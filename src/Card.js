@@ -8,10 +8,7 @@ function Card() {
         <p>Architect & Engineer</p>
         <p>We love that guy</p>
       </div>
-      <div
-        class="flip-card-front w-52 h-52 absolute rounded hover:opacity-0 transform duration-500 hover:scale-75"
-        id="front-face"
-      >
+      <div class=" w-52 h-52 absolute rounded hover:opacity-0 transform duration-500 hover:scale-75">
         <img
           src="https://www.trapbasshdtv.online/images/trapbasshdtv%20.jpg"
           alt="Avatar"

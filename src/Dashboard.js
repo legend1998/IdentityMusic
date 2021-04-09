@@ -12,7 +12,7 @@ function Dashboard() {
         <div className=" m-5  py-5 p border-b border-gray-50 flex items-center justify-between text-gray-500">
           <h3>please do the following </h3>
           <div>
-            <i class="far fa-times-circle cursor-pointer"></i>
+            <i className="far fa-times-circle cursor-pointer"></i>
           </div>
         </div>
         <div className=" h-56 flex items-center justify-center">

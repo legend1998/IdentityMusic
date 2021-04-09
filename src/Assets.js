@@ -21,7 +21,7 @@ function Assets() {
             tab === 1 ? active : passive
           }`}
         >
-          <i class="fas fa-record-vinyl mx-5"></i>Albums
+          <i className="fas fa-record-vinyl mx-5"></i>Albums
         </div>
         <div
           onClick={() => settab(2)}
@@ -29,7 +29,7 @@ function Assets() {
             tab === 2 ? active : passive
           }`}
         >
-          <i class="fas fa-music mx-5"></i> Tracks
+          <i className="fas fa-music mx-5"></i> Tracks
         </div>
         <div
           onClick={() => settab(3)}
