@@ -57,7 +57,7 @@ function AccountInfo() {
               type="text"
               className=" appearance-none focus:outline-none bg-gray-100 border h-12 my-5 px-2"
             />
-            <p className=" font-normal">password</p>
+            <p className=" font-normal">Password</p>
             <input
               type="password"
               className=" appearance-none focus:outline-none bg-gray-100 border h-12 my-5 px-2"

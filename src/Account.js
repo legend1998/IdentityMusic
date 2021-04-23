@@ -11,7 +11,7 @@ function Account() {
     <div className="h-screen overflow-y-auto bg-gray-100">
       <div className="w-full bg-white h-24  flex items-center justify-between shadow-sm">
         <h1 className="text-3xl font-semibold ml-8 font-sans ">Account</h1>
-        <p className="text-sm font-light mr-8 ">Account>account</p>
+        <p className="text-sm font-light mr-8 ">Account</p>
       </div>
       <div className="flex border flex-wrap items-center h-14 ">
         <div

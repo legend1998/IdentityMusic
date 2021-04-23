@@ -5,6 +5,9 @@ function Home() {
   return (
     <div>
       <Header />
+      <div className="h-screen bg-red-50 flex justify-center items-center">
+        this is graphik font
+      </div>
     </div>
   );
 }

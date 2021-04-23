@@ -4,7 +4,7 @@ import Login from "./Login";
 import Panel from "./Panel";
 function App() {
   return (
-    <div className="App">
+    <div className="App  font-graphik ">
       <Router>
         <Switch>
           <Route path="/login">

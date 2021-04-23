@@ -13,7 +13,7 @@ function ArtistTab() {
       </div>
       <div className="lg:px-12 md:px-1  py-5">
         <div className=" bg-white">
-          <div className="flex h-14 items-center">
+          <div className="flex h-12 items-center">
             <button
               onClick={() => setfilter(!filter)}
               className={`px-7 md:hidden lg:block focus:outline-none ${

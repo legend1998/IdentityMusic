@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Graphik';
+    src: local('Graphik Light'), local('Graphik-Light'),
+        url('Graphik-Light.woff2') format('woff2'),
+        url('Graphik-Light.woff') format('woff'),
+        url('Graphik-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+  }

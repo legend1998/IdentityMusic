@@ -5,7 +5,7 @@ function Sidebar() {
   const [showright, setshowright] = useState(false);
   const [toggle, settoggle] = useState(1);
   return (
-    <div className="lg:flex w-64 bg-sideblack font-sans   hidden items-center flex-col justify-between">
+    <div className="lg:flex w-64 bg-sideblack font-Sans   hidden items-center flex-col justify-between">
       <div className="w-52 flex flex-col justify-start px-6 my-3">
         <img src="" alt="logo" className="my-8 self-center" />
         <Link

@@ -7,7 +7,7 @@ function Tracks() {
   return (
     <div className="lg:px-12 md:px-1 py-5 ">
       <div className="bg-white">
-        <div className="flex h-14 items-center">
+        <div className="flex h-12 items-center">
           <button
             onClick={() => setfilter(!filter)}
             className={`px-7 md:hidden lg:block focus:outline-none ${
@@ -27,17 +27,17 @@ function Tracks() {
           <div className="duration-200">
             <button
               onClick={() => setshow(!show)}
-              className="bg-blue-700 hover:bg-blue-800 w-52 h-12 focus:outline-none text-white"
+              className="bg-blue-700 hover:bg-blue-800 w-64 h-12 focus:outline-none text-white"
             >
               Actions &#x2304;
             </button>
             {show ? (
-              <ul className="absolute bg-white w-52 rounded text-sm text-center border ">
+              <ul className="absolute bg-white w-64 rounded text-sm text-center border ">
                 <li className="h-10 border-b p-2 hover:bg-gray-300">
-                  export as csv
+                  Export as csv
                 </li>
                 <li className="h-10 border-b p-2 hover:bg-gray-300">
-                  export as xlsx
+                  Export as xlsx
                 </li>
               </ul>
             ) : null}

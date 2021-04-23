@@ -3,6 +3,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      fontFamily: {
+        graphik: ["Graphik"],
+      },
       colors: {
         "regal-blue": "#243c5a",
         limegreen: "#23db8b",
