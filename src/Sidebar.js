@@ -82,6 +82,17 @@ function Sidebar() {
         >
           Transactions
         </Link>
+        <Link
+          to="/panel/dispute"
+          onClick={() => settoggle(7)}
+          className={
+            toggle === 7
+              ? "my-2 text-gray-100"
+              : "my-2 text-gray-400 hover:text-gray-100"
+          }
+        >
+          Dispute
+        </Link>
       </div>
       <div className="sm self-start mx-6 text-gray-500 text-xs flex flex-col border-t border-gray-700">
         <Link

@@ -10,6 +10,8 @@ import Labels from "./Labels";
 import AddLabel from "./AddLabel";
 import Transactions from "./Transactions";
 import Account from "./Account";
+import Dispute from './Dispute';
+import CreateNewDispute from './CreateNewDispute';
 function Panel() {
   let { path } = useRouteMatch();
   return (
@@ -22,6 +24,9 @@ function Panel() {
           </Route>
           <Route path={`${path}/create_new_release`}>
             <CreateNewRelease />
+          </Route>
+          <Route path={`${path}/create_new_dispute`}>
+            <CreateNewDispute />
           </Route>
           <Route path={`${path}/artist`}>
             <ArtistTab />
@@ -37,6 +42,9 @@ function Panel() {
           </Route>
           <Route path={`${path}/transactions`}>
             <Transactions />
+          </Route>
+          <Route path={`${path}/dispute`}>
+            <Dispute />
           </Route>
           <Route path={`${path}/account`}>
             <Account />
