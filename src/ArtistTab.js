@@ -1,9 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "./Card";
 import { Link } from "react-router-dom";
+import { firedb } from "./firebaseconfig";
+import { useStateValue } from "./StateProvider";
 
 function ArtistTab() {
   const [filter, setfilter] = useState(false);
+  const [artists, setartists] = useState([]);
+  const [{ user }] = useStateValue();
+
+  useEffect(() => {
+    firedb.collection("artist").onSnapshot((snapshot) => {
+      var a = [];
+      snapshot.forEach((snap) => {
+        if (snap.data().user === user.email)
+          a.push({ ...snap.data(), id: snap.id });
+      });
+      setartists(a);
+    });
+  }, []);
+
   return (
     <div className="bg-gray-100 pb-10 h-screen">
       <div className="w-full bg-white h-24 flex items-center shadow-sm">
@@ -81,7 +97,9 @@ function ArtistTab() {
           nothing to show
         </div>
         <div className="">
-          <Card />
+          {artists.map((data, index) => (
+            <Card key={index} data={data} />
+          ))}
         </div>
       </div>
     </div>

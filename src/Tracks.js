@@ -1,8 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { firedb } from "./firebaseconfig";
+import { useStateValue } from "./StateProvider";
 
 function Tracks() {
   const [show, setshow] = useState(false);
   const [filter, setfilter] = useState(false);
+  const [{ user }] = useStateValue();
+  const [tracks, setTracks] = useState([]);
+
+  useEffect(() => {
+    getTracks();
+  }, []);
+
+  async function getTracks() {
+    var a = [];
+    firedb.collection("album").onSnapshot((snapshot) => {
+      snapshot.forEach((snap) => {
+        if (snap.data().user === user.email) {
+          firedb
+            .collection("album")
+            .doc(snap.id)
+            .collection("tracks")
+            .onSnapshot((trackshot) => {
+              trackshot.forEach((snaptrack) => {
+                a.push(snaptrack.data());
+                console.log(snaptrack.data());
+              });
+              setTracks(a);
+            });
+        }
+      });
+    });
+  }
+
+  console.log(tracks.length);
 
   return (
     <div className="lg:px-12 md:px-1 py-5 ">
@@ -17,7 +48,7 @@ function Tracks() {
             Filters &#x2304;
           </button>
           <div className="flex-grow flex items-center">
-            <i class="fas fa-search p-2"></i>
+            <i className="fas fa-search p-2"></i>
             <input
               className="flex-grow h-7 outline-none text-gray-700"
               type="text"
@@ -93,23 +124,47 @@ function Tracks() {
         </div>
       </div>
       <div className="h-16 py-2 text-xs text-gray-500 flex items-end">
-        nothing to show
+        {tracks.length === 0 ? "nothing to show" : "showing all tracks"}
       </div>
       <div className="bg-white">
         <table className="table-fixed text-xs text-gray-700 w-full h-60">
-          <thead>
+          <thead className="text-left">
             <tr className="h-12 border">
-              <th className=" w-2/6">Track Name</th>
-              <th className=" w-1/6">Artist</th>
-              <th className=" w-1/6">ISRC</th>
-              <th className=" w-1/6">Audio</th>
-              <th className=" w-1/6">Genre(s)</th>
+              <th className=" w-1/12"></th>
+              <th className=" w-2/12">Track Name</th>
+              <th className="w-2/12">Artist</th>
+              <th className=" w-1/12">ISRC</th>
+              <th className="w-4/12">Audio</th>
+              <th className=" w-1/12">Language</th>
             </tr>
           </thead>
+          <tbody>
+            {tracks.map((t) => (
+              <tr className="h-12 text-left text-lg font-semibold border-b hover:bg-gray-50">
+                <td>
+                  <input
+                    type="checkbox"
+                    className="w-8 h-8 border focus:outline-none mx-4"
+                  />
+                </td>
+                <td>{t.releaseTitle}</td>
+                <td>{t.primaryArtist}</td>
+                <td>{t.isrc}</td>
+                <td>
+                  <audio src={t.trackURL} controls></audio>
+                </td>
+                <td>{t.lyricLanguage}</td>
+              </tr>
+            ))}
+          </tbody>
         </table>
-        <div className=" h-56 flex items-center justify-center">
-          <p className="text-xs text-gray-500">you have no data to display.</p>
-        </div>
+        {tracks.length === 0 ? (
+          <div className=" h-56 flex items-center justify-center">
+            <p className="text-xs text-gray-500">
+              you have no data to display.
+            </p>
+          </div>
+        ) : null}
       </div>
     </div>
   );

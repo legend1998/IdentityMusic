@@ -1,11 +1,13 @@
 import React from "react";
+import { useStateValue } from "./StateProvider";
 
 function Dashboard() {
+  const [{ user }] = useStateValue();
   return (
     <div className="w-full bg-gray-100">
       <div className="w-full bg-white h-24 flex items-center shadow-sm">
-        <h1 className="text-3xl font-semibold ml-8 pl-10 font-sans ">
-          Hi, Yash!
+        <h1 className="text-3xl font-semibold ml-8 pl-10 font-sans capitalize">
+          Hi, {user.fname}!
         </h1>
       </div>
       <div className="m-10 bg-white p-5">

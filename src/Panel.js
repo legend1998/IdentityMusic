@@ -1,5 +1,5 @@
 import React from "react";
-import { useRouteMatch, Route, Switch } from "react-router-dom";
+import { useRouteMatch, Route, Switch, useParams } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import Sidebar from "./Sidebar";
 import Assets from "./Assets";
@@ -10,8 +10,8 @@ import Labels from "./Labels";
 import AddLabel from "./AddLabel";
 import Transactions from "./Transactions";
 import Account from "./Account";
-import Dispute from './Dispute';
-import CreateNewDispute from './CreateNewDispute';
+import Dispute from "./Dispute";
+import CreateNewDispute from "./CreateNewDispute";
 function Panel() {
   let { path } = useRouteMatch();
   return (
@@ -31,8 +31,14 @@ function Panel() {
           <Route path={`${path}/artist`}>
             <ArtistTab />
           </Route>
+          <Route path={`${path}/view_artist/:id`}>
+            <AddNewArtist />
+          </Route>
           <Route path={`${path}/labels`}>
             <Labels />
+          </Route>
+          <Route path={`${path}/view_labels/:id`}>
+            <AddLabel />
           </Route>
           <Route path={`${path}/add_label`}>
             <AddLabel />

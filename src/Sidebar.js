@@ -1,9 +1,25 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { auth } from "./firebaseconfig";
+import { useHistory } from "react-router";
+import { useStateValue } from "./StateProvider";
 
 function Sidebar() {
+  //stats
+  const [{ user }] = useStateValue();
   const [showright, setshowright] = useState(false);
   const [toggle, settoggle] = useState(1);
+
+  //hooks
+  const history = useHistory();
+
+  const logoutnow = (e) => {
+    e.preventDefault();
+    localStorage.removeItem("user");
+    auth.signOut();
+    history.replace("/");
+  };
+
   return (
     <div className="lg:flex w-64 bg-sideblack font-Sans   hidden items-center flex-col justify-between">
       <div className="w-52 flex flex-col justify-start px-6 my-3">
@@ -109,8 +125,9 @@ function Sidebar() {
       </div>
       <div className="my-8 pb-8 flex justify-between border-b border-gray-700 items-center text-gray-300  text-start w-4/5 text-xs">
         <div className="cursor-pointer">
-          <p>Yash Raj</p>
-          <p>Trapbasshdtv</p>
+          <p>{user.fname + " " + user.lname}</p>
+          <p>{user?.label}</p>
+          <button onClick={(e) => logoutnow(e)}>Sign out</button>
         </div>
         <div>
           <i className="fas fa-cog cursor-pointer"></i>

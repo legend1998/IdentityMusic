@@ -1,10 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { firedb } from "./firebaseconfig";
+import { useStateValue } from "./StateProvider";
 
 function Album() {
   const [show, setshow] = useState(false);
   const [filter, setfilter] = useState(false);
+  const [{ user }] = useStateValue();
+  const [album, setalbum] = useState([]);
+  useEffect(() => {
+    firedb.collection("album").onSnapshot((snapshot) => {
+      var a = [];
+      snapshot.forEach((snap) => {
+        if (snap.data().user === user.email) a.push(snap.data());
+      });
+      setalbum(a);
+    });
+  }, []);
 
+  function sort(type) {
+    album.sort(function (a, b) {
+      if (a.title < b.title) {
+        return -1;
+      }
+      if (a.title > b.title) {
+        return 1;
+      }
+      return 0;
+    });
+  }
   return (
     <div className="lg:px-12 md:px-1 py-5 ">
       <div className="bg-white">
@@ -18,7 +42,7 @@ function Album() {
             Filters &#x2304;
           </button>
           <div className="flex-grow flex items-center">
-            <i class="fas fa-search p-2"></i>
+            <i className="fas fa-search p-2"></i>
             <input
               className="flex-grow h-7 outline-none text-gray-700"
               type="text"
@@ -97,23 +121,61 @@ function Album() {
         </div>
       </div>
       <div className=" h-16 py-2 text-xs text-gray-500 flex items-end">
-        nothing to show
+        {album.length === 0 ? "Nothing to show" : " Showing all Albums"}
       </div>
       <div className="bg-white">
-        <table className="table-fixed text-xs text-gray-700 w-full h-60">
+        <table className=" capitalize table-fixed text-xs text-gray-700 w-full text-left">
           <thead>
-            <tr className="h-12 border">
-              <th className=" w-2/6">Album Name</th>
+            <tr className="h-14 border">
+              <th className=" w-24"></th>
+              <th
+                className=" w-2/6 hover:bg-gray-100"
+                onClick={() => sort("title")}
+              >
+                Album Name
+                <span className="mx-3">
+                  <i className="fas fa-arrows-alt-v"></i>
+                </span>
+              </th>
               <th className=" w-1/6">Artist</th>
               <th className=" w-1/6">Label</th>
               <th className=" w-1/6">UPC</th>
               <th className=" w-1/6">Release Date</th>
             </tr>
           </thead>
+          <tbody>
+            {album.map((a, index) => (
+              <tr
+                key={index}
+                className="h-20 text-lg font-semibold hover:bg-gray-50 border-b"
+              >
+                <td className="text-center">
+                  <input
+                    className="h-8 w-8 border focus:outline-none"
+                    type="checkbox"
+                  />
+                </td>
+                <td className=" w-2/6  ">
+                  <div className="flex justify-start items-center">
+                    <img src={a.coverImage} width="50px" alt="" />
+                    <p className="pl-6"> {a.title}</p>
+                  </div>
+                </td>
+                <td className=" w-1/6">{a.primaryArtist}</td>
+                <td className=" w-2/6">{a.label}</td>
+                <td className=" w-1/6">{a.upcEan}</td>
+                <td className=" w-1/6">{a.releaseDate}</td>
+              </tr>
+            ))}
+          </tbody>
         </table>
-        <div className="w-full h-56 flex items-center justify-center">
-          <p className="text-xs text-gray-500">you have no data to display.</p>
-        </div>
+        {album.length === 0 ? (
+          <div className="w-full h-56 flex items-center justify-center">
+            <p className="text-xs text-gray-500">
+              You have no data to display.
+            </p>
+          </div>
+        ) : null}
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
-import React from "react";
+function Title({ somefun, album }) {
+  // refs
 
-function Title({ somefun }) {
   return (
     <div className="lg:p-10 p-2 bg-white my-10">
       <p className="px-5 text-xl border-b py-3 mb-5">Title</p>
@@ -9,7 +9,10 @@ function Title({ somefun }) {
           <p className="text-lg">Release Title</p>
           <input
             type="text"
-            placeholder="release title"
+            defaultValue={album.title}
+            disabled={album.info ? true : false}
+            onChange={(e) => somefun({ ...album, title: e.target.value })}
+            placeholder="Eg: Album Name"
             className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
           />
         </div>
@@ -17,7 +20,12 @@ function Title({ somefun }) {
           <p className="text-lg">Title Version</p>
           <input
             type="text"
-            placeholder="title  version"
+            defaultValue={album.titleVersion}
+            disabled={album.info ? true : false}
+            onChange={(e) =>
+              somefun({ ...album, titleVersion: e.target.value })
+            }
+            placeholder="Eg: Live, Radio Edit"
             className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
           />
         </div>

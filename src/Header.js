@@ -9,8 +9,12 @@ function Header() {
           <img src="" alt="logo" />
         </div>
         <div>
-          <Link className="px-8">Home</Link>
-          <Link className="px-8">About</Link>
+          <Link className="px-8" to="/">
+            Home
+          </Link>
+          <Link className="px-8" to="/about">
+            About
+          </Link>
           <Link className="px-8" to="/login">
             Login
           </Link>

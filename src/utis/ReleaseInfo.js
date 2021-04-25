@@ -1,10 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import raw from "../genre.txt";
+import raw2 from "../genre2.txt";
 
-function ReleaseInfo() {
+function ReleaseInfo({ somefun, album }) {
   const [ownupc, setownupc] = useState(0);
   const [preRel, setpreRel] = useState(false);
+  const [genre1, setgenre1] = useState([]);
+  const [genre2, setgenre2] = useState([]);
   const [recLabel, setrecLabel] = useState(false);
-  console.log(ownupc);
+
+  useEffect(() => {
+    fetch(raw)
+      .then((r) => r.text())
+      .then((text) => {
+        var a = [];
+        text = text.split("\n");
+        text.forEach((t) => {
+          a.push(t);
+        });
+        setgenre1(a);
+      });
+    fetch(raw2)
+      .then((r) => r.text())
+      .then((text) => {
+        var a = [];
+        text = text.split("\n");
+        text.forEach((t) => {
+          a.push(t);
+        });
+        setgenre2(a);
+      });
+  }, []);
+
   return (
     <div className="lg:p-10 p-2 bg-white my-10">
       <p className="px-5 text-xl border-b py-3 mb-5">Info</p>
@@ -13,18 +40,26 @@ function ReleaseInfo() {
         <div className="">
           <p className="px-5 text-md font-semibold">Genre 1</p>
           <select
-            name="artisttype"
+            name="genre1  "
+            defaultValue={album?.genre1}
+            disabled={album?.info ? true : false}
+            onChange={(e) => somefun({ ...album, genre1: e.target.value })}
             className="h-12 w-full text-center bg-gray-100"
           >
-            <option value="default" defaultValue>
-              --select--
-            </option>
+            {genre1.map((genre, index) => (
+              <option className="capitalize" value={genre} key={index}>
+                {genre}
+              </option>
+            ))}
           </select>
         </div>
         <div className="">
           <p className="px-5 text-md font-semibold"> (P) Copyright </p>
           <input
             type="text"
+            defaultValue={album?.pCopyright}
+            disabled={album?.info ? true : false}
+            onChange={(e) => somefun({ ...album, pCopyright: e.target.value })}
             placeholder="2021 Label Name"
             className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
           />
@@ -32,12 +67,17 @@ function ReleaseInfo() {
         <div className="">
           <p className="px-5 text-md font-semibold">Genre 2</p>
           <select
-            name="artisttype"
+            name="gene2"
+            defaultValue={album?.genre2}
+            disabled={album?.info ? true : false}
             className="h-12 w-full text-center bg-gray-100"
+            onChange={(e) => somefun({ ...album, genre2: e.target.value })}
           >
-            <option value="default" defaultValue>
-              --select--
-            </option>
+            {genre2.map((genre, index) => (
+              <option className="capitalize" value={genre} key={index}>
+                {genre}
+              </option>
+            ))}
           </select>
         </div>
         <div className="">
@@ -45,6 +85,9 @@ function ReleaseInfo() {
           <input
             type="text"
             placeholder="2021 Label Name"
+            defaultValue={album?.Ccopyright}
+            disabled={album?.info ? true : false}
+            onChange={(e) => somefun({ ...album, Ccopyright: e.target.value })}
             className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
           />
         </div>
@@ -79,6 +122,9 @@ function ReleaseInfo() {
         <div className={preRel ? "block" : "hidden"}>
           <input
             type="date"
+            defaultValue={album?.releaseDate}
+            disabled={album?.info ? true : false}
+            onChange={(e) => somefun({ ...album, releaseDate: e.target.value })}
             placeholder="Previously release date"
             className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
           />
@@ -108,7 +154,10 @@ function ReleaseInfo() {
         <div className={recLabel ? "block" : "hidden"}>
           <select
             placeholder=""
-            className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
+            defaultValue={album?.recordLabel}
+            disabled={album?.info ? true : false}
+            onChange={(e) => somefun({ ...album, recordLabel: e.target.value })}
+            className="h-12 px-5 w-full my-2 bg-gray-50 appearance-none outline-none border focus:border-purple-700"
           >
             <option value="default" defaultValue>
               --select--
@@ -119,7 +168,7 @@ function ReleaseInfo() {
       <div className="grid grid-flow-col grid-rows-1 grid-cols-2">
         <div>
           <p className="px-5 text-md font-semibold">
-            Do you already have a UPC/EAN/JAN?
+            Do you already have a UPC/EAN?
           </p>
           <div className="px-5 py-3">
             <label>
@@ -150,7 +199,10 @@ function ReleaseInfo() {
           <input
             type="text "
             placeholder="xxxxxxxxxxxx"
+            defaultValue={album?.upcEan}
+            disabled={album?.info ? true : false}
             required
+            onChange={(e) => somefun({ ...album, upcEan: e.target.value })}
             className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border border-red-700"
           />
         </div>

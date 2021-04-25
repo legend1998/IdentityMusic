@@ -1,7 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useStateValue } from "./StateProvider";
+import { firedb } from "./firebaseconfig";
 
-function ArtistInfo() {
+function ArtistInfo({ artist, setartist, disabled }) {
   const [show, setshow] = useState(false);
+  const [lables, setlabels] = useState([]);
+  const [{ user }] = useStateValue();
+
+  useEffect(() => {
+    if (disabled) return;
+    firedb.collection("label").onSnapshot((snapshot) => {
+      var a = [];
+      snapshot.forEach((snap) => {
+        if (snap.data().user === user.email) a.push(snap.data());
+      });
+
+      setlabels(a);
+    });
+  }, [disabled, user.email]);
 
   return (
     <div className="lg:my-4 lg:mx-10 p-5 bg-white">
@@ -10,6 +26,9 @@ function ArtistInfo() {
         <p className="text-lg my-3 font-semibold">Official artist/band name</p>
         <input
           type="text"
+          disabled={disabled}
+          defaultValue={artist?.name}
+          onChange={(e) => setartist({ ...artist, name: e.target.value })}
           placeholder="Written exactly as you want it to appear everywhere."
           className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
         />
@@ -18,6 +37,9 @@ function ArtistInfo() {
         <p className="text-lg my-3 font-semibold">Biography</p>
         <textarea
           type="text"
+          disabled={disabled}
+          defaultValue={artist?.biography}
+          onChange={(e) => setartist({ ...artist, biography: e.target.value })}
           placeholder="Written exactly as you want it to appear everywhere."
           className=" px-5 w-full bg-gray-50 appearance-none h-36 outline-none border focus:border-purple-700"
         />
@@ -26,6 +48,7 @@ function ArtistInfo() {
         <p className="text-lg my-3 font-semibold">Location</p>
         <input
           type="text"
+          onChange={(e) => setartist({ ...artist, locaiton: e.target.value })}
           placeholder="Fans like to know! Can be country or city"
           className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
         />
@@ -55,12 +78,18 @@ function ArtistInfo() {
         <div className="">
           <select
             type="text"
+            disabled={disabled}
+            defaultValue={artist?.label}
+            onChange={(e) => setartist({ ...artist, label: e.target.value })}
             placeholder="Fans like to know! Can be country or city"
             className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
           >
-            <option value="default" defaultValue>
-              --select--
-            </option>
+            {lables.map((label, index) => (
+              <option value={label.label} key={index}>
+                {label.label}
+              </option>
+            ))}
+            <option value="none">--select--</option>
           </select>
         </div>
       ) : null}

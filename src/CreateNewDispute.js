@@ -15,8 +15,15 @@ function CreateNewDispute() {
             className=" appearance-none focus:outline-none bg-gray-100 border h-12 my-5 w-full px-5"
           />
           <br />
+          <p className=" font-normal">Comments</p>
+          <textarea
+            name="comments"
+            className={
+              "border w-full h-64 focus:outline-none p-5 bg-gray-50 text-sm"
+            }
+          ></textarea>
           <button className=" appearance-none focus:outline-none h-12 w-52 bg-indigo-600 text-white">
-            save
+            Create Dispute
           </button>
         </div>
       </div>

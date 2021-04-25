@@ -2,19 +2,26 @@ import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import Home from "./Home";
 import Login from "./Login";
 import Panel from "./Panel";
+import Signup from "./Signup";
+import { useStateValue } from "./StateProvider";
 function App() {
+  const [{ user }, dispatch] = useStateValue();
+  console.log(user);
+
   return (
     <div className="App  font-graphik ">
       <Router>
         <Switch>
-          <Route path="/login">
-            <Login />
+          <Route path="/signup">
+            <Signup />
           </Route>
-          <Route path="/panel">
-            <Panel />
-          </Route>
+          {user ? (
+            <Route path="/panel">
+              <Panel />
+            </Route>
+          ) : null}
           <Route path="/">
-            <Home />
+            <Login />
           </Route>
         </Switch>
       </Router>

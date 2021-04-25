@@ -1,0 +1,52 @@
+Instrumental
+Afrikaans
+Amharic
+Azerbaijani
+Bengali
+Bhojpuri
+Bulgarian
+Chinese
+Simplified Chinese
+Croatian
+Danish
+English
+Estonian
+Filipino
+French
+Gujarati
+German
+Greek
+Hebrew
+Hungarian
+Hindi
+Icelandic
+Indonesian
+Italian
+Japanese
+Kannada
+Latvian
+Lithuanian
+Malayalam
+Marathi
+Nepali
+Norwegian
+Odia
+Persian
+Portuguese for Portugal
+Eastern Punjabi
+Western Punjabi
+Romanian
+Russian
+Swedish
+Serbian
+Spanish
+Slovak
+Slovenian
+Swahili
+Tamil
+Thai
+Turkish
+Telugu
+Ukrainian
+Urdu
+Vietnamese

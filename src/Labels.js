@@ -1,9 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "./Card";
 import { Link } from "react-router-dom";
+import { useStateValue } from "./StateProvider";
+import { firedb } from "./firebaseconfig";
 
 function Labels() {
   const [filter, setfilter] = useState(false);
+  const [lables, setlabels] = useState([]);
+  const [{ user }] = useStateValue();
+
+  useEffect(() => {
+    firedb.collection("label").onSnapshot((snapshot) => {
+      var a = [];
+      snapshot.forEach((snap) => {
+        if (snap.data().user === user.email)
+          a.push({ ...snap.data(), id: snap.id });
+      });
+      setlabels(a);
+    });
+  }, []);
   return (
     <div className="bg-gray-100 pb-10 h-screen">
       <div className="w-full bg-white h-24 flex items-center shadow-sm">
@@ -70,7 +85,9 @@ function Labels() {
           nothing to show
         </div>
         <div className="">
-          <Card />
+          {lables.map((label, index) => (
+            <Card data={label} key={index} />
+          ))}
         </div>
       </div>
     </div>

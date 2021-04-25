@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Album from "./Album";
 import Tracks from "./Tracks";
-import All from "./All";
 
 function Assets() {
   const [tab, settab] = useState(1);
@@ -31,18 +30,9 @@ function Assets() {
         >
           <i className="fas fa-music mx-5"></i> Tracks
         </div>
-        <div
-          onClick={() => settab(3)}
-          className={`flex-grow py-4 pl-6 hover:text-black cursor-pointer ${
-            tab === 3 ? active : passive
-          }`}
-        >
-          All
-        </div>
       </div>
       {tab === 1 ? <Album /> : null}
       {tab === 2 ? <Tracks /> : null}
-      {tab === 3 ? <All /> : null}
     </div>
   );
 }
