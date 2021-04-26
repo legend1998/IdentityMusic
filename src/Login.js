@@ -55,7 +55,7 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-bl from-indigo-500 to-black via-black border-8 border-white">
+    <div className="min-h-screen w-full border-8 border-white login">
       <div className=" h-32">
         <img src="" alt="logo" className=" w-32 h-20" />
       </div>

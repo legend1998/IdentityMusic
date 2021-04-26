@@ -5,6 +5,7 @@ import "./notification.css";
 import { auth, firedb } from "./firebaseconfig";
 import { useHistory } from "react-router";
 import { useStateValue } from "./StateProvider";
+import { Link } from "react-router-dom";
 
 function Signup() {
   // stats
@@ -77,7 +78,7 @@ function Signup() {
     }
   };
   return (
-    <div className=" min-h-screen    w-full bg-gradient-to-bl from-indigo-500 to-black via-black border-8 border-white">
+    <div className=" min-h-screen    w-full login border-8 border-white">
       <div className=" h-32">
         <img src="" alt="logo" className=" w-32 h-20" />
       </div>
@@ -127,6 +128,9 @@ function Signup() {
                 Sign up <i className="fas fa-arrow-right mx-3"></i>
               </button>
             </div>
+            <Link to="/" className="p-3  text-gray-400">
+              already have an account | Login
+            </Link>
           </form>
         </div>
       </div>

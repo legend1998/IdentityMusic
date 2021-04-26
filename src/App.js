@@ -1,8 +1,8 @@
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
-import Home from "./Home";
 import Login from "./Login";
 import Panel from "./Panel";
 import Signup from "./Signup";
+import "./app.css";
 import { useStateValue } from "./StateProvider";
 function App() {
   const [{ user }, dispatch] = useStateValue();
