@@ -12,6 +12,8 @@ import Transactions from "./Transactions";
 import Account from "./Account";
 import Dispute from "./Dispute";
 import CreateNewDispute from "./CreateNewDispute";
+import Viewalbum from "./Viewalbum";
+
 function Panel() {
   let { path } = useRouteMatch();
   return (
@@ -21,6 +23,9 @@ function Panel() {
         <Switch>
           <Route path={`${path}/assets`}>
             <Assets />
+          </Route>
+          <Route path={`${path}/viewAlbum/:id`}>
+            <Viewalbum />
           </Route>
           <Route path={`${path}/create_new_release`}>
             <CreateNewRelease />

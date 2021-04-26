@@ -24,7 +24,6 @@ function Tracks() {
             .onSnapshot((trackshot) => {
               trackshot.forEach((snaptrack) => {
                 a.push(snaptrack.data());
-                console.log(snaptrack.data());
               });
               setTracks(a);
             });
@@ -32,8 +31,6 @@ function Tracks() {
       });
     });
   }
-
-  console.log(tracks.length);
 
   return (
     <div className="lg:px-12 md:px-1 py-5 ">

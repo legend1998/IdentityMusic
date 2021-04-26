@@ -64,7 +64,6 @@ function Stores({ nextab, albumid }) {
       setstoreobject({ ...storeobject, telecomPartners: null });
     }
   }
-  console.log(storeobject);
 
   function saveStores() {
     if (storeobject?.submitted) {

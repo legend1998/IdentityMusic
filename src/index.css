@@ -3,6 +3,6 @@
 
 @font-face {
   font-family: "Graphik";
-  src: local("Graphik"), url(./fonts/Graphik-Light.ttf) format("ttf");
+  src: local("Graphik"), url(./fonts/Graphik-Regular.ttf) format("ttf");
 }
 @tailwind utilities;

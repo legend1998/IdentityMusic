@@ -94,8 +94,6 @@ function TrackInfo({ track, close, index, albumid, data }) {
       });
   }
 
-  console.log(newtrack);
-
   return (
     <div className="lg:p-10 p-2 bg-white my-10">
       <div className="flex items-center justify-between border-b">

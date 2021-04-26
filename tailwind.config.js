@@ -12,6 +12,7 @@ module.exports = {
         "transparent-back": "#30303063",
         "white-cover": "#f6f6f6",
         sideblack: "#1d1d1d",
+        sidetext: "#707070",
       },
     },
   },

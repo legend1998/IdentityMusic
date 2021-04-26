@@ -3,13 +3,13 @@ import Login from "./Login";
 import Panel from "./Panel";
 import Signup from "./Signup";
 import "./app.css";
+
 import { useStateValue } from "./StateProvider";
 function App() {
   const [{ user }, dispatch] = useStateValue();
-  console.log(user);
 
   return (
-    <div className="App  font-graphik ">
+    <div className="App font-graphik  ">
       <Router>
         <Switch>
           <Route path="/signup">

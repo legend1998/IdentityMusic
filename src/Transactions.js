@@ -3,38 +3,13 @@ import React from "react";
 function Transactions() {
   return (
     <div className="w-full bg-gray-100 h-full">
-      <div className="w-full bg-white h-24 flex items-center shadow-sm">
-        <h1 className="text-3xl font-semibold ml-8     font-sans ">Balance</h1>
+      <div className="w-full bg-white h-24 font-Graphik flex items-center shadow-sm">
+        <h1 className="text-3xl font-Graphikmedium ml-8  ">Balance</h1>
       </div>
       <div className="flex justify-between items-end mx-10 my-5">
         <div className="">
-          <select
-            name=""
-            id=""
-            className="text-3xl font-bold appearance-none focus:outline-none bg-gray-100"
-          >
-            <option value="alll" className="text-sm">
-              All
-            </option>
-            <option value="tm" className="text-sm">
-              This Month
-            </option>
-            <option value="lm" className="text-sm">
-              Last Month
-            </option>
-            <option value="tq" className="text-sm">
-              This Quarter
-            </option>
-            <option value="lq" className="text-sm">
-              Last Quarter
-            </option>
-            <option value="ty" className="text-sm">
-              This Year
-            </option>
-            <option value="ly" className="text-sm">
-              Last Year
-            </option>
-          </select>
+          <p className="">OutStanding Earnings</p>
+          <h3 className="text-3xl fa fa-inr font-bold"> 0.00</h3>
         </div>
         <div className="">
           <p className="text-sm">Balance</p>

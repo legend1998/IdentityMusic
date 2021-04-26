@@ -11,12 +11,14 @@ function Assets() {
   return (
     <div className="bg-gray-100  h-screen">
       <div className="w-full bg-white h-24 flex items-center shadow-sm">
-        <h1 className="text-3xl font-semibold ml-8 pl-10 font-sans ">Music</h1>
+        <h1 className="text-3xl font-semibold ml-8 pl-10 font-graphik ">
+          Music
+        </h1>
       </div>
-      <div className="flex border flex-wrap items-center h-14 ">
+      <div className="flex border flex-wrap items-center h-16 ">
         <div
           onClick={() => settab(1)}
-          className={`flex-grow py-4 cursor-pointer hover:text-black   ${
+          className={`flex-grow py-5 cursor-pointer hover:text-black   ${
             tab === 1 ? active : passive
           }`}
         >
@@ -24,7 +26,7 @@ function Assets() {
         </div>
         <div
           onClick={() => settab(2)}
-          className={`flex-grow py-4 cursor-pointer hover:text-black ${
+          className={`flex-grow py-5 cursor-pointer hover:text-black ${
             tab === 2 ? active : passive
           }`}
         >

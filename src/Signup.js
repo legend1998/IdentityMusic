@@ -6,6 +6,7 @@ import { auth, firedb } from "./firebaseconfig";
 import { useHistory } from "react-router";
 import { useStateValue } from "./StateProvider";
 import { Link } from "react-router-dom";
+import logo from "./utis/logo.png";
 
 function Signup() {
   // stats
@@ -79,11 +80,11 @@ function Signup() {
   };
   return (
     <div className=" min-h-screen    w-full login border-8 border-white">
-      <div className=" h-32">
-        <img src="" alt="logo" className=" w-32 h-20" />
+      <div className=" h-32 p-10">
+        <img src={logo} alt="logo" className=" h-20" />
       </div>
-      <div className="flex items-center w-full lg:w-2/3  h-full lg:h-2/3 justify-center">
-        <div className="text-white w-full lg:w-1/2  p-5">
+      <div className="flex items-center w-full lg:w-2/3  h-full  justify-center">
+        <div className="text-white w-full lg:w-1/2 mt-10 p-5">
           <h1 className="text-7xl">Sign Up.</h1>
           <p className="text-2xl my-5 text-gray-500">
             TrakLab | Client Sign Up Portal
@@ -93,14 +94,14 @@ function Signup() {
               <input
                 type="text"
                 ref={fname}
-                placeholder="first name"
+                placeholder="First Name"
                 name="fname"
                 className="focus:outline-none h-full w-1/2 border p-3"
               />
               <input
                 type="text"
                 ref={lname}
-                placeholder="last name"
+                placeholder="Last Name"
                 name="lname"
                 className="focus:outline-none h-full w-1/2 border p-3"
               />
@@ -108,14 +109,14 @@ function Signup() {
             <input
               type="email"
               ref={email}
-              placeholder="email"
+              placeholder="Email ID"
               name="email"
               className="focus:outline-none h-14 w-full border p-3 mt-1"
             />
             <input
               type="password"
               ref={password}
-              placeholder="password"
+              placeholder="Password"
               name="password"
               className="focus:outline-none h-14 w-full border p-3 mt-1"
             />
@@ -129,7 +130,7 @@ function Signup() {
               </button>
             </div>
             <Link to="/" className="p-3  text-gray-400">
-              already have an account | Login
+              Already have an Account | Login
             </Link>
           </form>
         </div>

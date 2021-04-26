@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { auth } from "./firebaseconfig";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import { useStateValue } from "./StateProvider";
+import logo from "./utis/logo.png";
 
 function Sidebar() {
   //stats
   const [{ user }] = useStateValue();
   const [showright, setshowright] = useState(false);
-  const [toggle, settoggle] = useState(1);
+  const matchurl = useLocation();
 
   //hooks
   const history = useHistory();
@@ -21,27 +22,25 @@ function Sidebar() {
   };
 
   return (
-    <div className="lg:flex w-64 bg-sideblack font-Sans   hidden items-center flex-col justify-between">
-      <div className="w-52 flex flex-col justify-start px-6 my-3">
-        <img src="" alt="logo" className="my-8 self-center" />
+    <div className="lg:flex w-72 bg-sideblack  hidden items-center flex-col justify-between text-lg">
+      <div className="w-54 flex flex-col justify-start px-8 my-2">
+        <img src={logo} alt="logo" className="my-8 self-center" />
         <Link
           to="/panel/dashboard"
-          onClick={() => settoggle(1)}
           className={
-            toggle === 1
-              ? "my-2 text-gray-100"
-              : "my-2 text-gray-400 hover:text-gray-100"
+            matchurl.pathname.includes("dashboard")
+              ? "my-1 text-gray-100"
+              : "my-1 text-sidetext hover:text-gray-100"
           }
         >
           Start
         </Link>
         <Link
-          onClick={() => settoggle(2)}
           to="/panel/assets"
           className={
-            toggle === 2
-              ? "my-2 text-gray-100"
-              : "my-2 text-gray-400 hover:text-gray-100"
+            matchurl.pathname.includes("assets")
+              ? "my-1 text-gray-100"
+              : "my-1 text-sidetext hover:text-gray-100"
           }
         >
           Assets
@@ -50,9 +49,10 @@ function Sidebar() {
           onClick={() => setshowright(!showright)}
           id="rightbutton"
           className={
-            toggle === 3 || toggle === 4
-              ? "my-2 text-gray-100 cursor-pointer"
-              : "my-2 text-gray-400 hover:text-gray-100 cursor-pointer"
+            matchurl.pathname.includes("labels") ||
+            matchurl.pathname.includes("artist")
+              ? "my-1 text-gray-100 cursor-pointer"
+              : "my-1 text-sidetext hover:text-gray-100 cursor-pointer"
           }
         >
           RightHolders &#x2304;
@@ -64,23 +64,21 @@ function Sidebar() {
           >
             <Link
               to="/panel/artist"
-              onClick={() => settoggle(3)}
               className={
-                toggle === 3
+                matchurl.pathname.includes("artist")
                   ? "ml-5 text-gray-100"
-                  : "ml-5 text-gray-400 hover:text-gray-100"
+                  : "ml-5 text-sidetext hover:text-gray-100"
               }
             >
               Artist
             </Link>
             <br />
             <Link
-              onClick={() => settoggle(4)}
               to="/panel/labels"
               className={
-                toggle === 4
+                matchurl.pathname.includes("labels")
                   ? "ml-5 text-gray-100"
-                  : "ml-5 text-gray-400 hover:text-gray-100"
+                  : "ml-5 text-sidetext hover:text-gray-100"
               }
             >
               Labels
@@ -89,22 +87,20 @@ function Sidebar() {
         ) : null}
         <Link
           to="/panel/transactions"
-          onClick={() => settoggle(5)}
           className={
-            toggle === 5
-              ? "my-2 text-gray-100"
-              : "my-2 text-gray-400 hover:text-gray-100"
+            matchurl.pathname.includes("transactions")
+              ? "my-1 text-gray-100"
+              : "my-1 text-sidetext hover:text-gray-100"
           }
         >
           Transactions
         </Link>
         <Link
           to="/panel/dispute"
-          onClick={() => settoggle(7)}
           className={
-            toggle === 7
-              ? "my-2 text-gray-100"
-              : "my-2 text-gray-400 hover:text-gray-100"
+            matchurl.pathname.includes("dispute")
+              ? "my-1 text-gray-100"
+              : "my-1 text-sidetext hover:text-gray-100"
           }
         >
           Dispute
@@ -113,17 +109,16 @@ function Sidebar() {
       <div className="sm self-start mx-6 text-gray-500 text-xs flex flex-col border-t border-gray-700">
         <Link
           to="/panel/account"
-          onClick={() => settoggle(6)}
           className={
-            toggle === 6
-              ? "mt-3 text-gray-100 cursor-pointer"
-              : "mt-3  text-gray-400 hover:text-gray-100 cursor-pointer"
+            matchurl.pathname.includes("account")
+              ? "mt-2 text-gray-100 cursor-pointer"
+              : "mt-2  text-sidetext hover:text-gray-100 cursor-pointer"
           }
         >
           My Account
         </Link>
       </div>
-      <div className="my-8 pb-8 flex justify-between border-b border-gray-700 items-center text-gray-300  text-start w-4/5 text-xs">
+      <div className="my-8 pb-8 flex justify-between border-b border-gray-700 items-center text-sidetext  text-start w-4/5 text-xs">
         <div className="cursor-pointer">
           <p>{user.fname + " " + user.lname}</p>
           <p>{user?.label}</p>

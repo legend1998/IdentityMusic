@@ -9,8 +9,6 @@ function ReviewandSave({ albumid, setid }) {
 
   const history = useHistory();
 
-  console.log(tracks);
-
   useEffect(() => {
     if (albumid) {
       firedb

@@ -3,7 +3,6 @@ import React, { useState } from "react";
 function PaymentPreferences() {
   const [Payment, setPayment] = useState(null);
 
-  console.log(Payment);
   return (
     <div className="p-5 bg-gray-100">
       <div className="bg-white m-5">

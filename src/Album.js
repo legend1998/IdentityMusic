@@ -2,21 +2,28 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { firedb } from "./firebaseconfig";
 import { useStateValue } from "./StateProvider";
+import { useHistory } from "react-router";
 
 function Album() {
   const [show, setshow] = useState(false);
   const [filter, setfilter] = useState(false);
   const [{ user }] = useStateValue();
   const [album, setalbum] = useState([]);
+  const history = useHistory();
   useEffect(() => {
     firedb.collection("album").onSnapshot((snapshot) => {
       var a = [];
       snapshot.forEach((snap) => {
-        if (snap.data().user === user.email) a.push(snap.data());
+        if (snap.data().user === user.email)
+          a.push({ ...snap.data(), id: snap.id });
       });
       setalbum(a);
     });
-  }, []);
+  }, [user.email]);
+
+  function handleClick(id) {
+    history.push("/panel/viewAlbum/" + id);
+  }
 
   function sort(type) {
     album.sort(function (a, b) {
@@ -126,8 +133,8 @@ function Album() {
       <div className="bg-white">
         <table className=" capitalize table-fixed text-xs text-gray-700 w-full text-left">
           <thead>
-            <tr className="h-14 border">
-              <th className=" w-24"></th>
+            <tr className="h-14 border ">
+              <th className=" w-24 "></th>
               <th
                 className=" w-2/6 hover:bg-gray-100"
                 onClick={() => sort("title")}
@@ -147,6 +154,7 @@ function Album() {
             {album.map((a, index) => (
               <tr
                 key={index}
+                onClick={() => handleClick(a.id)}
                 className="h-20 text-lg font-semibold hover:bg-gray-50 border-b"
               >
                 <td className="text-center">

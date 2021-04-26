@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 
 function Card({ data }) {
   const history = useHistory();
-  console.log(data);
 
   const handleClick = () => {
     if (data?.location) {
