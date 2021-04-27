@@ -39,7 +39,7 @@ function Viewalbum() {
             <i className="fas fa-arrow-left fa-2x py-5"></i>
           </div>
           <div className="flex-1 flex min-w-max">
-            <img src={album.coverImage} width="180px" alt="" />
+            <img src={album?.coverImage} width="180px" alt="" />
             <div className="px-5 w-full">
               <div className="flex items-center justify-center">
                 <h2 className=" flex-1 text-3xl font-bold py-5 border-b">
