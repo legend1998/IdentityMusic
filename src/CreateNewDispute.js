@@ -1,25 +1,23 @@
 import React, { useState } from "react";
 import { firedb } from "./firebaseconfig";
 import { useStateValue } from "./StateProvider";
-import firebase from "firebase";
 import AWN from "awesome-notifications";
 import { useHistory } from "react-router";
 
 function CreateNewDispute() {
-  const [dispute, setdispute] = useState({
-    createdAt: Date.now(),
-  });
   const [{ user }] = useStateValue();
   const history = useHistory();
+
+  const [dispute, setdispute] = useState({
+    createdAt: Date.now(),
+    user: user.email,
+  });
 
   function createDispute() {
     if (!dispute?.youtubeLink) return;
     firedb
-      .collection("user")
-      .doc(user.email)
-      .update({
-        disputes: firebase.firestore.FieldValue.arrayUnion(dispute),
-      })
+      .collection("dispute")
+      .add(dispute)
       .then(() => {
         new AWN().success("success");
         history.replace("/panel/dispute");

@@ -12,16 +12,15 @@ function Dispute() {
   const [{ user }] = useStateValue();
 
   useEffect(() => {
-    firedb
-      .collection("user")
-      .doc(user.email)
-      .get()
-      .then((res) => {
-        setdisputes(res.data().disputes);
-      })
-      .catch((e) => {
-        new AWN().alert(e.message);
+    firedb.collection("dispute").onSnapshot((snaphshot) => {
+      var a = [];
+      snaphshot.forEach((snap) => {
+        if (snap.data().user === user.email) {
+          a.push(snap.data());
+        }
       });
+      setdisputes(a);
+    });
   }, [user.email]);
 
   function showdetails(dis) {

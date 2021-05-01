@@ -1,9 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { firedb } from "../firebaseconfig";
 import KeyArtist from "./KeyArtist";
+import { useStateValue } from "../StateProvider";
+import { Link } from "react-router-dom";
 
 function ArtistComponent({ somefun, album }) {
   const [keyartist, setkeyartist] = useState(0);
   const [person, setperson] = useState([]);
+  const [artist, setartist] = useState([]);
+  const [{ user }] = useStateValue();
+
+  console.log(album);
+
+  useEffect(() => {
+    firedb.collection("artist").onSnapshot((snapshot) => {
+      var a = [];
+      snapshot.forEach((snap) => {
+        if (snap.data().user === user.email) {
+          a.push(snap.data());
+        }
+      });
+      setartist(a);
+    });
+  }, [user.email]);
 
   function getartist(secondaryartist) {
     if (album?.info) {
@@ -30,21 +49,37 @@ function ArtistComponent({ somefun, album }) {
       <p className="px-5 text-sm font-bold">
         Artist(s) – indicate ONLY ONE per field
       </p>
-      <select
-        type="text"
-        placeholder="Artist Name"
-        defaultValue={album.primaryArtist}
-        disabled={album.info ? true : false}
-        onChange={(e) => {
-          somefun({
-            ...album,
-            primaryArtist: e.target.value,
-          });
-        }}
-        className="h-12 mx-5 px-5 mt-2 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
-      >
-        <option value=""></option>
-      </select>
+      {artist.length === 0 ? (
+        <Link
+          to="/panel/add_new_artist"
+          className="p-2 w-44 bg-blue-500 text-white focus:outline-none hover:bg-blue-700 cursor-pointer"
+        >
+          Add new Artist
+        </Link>
+      ) : (
+        <select
+          type="text"
+          placeholder="Artist Name"
+          defaultValue={album.primaryArtist}
+          disabled={album.info ? true : false}
+          onChange={(e) => {
+            somefun({
+              ...album,
+              primaryArtist: e.target.value,
+            });
+          }}
+          className="h-12 mx-5 px-5 mt-2 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
+        >
+          <option value="default" defaultChecked>
+            default
+          </option>
+          {artist.map((art, index) => (
+            <option value={art.name} key={index}>
+              {art.name}
+            </option>
+          ))}
+        </select>
+      )}
       {Array.from(Array(keyartist)).map((data, index) => (
         <KeyArtist
           close={setkeyartist}
