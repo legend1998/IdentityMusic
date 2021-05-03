@@ -6,10 +6,11 @@ import validateRefs from "./utis/Utils";
 import { useStateValue } from "./StateProvider";
 import { useHistory } from "react-router";
 import logo from "./utis/logo.png";
+import firebase from "firebase";
 function Login() {
   //stats
 
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(false);
 
   //hooks
   const [{}, dispatch] = useStateValue();
@@ -21,6 +22,7 @@ function Login() {
   let refs = [email, password];
 
   const loginUser = (e) => {
+    setLoading(true);
     e.preventDefault();
 
     let res = validateRefs(refs);
@@ -35,6 +37,8 @@ function Login() {
         })
         .catch((e) => {
           new AWN().alert(e.message, { position: "bottom-right" });
+          setLoading(false);
+          return;
         });
       firedb
         .collection("user")
@@ -49,8 +53,50 @@ function Login() {
         });
     } else {
       new AWN().alert(res.message, { position: "bottom-right" });
+      setLoading(false);
+      return;
     }
   };
+
+  function signwithGoogle() {
+    var provider = new firebase.auth.GoogleAuthProvider();
+    auth
+      .signInWithPopup(provider)
+      .then((result) => {
+        /** @type {firebase.auth.OAuthCredential} */
+        var credential = result.credential;
+
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = credential.accessToken;
+        // The signed-in user info.
+        var user = result.user;
+        console.log(result);
+        firedb
+          .collection("user")
+          .doc(user.email)
+          .get()
+          .then((user) => {
+            localStorage.setItem("user", JSON.stringify(user.data()));
+            dispatch({
+              type: "SET_USER",
+              user: user.data(),
+            });
+            new AWN().success("logged In", { position: "bottom-right" });
+            history.replace("/panel/dashboard");
+          });
+        // ...
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
+      });
+  }
 
   return (
     <div className="min-h-screen w-full border-8 border-white login">
@@ -93,12 +139,28 @@ function Login() {
                 className="focus:outline-none h-full bg-blue-600 text-white p-5 w-44"
                 onClick={(e) => loginUser(e)}
               >
-                Login <i className="fas fa-arrow-right mx-3"></i>
+                {loading ? (
+                  <i className="fas fa-spinner animate-spin"></i>
+                ) : (
+                  <p className="">
+                    Login <i className="fas fa-arrow-right mx-3"></i>
+                  </p>
+                )}
               </button>
             </div>
           </form>
-
-          <Link to="/signup" className="p-3  text-gray-400">
+          <div>
+            <p className="flex items-center my-4">
+              Sign in with
+              <i
+                onClick={() => {
+                  signwithGoogle();
+                }}
+                className="fab mx-4 fa-google cursor-pointer fa-3x text-white"
+              ></i>
+            </p>
+          </div>
+          <Link to="/signup" className="py-3  text-gray-400">
             Create New Account
           </Link>
         </div>

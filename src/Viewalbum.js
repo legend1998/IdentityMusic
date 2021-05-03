@@ -6,6 +6,7 @@ import ViewAlbumMore from "./ViewAlbumMore";
 import { useParams } from "react-router";
 import { firedb } from "./firebaseconfig";
 import AWN from "awesome-notifications";
+import { statusSwitch } from "./utis/Utils";
 
 function Viewalbum() {
   const params = useParams();
@@ -45,9 +46,8 @@ function Viewalbum() {
                 <h2 className=" flex-1 text-3xl font-bold py-5 border-b">
                   {album.title}
                 </h2>
-                <span className="bg-red-500 text-white p-3 shadow-lg">
-                  {album?.status ? album.status : "pending"}
-                </span>
+
+                {statusSwitch(album?.status)}
               </div>
               <p className="">{album.primaryArtist}</p>
               <p className="">Released at {album.releaseDate}</p>

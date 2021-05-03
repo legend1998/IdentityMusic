@@ -4,6 +4,7 @@ import { useStateValue } from "./StateProvider";
 import { firedb } from "./firebaseconfig";
 import AWN from "awesome-notifications";
 import moment from "moment";
+import { statusSwitch } from "./utis/Utils";
 
 function Dispute() {
   const [show, setshow] = useState(false);
@@ -128,7 +129,7 @@ function Dispute() {
                 >
                   <td>{moment(dispute?.created_at).format("DD-MM-YYYY")}</td>
                   <td>{dispute.youtubeLink}</td>
-                  <td>{dispute?.status ? dispute.status : "pending"}</td>
+                  <td>{statusSwitch(dispute?.status)}</td>
                 </tr>
               ))}
             </tbody>

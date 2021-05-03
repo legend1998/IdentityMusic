@@ -39,7 +39,7 @@ function ArtistTab() {
               Filters &#x2304;
             </button>
             <div className="flex-grow flex items-center">
-              <i class="fas fa-search p-2"></i>
+              <i className="fas fa-search p-2"></i>
               <input
                 className="flex-grow h-7 outline-none text-gray-700"
                 type="text"
