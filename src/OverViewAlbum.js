@@ -5,7 +5,7 @@ function OverViewAlbum({ data }) {
   if (!data) {
     return (
       <div className="text-center">
-        <i className=" animate-spin fas fa-spinner fa-3x"></i>
+        <i className=" animate-spin fas fa-spinner fa-3x "></i>
       </div>
     );
   } else

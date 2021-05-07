@@ -14,7 +14,7 @@ function Album() {
     firedb.collection("album").onSnapshot((snapshot) => {
       var a = [];
       snapshot.forEach((snap) => {
-        if (snap.data().user === user.email)
+        if (snap.data().email === user.email)
           a.push({ ...snap.data(), id: snap.id });
       });
       setalbum(a);

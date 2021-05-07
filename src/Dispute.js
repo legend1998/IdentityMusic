@@ -122,8 +122,9 @@ function Dispute() {
               </tr>
             </thead>
             <tbody>
-              {disputes.map((dispute) => (
+              {disputes.map((dispute, index) => (
                 <tr
+                  key={index}
                   className="text-center h-14"
                   onClick={() => showdetails(dispute)}
                 >

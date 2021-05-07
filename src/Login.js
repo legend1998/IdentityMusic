@@ -31,25 +31,25 @@ function Login() {
         .signInWithEmailAndPassword(email.current.value, password.current.value)
         .then((data) => {
           if (data.user) {
-            new AWN().success("logged In", { position: "bottom-right" });
-            history.replace("/panel/dashboard");
+            firedb
+              .collection("user")
+              .doc(data.user.email)
+              .get()
+              .then((user) => {
+                localStorage.setItem("user", JSON.stringify(user.data()));
+                dispatch({
+                  type: "SET_USER",
+                  user: user.data(),
+                });
+                new AWN().success("logged In", { position: "bottom-right" });
+                history.replace("/panel/dashboard");
+              });
           }
         })
         .catch((e) => {
           new AWN().alert(e.message, { position: "bottom-right" });
           setLoading(false);
           return;
-        });
-      firedb
-        .collection("user")
-        .doc(email.current.value)
-        .get()
-        .then((user) => {
-          localStorage.setItem("user", JSON.stringify(user.data()));
-          dispatch({
-            type: "SET_USER",
-            user: user.data(),
-          });
         });
     } else {
       new AWN().alert(res.message, { position: "bottom-right" });
@@ -63,14 +63,10 @@ function Login() {
     auth
       .signInWithPopup(provider)
       .then((result) => {
-        /** @type {firebase.auth.OAuthCredential} */
-        var credential = result.credential;
-
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        var token = credential.accessToken;
-        // The signed-in user info.
-        var user = result.user;
-        console.log(result);
+        // // This gives you a Google Access Token. You can use it to access Google APIs.
+        // const credential = GoogleAuthProvider.credentialFromResult(result);
+        // const token = credential.accessToken;
+        const user = result.user;
         firedb
           .collection("user")
           .doc(user.email)
@@ -84,18 +80,20 @@ function Login() {
             new AWN().success("logged In", { position: "bottom-right" });
             history.replace("/panel/dashboard");
           });
-        // ...
+        // // The signed-in user info.
       })
       .catch((error) => {
         // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
         // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
+        //const email = error.email;
+        // The AuthCredential type that was used.
         // ...
       });
+
+    // ...
   }
 
   return (

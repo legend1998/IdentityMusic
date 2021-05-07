@@ -7,12 +7,14 @@ import { useParams } from "react-router";
 import { firedb } from "./firebaseconfig";
 import AWN from "awesome-notifications";
 import { statusSwitch } from "./utis/Utils";
+import { useHistory } from "react-router-dom";
 
 function Viewalbum() {
   const params = useParams();
   const [show, setshow] = useState(false);
   const [tab, setab] = useState(1);
   const [album, setalbum] = useState(null);
+  const history = useHistory();
 
   useEffect(() => {
     firedb
@@ -27,6 +29,10 @@ function Viewalbum() {
       });
   }, [params.id]);
 
+  function handlebackclick() {
+    history.goBack("/panel/assets");
+  }
+
   const passive =
     "text-gray-500 bg-gray-200 w-1/4 text-center h-16 py-5 cursor-pointer";
   const active =
@@ -37,7 +43,10 @@ function Viewalbum() {
       {album ? (
         <div className="flex px-3 py-8 flex-wrap">
           <div className="w-20 text-center">
-            <i className="fas fa-arrow-left fa-2x py-5"></i>
+            <i
+              className="fas fa-arrow-left fa-2x py-5 cursor-pointer hover:text-gray-700"
+              onClick={() => handlebackclick()}
+            ></i>
           </div>
           <div className="flex-1 flex min-w-max">
             <img src={album?.coverImage} width="180px" alt="" />
@@ -81,7 +90,7 @@ function Viewalbum() {
           </div>
         </div>
       ) : (
-        <div class="w-full flex items-center justify-center h-44">
+        <div className="w-full flex items-center justify-center h-44">
           <i className="fas fa-spinner"></i>
         </div>
       )}

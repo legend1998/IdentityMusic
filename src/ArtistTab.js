@@ -18,7 +18,7 @@ function ArtistTab() {
       });
       setartists(a);
     });
-  }, []);
+  }, [user.email]);
 
   return (
     <div className="bg-gray-100 pb-10 h-screen">

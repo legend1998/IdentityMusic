@@ -1,6 +1,6 @@
 import React from "react";
 import { useStateValue } from "./StateProvider";
-import { Line, Circle } from "rc-progress";
+import { Circle } from "rc-progress";
 
 function Dashboard() {
   const [{ user }] = useStateValue();

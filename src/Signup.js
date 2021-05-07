@@ -27,35 +27,8 @@ function Signup() {
   const createUser = (e) => {
     setLoading(true);
     e.preventDefault();
-    let res = validateRefs(refs);
-    if (res.success) {
-      firedb
-        .collection("user")
-        .doc(email.current.value)
-        .set({
-          fname: fname.current.value,
-          lname: lname.current.value,
-          email: email.current.value,
-        })
-        .then((res) => {
-          localStorage.setItem("user", JSON.stringify(res.data()));
-          dispatch({
-            type: "SET_USER",
-            user: res.data(),
-          });
-          new AWN().success("account created successfully", {
-            position: "bottom-right",
-          });
-        })
-        .catch((e) => {
-          new AWN()
-            .error("something went wrong try again later", {
-              position: "bottom-right",
-            })
-            .finally(() => {
-              setLoading(false);
-            });
-        });
+    let result = validateRefs(refs);
+    if (result.success) {
       auth
         .createUserWithEmailAndPassword(
           email.current.value,
@@ -63,19 +36,45 @@ function Signup() {
         )
         .then((data) => {
           if (data.user) {
+            var userdata = {
+              fname: fname.current.value,
+              lname: lname.current.value,
+              email: email.current.value,
+            };
+            firedb
+              .collection("user")
+              .doc(email.current.value)
+              .set(userdata)
+              .then(() => {
+                localStorage.setItem("user", JSON.stringify(userdata));
+                dispatch({
+                  type: "SET_USER",
+                  user: userdata,
+                });
+                new AWN().success("account created successfully", {
+                  position: "bottom-right",
+                });
+                history.replace("/panel/dashboard");
+              })
+              .catch((e) => {
+                console.log(e.message);
+                new AWN().alert(e.message, {
+                  position: "bottom-right",
+                });
+                setLoading(false);
+              });
           }
-          history.replace("/panel/dashboard");
         })
         .catch((e) => {
-          new AWN().error("something went wrong try again later", {
+          console.log(e.message);
+          new AWN().alert(e.message, {
             position: "bottom-right",
           });
-        })
-        .finally(() => {
           setLoading(false);
         });
     } else {
-      new AWN().warning(res.message, { position: "bottom-right" });
+      new AWN().warning(result.message, { position: "bottom-right" });
+      setLoading(false);
     }
   };
   return (
@@ -126,7 +125,15 @@ function Signup() {
                 className="focus:outline-none h-full w-44 bg-blue-600 text-white p-5"
                 onClick={(e) => createUser(e)}
               >
-                Sign up <i className="fas fa-arrow-right mx-3"></i>
+                {Loading ? (
+                  <span className>
+                    <i className="fas fa-spinner animate-spin text-white"></i>
+                  </span>
+                ) : (
+                  <p>
+                    Sign up <i className="fas fa-arrow-right mx-3"></i>
+                  </p>
+                )}
               </button>
             </div>
             <Link to="/" className="p-3  text-gray-400">
