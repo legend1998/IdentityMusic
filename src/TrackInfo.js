@@ -4,13 +4,14 @@ import { firedb, storage } from "./firebaseconfig";
 import KeyArtist from "./utis/KeyArtist";
 import raw from "./languageList.txt";
 
-function TrackInfo({ track, close, index, albumid, data }) {
+function TrackInfo({ track, close, index, albumid, data, artist }) {
   const [keyartist, setkeyartist] = useState(0);
   const [ownisrc, setownisrc] = useState(0);
   const [lyrics, setlyrics] = useState(false);
   const [newtrack, setnewtrack] = useState({});
   const [progress, setprogress] = useState(0);
   const [language, setlanguage] = useState([]);
+  const [select, setselect] = useState([]);
   const [sideartist, setsideartist] = useState([]);
 
   useEffect(() => {
@@ -63,6 +64,8 @@ function TrackInfo({ track, close, index, albumid, data }) {
     );
   };
 
+  console.log(newtrack);
+
   function getartist(secondaryartist) {
     if (data?.submitted) {
       return;
@@ -92,6 +95,18 @@ function TrackInfo({ track, close, index, albumid, data }) {
       .catch((e) => {
         new AWN().alert(e.message);
       });
+  }
+
+  function handleartist(string) {
+    if (string === "default") return;
+    if (!select.includes(string)) {
+      setselect([...select, string]);
+      setnewtrack({ ...newtrack, mainArtist: select });
+    }
+  }
+  function handleCutGenre(string) {
+    setselect(select.filter((gen) => gen !== string));
+    setnewtrack({ ...newtrack, mainArtist: select });
   }
 
   return (
@@ -189,12 +204,32 @@ function TrackInfo({ track, close, index, albumid, data }) {
       </div>
       <div className="grid grid-rows-2  mt-5">
         <p className="text-lg">Artist (Indicate only one in this field) *</p>
-        <input
-          defaultValue={data?.singer}
-          className="appearance-none focus:outline-none w-full h-12 bg-gray-100 px-5 text-gray-600"
-          readOnly
-          value="Singer"
-        />
+        <div className="p-3">
+          {select.map((sel) => (
+            <span
+              className="h-14 px-3 py-2 bg-indigo-500 m-2 text-white rounded"
+              onClick={() => handleCutGenre(sel)}
+            >
+              {sel}
+            </span>
+          ))}
+        </div>
+        <select
+          type="text"
+          placeholder="Artist Name"
+          defaultValue={newtrack?.singer}
+          onChange={(e) => handleartist(e.target.value)}
+          className="h-12 mx-5 px-5 mt-2 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
+        >
+          <option value="default" defaultChecked>
+            default
+          </option>
+          {artist.map((art, index) => (
+            <option value={art.name} key={index}>
+              {art.name}
+            </option>
+          ))}
+        </select>
       </div>
       {Array.from(Array(keyartist)).map((data, index) => (
         <KeyArtist

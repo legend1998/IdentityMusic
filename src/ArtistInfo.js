@@ -23,7 +23,9 @@ function ArtistInfo({ artist, setartist, disabled }) {
     <div className="lg:my-4 lg:mx-10 p-5 bg-white">
       <h2 className=" py-10 mb-5 border-b text-xl font-semibold">Info</h2>
       <div className="">
-        <p className="text-lg my-3 font-semibold">Official artist/band name</p>
+        <p className="text-lg my-3 font-semibold">
+          Official artist/band name <span className="text-red-500 px-1">*</span>
+        </p>
         <input
           type="text"
           disabled={disabled}

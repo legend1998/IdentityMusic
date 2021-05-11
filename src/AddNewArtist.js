@@ -60,8 +60,8 @@ function AddNewArtist() {
       new AWN().alert("select label");
       return;
     }
-    if (Object.keys(artist).length < 4) {
-      new AWN().alert("fill all details");
+    if (artist?.name === "") {
+      new AWN().alert("Name required");
       return;
     }
 

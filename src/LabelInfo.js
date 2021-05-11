@@ -33,7 +33,9 @@ function LabelInfo({ label, setlabel, disabled }) {
     <div className="lg:my-4 lg:mx-10 p-5 bg-white">
       <h2 className=" py-10 mb-5 border-b text-xl font-semibold">Info</h2>
       <div className="">
-        <p className="text-lg my-3 font-semibold">Official Label name</p>
+        <p className="text-lg my-3 font-semibold">
+          Official Label name <span className="px-1 text-red-600">*</span>
+        </p>
         <input
           type="text"
           disabled={disabled}
@@ -60,7 +62,7 @@ function LabelInfo({ label, setlabel, disabled }) {
             type="text"
             disabled={disabled}
             onChange={(e) => handleGenre(e.target.value)}
-            placeholder="Add genres you will be deliveringoo"
+            placeholder="Add genres you will be delivering"
             className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
           >
             {genre1.map((genre, index) => (

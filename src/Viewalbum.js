@@ -6,7 +6,7 @@ import ViewAlbumMore from "./ViewAlbumMore";
 import { useParams } from "react-router";
 import { firedb } from "./firebaseconfig";
 import AWN from "awesome-notifications";
-import { statusSwitch } from "./utis/Utils";
+import { downloadcsv, downloadxlsx, statusSwitch } from "./utis/Utils";
 import { useHistory } from "react-router-dom";
 
 function Viewalbum() {
@@ -72,18 +72,16 @@ function Viewalbum() {
               Actions &#x2304;
             </button>
             {show ? (
-              <ul className="absolute bg-white w-64 rounded text-sm text-center border ">
+              <ul className="absolute bg-white w-64 rounded text-sm text-center border cursor-pointer">
                 <li className="h-10 border-b p-2 hover:bg-gray-300">
-                  download Audio
+                  <a href={album?.coverImage} className="" target="blank">
+                    Download Artwork
+                  </a>
                 </li>
                 <li className="h-10 border-b p-2 hover:bg-gray-300">
-                  Download Artwork
-                </li>
-                <li className="h-10 border-b p-2 hover:bg-gray-300">
-                  Export as csv
-                </li>
-                <li className="h-10 border-b p-2 hover:bg-gray-300">
-                  Export as xlsx
+                  <button className="" onClick={() => downloadcsv(album)}>
+                    Export as csv
+                  </button>
                 </li>
               </ul>
             ) : null}

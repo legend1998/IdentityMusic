@@ -10,11 +10,14 @@ function OverViewAlbum({ data }) {
     );
   } else
     return (
-      <div className=" flex items-center justify-center flex-wrap">
+      <div className=" flex items-start justify-center flex-wrap">
         <div className="">
           <img src={data.coverImage} width="450px" alt="" />
         </div>
-        <div className="bg-white flex-1 h-full m-5">
+        <div className="bg-white flex-1 h-full  mx-5">
+          <div className="pb-4 bg-gray-100  text-blue-600 border-b">
+            <p className="h-12 bg-white p-2">Message: {data?.message}</p>
+          </div>
           <h1 className="text-xl font-semibold py-5 px-10 border-b ">
             Album Info
           </h1>

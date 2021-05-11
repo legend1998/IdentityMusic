@@ -53,8 +53,9 @@ function AddLabel() {
 
   function addLabelNow() {
     if (disabled) return;
-    if (Object.keys(label).length < 6) {
-      new AWN().alert("fill all details");
+    if (label?.label === "" || label?.coverImage) {
+      new AWN().alert("name and logo requried");
+      return;
     }
 
     firedb

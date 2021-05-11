@@ -6,6 +6,9 @@ function KeyArtist({ close, keyartist, addArtist }) {
   const [disable, setdisable] = useState(false);
 
   async function pushArtist() {
+    if (artists?.artistname === "") {
+      return;
+    }
     if (!disable) {
       addArtist(artists);
       setdisable(true);

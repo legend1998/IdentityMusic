@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { firedb } from "./firebaseconfig";
 import TrackInfo from "./TrackInfo";
+import { useStateValue } from "./StateProvider";
 
 function NewTracks({ nextab, albumid }) {
   const [tracks, settracks] = useState(0);
+  const [artist, setartist] = useState([]);
   const [trackData, seTtrackData] = useState([]);
+  const [{ user }] = useStateValue();
 
   //hooks
 
@@ -21,6 +24,15 @@ function NewTracks({ nextab, albumid }) {
         settracks(a.length);
         seTtrackData(a);
       });
+    firedb.collection("artist").onSnapshot((snapshot) => {
+      var a = [];
+      snapshot.forEach((snap) => {
+        if (snap.data().user === user.email) {
+          a.push(snap.data());
+        }
+      });
+      setartist(a);
+    });
   }, []);
 
   const handletracks = () => {
@@ -37,6 +49,7 @@ function NewTracks({ nextab, albumid }) {
             key={index}
             index={index}
             albumid={albumid}
+            artist={artist}
           />
         ))}
 

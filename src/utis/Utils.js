@@ -59,3 +59,63 @@ export function getEarnigns(data) {
 
   return total;
 }
+
+export function downloadcsv(album) {
+  let csvContent = "";
+  var key;
+  var head = "";
+  var data = "";
+
+  for (key in album) {
+    if (
+      key === "coverImage" ||
+      key === "stats" ||
+      key === "artist" ||
+      key === "storInfo"
+    )
+      continue;
+    head += `${key},`;
+    data += `${album[key]},`;
+  }
+
+  csvContent += head + "\n" + data;
+
+  var downloadLink = document.createElement("a");
+  var blob = new Blob(["\ufeff", csvContent]);
+  var url = URL.createObjectURL(blob);
+  downloadLink.href = url;
+  downloadLink.download = "albuminfo.csv";
+
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  document.body.removeChild(downloadLink);
+}
+export function downloadxlsx(album) {
+  let csvContent = "";
+  var key;
+  var head = "";
+  var data = "";
+  for (key in album) {
+    if (
+      key === "coverImage" ||
+      key === "stats" ||
+      key === "artist" ||
+      key === "storInfo"
+    )
+      continue;
+    head += `${key},`;
+    data += `${album[key]},`;
+  }
+
+  csvContent += head + "\n" + data;
+
+  var downloadLink = document.createElement("a");
+  var blob = new Blob(["\ufeff", csvContent]);
+  var url = URL.createObjectURL(blob);
+  downloadLink.href = url;
+  downloadLink.download = "albuminfo.xlsx";
+
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  document.body.removeChild(downloadLink);
+}

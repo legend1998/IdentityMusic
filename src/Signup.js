@@ -21,12 +21,19 @@ function Signup() {
   let lname = useRef();
   let email = useRef();
   let password = useRef();
+  let confirmpassword = useRef();
 
-  var refs = [fname, lname, email, password];
+  var refs = [fname, lname, email, password, confirmpassword];
 
   const createUser = (e) => {
     setLoading(true);
     e.preventDefault();
+    if (password.current.value !== confirmpassword.current.value) {
+      new AWN().alert("password mismatch", {
+        position: "bottom-right",
+      });
+      return;
+    }
     let result = validateRefs(refs);
     if (result.success) {
       auth
@@ -117,6 +124,12 @@ function Signup() {
               ref={password}
               placeholder="Password"
               name="password"
+              className="focus:outline-none h-14 w-full border p-3 mt-1"
+            />
+            <input
+              type="password"
+              ref={confirmpassword}
+              placeholder="Confirm Password"
               className="focus:outline-none h-14 w-full border p-3 mt-1"
             />
 
