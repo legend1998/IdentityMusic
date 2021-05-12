@@ -6,7 +6,6 @@ import validateRefs from "./utis/Utils";
 import { useStateValue } from "./StateProvider";
 import { useHistory } from "react-router";
 import logo from "./utis/logo.png";
-import firebase from "firebase";
 function Login() {
   //stats
 
@@ -58,43 +57,44 @@ function Login() {
     }
   };
 
-  function signwithGoogle() {
-    var provider = new firebase.auth.GoogleAuthProvider();
-    auth
-      .signInWithPopup(provider)
-      .then((result) => {
-        // // This gives you a Google Access Token. You can use it to access Google APIs.
-        // const credential = GoogleAuthProvider.credentialFromResult(result);
-        // const token = credential.accessToken;
-        const user = result.user;
-        firedb
-          .collection("user")
-          .doc(user.email)
-          .get()
-          .then((user) => {
-            localStorage.setItem("user", JSON.stringify(user.data()));
-            dispatch({
-              type: "SET_USER",
-              user: user.data(),
-            });
-            new AWN().success("logged In", { position: "bottom-right" });
-            history.replace("/panel/dashboard");
-          });
-        // // The signed-in user info.
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-        // The email of the user's account used.
-        //const email = error.email;
-        // The AuthCredential type that was used.
-        // ...
-      });
+  // function signwithGoogle() {
+  //   var provider = new firebase.auth.GoogleAuthProvider();
+  //   auth
+  //     .signInWithPopup(provider)
+  //     .then((result) => {
+  //       // // This gives you a Google Access Token. You can use it to access Google APIs.
+  //       // const credential = GoogleAuthProvider.credentialFromResult(result);
+  //       // const token = credential.accessToken;
+  //       const user = result.user;
+  //       if (!user) return;
+  //       firedb
+  //         .collection("user")
+  //         .doc(user.email)
+  //         .get()
+  //         .then((user) => {
+  //           localStorage.setItem("user", JSON.stringify(user.data()));
+  //           dispatch({
+  //             type: "SET_USER",
+  //             user: user.data(),
+  //           });
+  //           new AWN().success("logged In", { position: "bottom-right" });
+  //           history.replace("/panel/dashboard");
+  //         });
+  //       // // The signed-in user info.
+  //     })
+  //     .catch((error) => {
+  //       // Handle Errors here.
+  //       const errorCode = error.code;
+  //       const errorMessage = error.message;
+  //       console.log(errorCode, errorMessage);
+  //       // The email of the user's account used.
+  //       //const email = error.email;
+  //       // The AuthCredential type that was used.
+  //       // ...
+  //     });
 
-    // ...
-  }
+  //   // ...
+  // }
 
   return (
     <div className="min-h-screen w-full border-8 border-white login">
@@ -147,17 +147,6 @@ function Login() {
               </button>
             </div>
           </form>
-          <div>
-            <p className="flex items-center my-4">
-              Sign in with
-              <i
-                onClick={() => {
-                  signwithGoogle();
-                }}
-                className="fab mx-4 fa-google cursor-pointer fa-3x text-white"
-              ></i>
-            </p>
-          </div>
           <Link to="/signup" className="py-3  text-gray-400">
             Create New Account
           </Link>
