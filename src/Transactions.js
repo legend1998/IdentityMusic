@@ -1,31 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { firedb } from "./firebaseconfig";
 import { useStateValue } from "./StateProvider";
+import moment from "moment";
+import { calculateOutstanding } from "./utis/Utils";
 
 function Transactions() {
   const [{ user }] = useStateValue();
   const [trans, settrans] = useState([]);
-  const [stats, setstats] = useState({});
   useEffect(() => {
-    firedb
-      .collection("user")
-      .doc(user.email)
-      .get()
-      .then((user) => {
-        setstats(user?.stats);
-      });
-    firedb
-      .collection("user")
-      .doc(user.email)
-      .collection("transactions")
-      .onSnapshot((snapshot) => {
-        var a = [];
-        snapshot.forEach((snap) => {
-          a.push(snap.data());
+    if (user) {
+      firedb
+        .collection("transactions")
+        .where("user", "==", user.email)
+        .onSnapshot((snapshot) => {
+          var a = [];
+          snapshot.forEach((snap) => {
+            a.push(snap.data());
+          });
+          settrans(a);
         });
-        settrans(a);
-      });
-  }, [user.email]);
+    }
+  }, [user]);
+
   return (
     <div className="w-full bg-gray-100 h-full">
       <div className="w-full bg-white h-24 font-Graphik flex items-center shadow-sm">
@@ -35,13 +31,13 @@ function Transactions() {
         <div className="">
           <p className="">OutStanding Earnings</p>
           <h3 className="text-3xl fa fa-inr font-bold">
-            {stats?.outstanding ? stats?.outstanding : 0.0}
+            {calculateOutstanding(trans, user?.transactionStat?.total)}
           </h3>
         </div>
         <div className="">
           <p className="text-sm">Balance</p>
           <h3 className="text-3xl fa fa-inr font-bold">
-            {stats?.total ? stats?.total : 0.0}
+            {user?.transactionStat?.total}
           </h3>
         </div>
       </div>
@@ -50,22 +46,21 @@ function Transactions() {
           {trans.length === 0 ? "Nothing to show" : "showing all transactions"}
         </div>
         <div className="bg-white">
-          <table className="table-fixed text-xs text-gray-700 w-full h-60">
+          <table className="table-fixed text-xs text-gray-700 w-full">
             <thead>
               <tr className="h-12 border">
-                <th className=" w-2/6">Date</th>
-                <th className=" w-1/6">Contract Name</th>
-                <th className=" w-1/6">Transaction Mode</th>
+                <th className=" w-1/6">Date</th>
+                <th className=" w-2/6">Transaction Mode</th>
                 <th className=" w-1/6">Amount</th>
                 <th className=" w-1/6">Status</th>
               </tr>
             </thead>
             <tbody>
               {trans.map((t, i) => (
-                <tr key={i}>
-                  <td>{t.date}</td>
-                  <td>{t.name}</td>
+                <tr key={i} className="h-14 text-center">
+                  <td>{moment(t.date).format("D-M-yy")}</td>
                   <td>{t.mode}</td>
+                  <td>{t.amount}</td>
                   <td>{t.status}</td>
                 </tr>
               ))}

@@ -84,7 +84,7 @@ function AddNewArtist() {
           <i className="fas fa-arrow-left"></i>
         </button>
         <h1 className="text-3xl font-semibold pl-2 font-sans ">
-          Create New Artist
+          {disabled ? "Artist" : "Create New Artist"}
         </h1>
       </div>
       <div className="bg-white lg:m-10">

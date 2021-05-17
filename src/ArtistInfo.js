@@ -78,21 +78,31 @@ function ArtistInfo({ artist, setartist, disabled }) {
       </div>
       {show ? (
         <div className="">
-          <select
-            type="text"
-            disabled={disabled}
-            defaultValue={artist?.label}
-            onChange={(e) => setartist({ ...artist, label: e.target.value })}
-            placeholder="Fans like to know! Can be country or city"
-            className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
-          >
-            {lables.map((label, index) => (
-              <option value={label.label} key={index}>
-                {label.label}
-              </option>
-            ))}
-            <option value="none">--select--</option>
-          </select>
+          {disabled ? (
+            <input
+              type="text"
+              disabled
+              defaultValue={artist?.label}
+              placeholder="No label present"
+              className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
+            />
+          ) : (
+            <select
+              type="text"
+              disabled={disabled}
+              defaultValue={artist?.label}
+              onChange={(e) => setartist({ ...artist, label: e.target.value })}
+              placeholder="Fans like to know! Can be country or city"
+              className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
+            >
+              {lables.map((label, index) => (
+                <option value={label.label} key={index}>
+                  {label.label}
+                </option>
+              ))}
+              <option value="none">--select--</option>
+            </select>
+          )}
         </div>
       ) : null}
     </div>

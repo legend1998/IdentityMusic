@@ -11,6 +11,7 @@ import PieChart, {
 } from "devextreme-react/pie-chart";
 import PlatFormViewsEarnings from "./PlatFormViewsEarnings";
 import { getEarnigns } from "./utis/Utils";
+import { useEffect } from "react/cjs/react.production.min";
 
 function ViewAlbumStats({ stats }) {
   const [data, setdata] = useState(stats ? stats : []);
@@ -18,7 +19,7 @@ function ViewAlbumStats({ stats }) {
   console.log(data);
   function customizeTooltip(arg) {
     return {
-      text: `${arg.argumentText}<br>${arg.seriesName}: ${arg.valueText}B`,
+      text: `${arg.argumentText}<br>${arg.seriesName}: ${arg.valueText}`,
     };
   }
   return (

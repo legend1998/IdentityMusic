@@ -1,5 +1,5 @@
 import React from "react";
-import { useRouteMatch, Route, Switch, useParams } from "react-router-dom";
+import { useRouteMatch, Route, Switch } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import Sidebar from "./Sidebar";
 import Assets from "./Assets";

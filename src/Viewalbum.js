@@ -6,7 +6,7 @@ import ViewAlbumMore from "./ViewAlbumMore";
 import { useParams } from "react-router";
 import { firedb } from "./firebaseconfig";
 import AWN from "awesome-notifications";
-import { downloadcsv, downloadxlsx, statusSwitch } from "./utis/Utils";
+import { downloadcsv, statusSwitch } from "./utis/Utils";
 import { useHistory } from "react-router-dom";
 
 function Viewalbum() {

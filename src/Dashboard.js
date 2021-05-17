@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useStateValue } from "./StateProvider";
 import { Circle } from "rc-progress";
+import { useHistory } from "react-router";
+import { firedb } from "./firebaseconfig";
 
 function Dashboard() {
   const [{ user }] = useStateValue();
+  const history = useHistory();
+  const [vidoes, setvidoes] = useState([]);
+
+  useEffect(() => {
+    firedb.collection("video").onSnapshot((snapshot) => {
+      var a = [];
+      snapshot.forEach((snap) => {
+        a.push(snap.data());
+      });
+      setvidoes(a);
+    });
+  }, []);
   return (
     <div className="w-full bg-gray-100">
       <div className="w-full bg-white h-24 flex items-center shadow-sm">
@@ -32,17 +46,14 @@ function Dashboard() {
           <div className="">
             <div className="float-left flex items-center m-3 flex-wrap justify-center">
               <span className="text-blue-600 h-24 w-24 rounded-full border-8 p-3 flex items-center justify-center">
-                <i className="fas fa-money-check-alt fa-2x  "></i>
-              </span>
-              <span className="text-center text-2xl  mx-4">
-                Add Payment Info
-              </span>
-            </div>
-            <div className="float-left flex items-center m-3 flex-wrap justify-center">
-              <span className="text-blue-600 h-24 w-24 rounded-full border-8 p-3 flex items-center justify-center">
                 <i className="fas fa-user fa-2x  "></i>
               </span>
-              <span className="text-center  text-2xl mx-4">
+              <span
+                className="text-center  text-2xl mx-4"
+                onClick={() => {
+                  history.push("/panel/account");
+                }}
+              >
                 Add Account Info
               </span>
             </div>
@@ -50,32 +61,34 @@ function Dashboard() {
               <span className="text-blue-600 h-24 w-24 rounded-full border-8 p-3 flex items-center justify-center">
                 <i className="fas fa-podcast fa-2x  "></i>
               </span>
-              <span className="text-center  text-2xl mx-4">
+              <span
+                className="text-center  text-2xl mx-4"
+                onClick={() => {
+                  history.push("/panel/assets");
+                }}
+              >
                 Distribute your Music
               </span>
             </div>
           </div>
         </div>
       </div>
-      <div className="m-10  grid  grid-cols-1 md:grid-cols-3">
-        <div className=" h-72   bg-white   mr-3 mb-3">
-          <div className=" h-16 px-8 flex items-center">
-            <p className="text-xl">Tutorial | Setup Account</p>
+      <div className="m-10">
+        {vidoes.map((v, i) => (
+          <div className="  bg-white   mr-3 mb-3 float-left w-96 m-5" key={i}>
+            <div className="h-56 bg-gray-500">
+              <iframe
+                src={v?.src}
+                width="100%"
+                allowfullscreen
+                height="100%"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              ></iframe>
+            </div>
           </div>
-          <div className="h-56 bg-gray-500 p-8">data</div>
-        </div>
-        <div className=" h-72  bg-white mr-3 mb-3">
-          <div className=" h-16 px-8 flex items-center">
-            <p className="text-xl">Tutorial | Create Release</p>
-          </div>
-          <div className="h-56 bg-gray-500 p-8">data</div>
-        </div>
-        <div className=" h-72  bg-white mr-3 mb-3">
-          <div className=" h-16 px-8 flex items-center">
-            <p className="text-xl">Tutorial | Release Information</p>
-          </div>
-          <div className="h-56 bg-gray-500 p-8">data</div>
-        </div>
+        ))}
       </div>
     </div>
   );
