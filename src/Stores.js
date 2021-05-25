@@ -260,10 +260,18 @@ function Stores({ nextab, albumid }) {
                 onChange={(e) => handlecheck(e)}
               />
             </td>
-            <td className=" text-left capitalize"> youtube content id</td>
+            <td className=" text-left capitalize"> Youtube Content ID</td>
           </tr>
         </tbody>
       </table>
+      <div className="pb-4 bg-gray-100  text-blue-600 border-b">
+        <p className="h-14 bg-white pt-1 pl-6">
+          * Note: Videos may claimed by any one of these Partners( Merlin
+          TrapBassHDtV, Merlin FUGA, Sony Music, RoutNote, Merlin Coin Digital).
+          We may use our Youtube deal or Mentioned Partnered depending upon use
+          have choosed for Synchronisation Purpose.
+        </p>
+      </div>
       <div className=" flex items-center justify-between bg-black h-14 text-gray-200 bottom-0  w-full">
         <button className=" h-full w-52 bg-gray-600 focus:outline-none hover:bg-gray-700">
           <i className="fas fa-arrow-left mx-3"></i> Back

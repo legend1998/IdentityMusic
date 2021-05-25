@@ -25,21 +25,10 @@ function Album() {
     history.push("/panel/viewAlbum/" + id);
   }
 
-  function sort(type) {
-    album.sort(function (a, b) {
-      if (a.title < b.title) {
-        return -1;
-      }
-      if (a.title > b.title) {
-        return 1;
-      }
-      return 0;
-    });
-  }
   return (
     <div className="lg:px-12 md:px-1 py-5 ">
       <div className="bg-white">
-        <div className="flex h-12 items-center flex-wrap">
+        <div className="flex h-14 items-center flex-wrap">
           <button
             onClick={() => setfilter(!filter)}
             className={`px-7 hidden lg:block focus:outline-none ${
@@ -59,20 +48,20 @@ function Album() {
           <div className="duration-200">
             <button
               onClick={() => setshow(!show)}
-              className="bg-blue-700 hover:bg-blue-800 w-64 h-12 focus:outline-none text-white"
+              className=" bg-blue-700 hover:bg-blue-800 w-64 h-14  focus:outline-none text-white"
             >
               Actions &#x2304;
             </button>
             {show ? (
-              <ul className="absolute bg-white w-64 rounded text-sm text-center border ">
-                <li className="h-10 border-b p-2 hover:bg-gray-300">
+              <ul className="absolute bg-white w-64 rounded font-Light shadow-lg  border cursor-pointer">
+                <li className="h-7 pt-1  pl-5 hover:bg-gray-100">
                   <Link to="/panel/create_new_release">Create new release</Link>
                 </li>
-                <li className="h-10 border-b p-2 hover:bg-gray-300">
-                  Export as csv
+                <li className="h-6 pl-5  hover:bg-gray-100">
+                  Download full catalog (CSV)
                 </li>
-                <li className="h-10 border-b p-2 hover:bg-gray-300">
-                  Export as xlsx
+                <li className="h-6 pl-5 hover:bg-gray-100">
+                  Download full catalog (XLSX)
                 </li>
               </ul>
             ) : null}
@@ -131,42 +120,30 @@ function Album() {
         {album.length === 0 ? "Nothing to show" : " Showing all Albums"}
       </div>
       <div className="bg-white">
-        <table className=" capitalize table-fixed text-xs text-gray-700 w-full text-left">
+        <table className=" capitalize table-fixed text-sm text-gray-700 w-full text-left">
           <thead>
             <tr className="h-14 border ">
               <th className=" w-24 "></th>
-              <th
-                className=" w-2/6 hover:bg-gray-100"
-                onClick={() => sort("title")}
-              >
-                Album Name
-                <span className="mx-3">
-                  <i className="fas fa-arrows-alt-v"></i>
-                </span>
-              </th>
+              <th className=" w-2/6 pl-2 ">Album Name</th>
               <th className=" w-1/6">Artist</th>
               <th className=" w-1/6">Label</th>
               <th className=" w-1/6">UPC</th>
               <th className=" w-1/6">Release Date</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="cursor-pointer">
             {album.map((a, index) => (
               <tr
                 key={index}
                 onClick={() => handleClick(a.id)}
-                className="h-20 text-lg font-semibold hover:bg-gray-50 border-b"
+                className="h-20 text-lg font-Regular hover:bg-gray-50 border-b"
               >
-                <td className="text-center">
-                  <input
-                    className="h-8 w-8 border focus:outline-none"
-                    type="checkbox"
-                  />
+                <td className="text-center pl-6">
+                  <img src={a.coverImage} width="50px" alt="" />
                 </td>
                 <td className=" w-2/6  ">
                   <div className="flex justify-start items-center">
-                    <img src={a.coverImage} width="50px" alt="" />
-                    <p className="pl-6"> {a.title}</p>
+                    <p className="pl-2"> {a.title}</p>
                   </div>
                 </td>
                 <td className=" w-1/6">{a.primaryArtist}</td>

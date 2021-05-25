@@ -27,27 +27,16 @@ export function statusSwitch(status) {
   switch (status) {
     case "rejected":
       return (
-        <span className="bg-red-500 text-white p-3 shadow-lg">rejected</span>
+        <button className="bg-red-400 text-white h-7 w-max text-center p-1 shadow-lg focus:outline-none">
+          Inspection Failed
+        </button>
       );
-    case "injested":
-      return (
-        <span className="bg-yellow-700 text-white p-3 shadow-lg">injested</span>
-      );
-    case "moderation":
-      return (
-        <span className="bg-blue-400 text-white p-3 shadow-lg">moderation</span>
-      );
-    case "approved":
-      return (
-        <span className="bg-green-500 text-white p-3 shadow-lg">approved</span>
-      );
-    case "live":
-      return (
-        <span className="bg-green-900 text-white p-3 shadow-lg">live</span>
-      );
+
     default:
       return (
-        <span className="bg-yellow-500 text-white p-3 shadow-lg">pending</span>
+        <button className="bg-blue-600 text-white h-7 w-max text-center p-1 shadow-lg focus:outline-none">
+          Locked
+        </button>
       );
   }
 }

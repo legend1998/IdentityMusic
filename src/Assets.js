@@ -32,6 +32,14 @@ function Assets() {
         >
           <i className="fas fa-music mx-5"></i> Tracks
         </div>
+        <div
+          onClick={() => settab(3)}
+          className={`flex-grow py-5 cursor-pointer hover:text-black ${
+            tab === 3 ? active : passive
+          }`}
+        >
+          <i className="fas fa-music mx-5"></i> Video
+        </div>
       </div>
       {tab === 1 ? <Album /> : null}
       {tab === 2 ? <Tracks /> : null}

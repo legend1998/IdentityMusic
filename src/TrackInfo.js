@@ -36,7 +36,7 @@ function TrackInfo({ track, close, index, albumid, data, artist }) {
   const musciupload = (e) => {
     var image = e.target.files[0];
     if (!image) {
-      new AWN().alert("no image file selected", { position: "bottom-right" });
+      new AWN().alert("no  file selected", { position: "bottom-right" });
       return;
     }
 
@@ -125,7 +125,9 @@ function TrackInfo({ track, close, index, albumid, data, artist }) {
       {newtrack?.trackURL || data?.trackURL || progress > 0 ? (
         <div className="h-10 w-full">
           <div className="h-full bg-indigo-500 text-white text-center py-2">
-            {progress > 0 ? Math.floor(progress) + "%" : "submitted the song"}
+            {progress > 0
+              ? Math.floor(progress) + "%"
+              : "Track has been uploaded Successfully"}
           </div>
         </div>
       ) : (
@@ -135,15 +137,15 @@ function TrackInfo({ track, close, index, albumid, data, artist }) {
             className="w-full h-full bg-gray-100 flex items-center"
           >
             <p className="pl-5 text-gray-400">
-              Upload your files here (stereo wav files only minimum bit depth 16
-              bit,sample rate :44.1 KHz)
+              Upload your files here (stereo mp3 files only sample rate :44.1
+              KHz)
             </p>
             <input
               id="audio-file"
               type="file"
               disabled={data?.submitted}
               onChange={(e) => musciupload(e)}
-              accept="audio/wav"
+              accept="audio/"
               className="hidden"
               placeholder=""
             />

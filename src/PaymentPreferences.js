@@ -44,20 +44,12 @@ function PaymentPreferences() {
           <h1 className="text-xl font-semibold py-8 border-b ">Payment Info</h1>
           <div className="">
             <div className="">
-              <p className="text-md  font-semibold my-4">PayPal Email</p>
+              <p className="text-md  font-semibold my-4">
+                PayPal Email / Upi ID
+              </p>
               <input
                 type="text"
-                value="INR"
-                readOnly
-                className=" appearance-none focus:outline-none bg-gray-100 border h-12 px-2 w-1/2"
-              />
-            </div>
-            <div className="my-5">
-              <p className="text-md font-semibold my-4">UPI Id</p>
-              <input
-                type="text"
-                value="INR"
-                readOnly
+                placeholder="abc@xyz.com"
                 className=" appearance-none focus:outline-none bg-gray-100 border h-12 px-2 w-1/2"
               />
             </div>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { firedb } from "./firebaseconfig";
 import { useStateValue } from "./StateProvider";
 
@@ -35,7 +36,7 @@ function Tracks() {
   return (
     <div className="lg:px-12 md:px-1 py-5 ">
       <div className="bg-white">
-        <div className="flex h-12 items-center">
+        <div className="flex h-14 items-center">
           <button
             onClick={() => setfilter(!filter)}
             className={`px-7 md:hidden lg:block focus:outline-none ${
@@ -55,17 +56,20 @@ function Tracks() {
           <div className="duration-200">
             <button
               onClick={() => setshow(!show)}
-              className="bg-blue-700 hover:bg-blue-800 w-64 h-12 focus:outline-none text-white"
+              className="bg-blue-700 hover:bg-blue-800 w-64 h-14 focus:outline-none text-white"
             >
               Actions &#x2304;
             </button>
             {show ? (
-              <ul className="absolute bg-white w-64 rounded text-sm text-center border ">
-                <li className="h-10 border-b p-2 hover:bg-gray-300">
-                  Export as csv
+              <ul className="absolute bg-white w-64 rounded font-Light shadow-lg  border cursor-pointer">
+                <li className="h-7 pt-1  pl-5 hover:bg-gray-100">
+                  <Link to="/panel/create_new_release">Create new release</Link>
                 </li>
-                <li className="h-10 border-b p-2 hover:bg-gray-300">
-                  Export as xlsx
+                <li className="h-6 pl-5  hover:bg-gray-100">
+                  Download full catalog (CSV)
+                </li>
+                <li className="h-6 pl-5 hover:bg-gray-100">
+                  Download full catalog (XLSX)
                 </li>
               </ul>
             ) : null}
@@ -121,44 +125,24 @@ function Tracks() {
         </div>
       </div>
       <div className="h-16 py-2 text-xs text-gray-500 flex items-end">
-        {tracks.length === 0 ? "nothing to show" : "showing all tracks"}
+        {tracks.length === 0 ? "Nothing to show" : "Showing all tracks"}
       </div>
       <div className="bg-white">
-        <table className="table-fixed text-xs text-gray-700 w-full h-60">
+        <table className="table-fixed text-gray-700 w-full h-full">
           <thead className="text-left">
             <tr className="h-12 border">
-              <th className=" w-1/12"></th>
-              <th className=" w-2/12">Track Name</th>
-              <th className="w-2/12">Artist</th>
-              <th className=" w-1/12">ISRC</th>
-              <th className="w-4/12">Audio</th>
-              <th className=" w-1/12">Language</th>
+              <th className=" w-2/12 pl-10 font-medium ">Track Name</th>
+              <th className="w-2/12 pl-5 font-medium ">Artist</th>
+              <th className=" w-2/12 font-medium ">ISRC</th>
+              <th className=" w-2/12 text-center font-medium ">CRBT Time</th>
+              <th className="w-4/12 text-center font-medium ">Audio</th>
             </tr>
           </thead>
-          <tbody>
-            {tracks.map((t) => (
-              <tr className="h-12 text-left text-lg font-semibold border-b hover:bg-gray-50">
-                <td>
-                  <input
-                    type="checkbox"
-                    className="w-8 h-8 border focus:outline-none mx-4"
-                  />
-                </td>
-                <td>{t.releaseTitle}</td>
-                <td>{t.primaryArtist}</td>
-                <td>{t.isrc}</td>
-                <td>
-                  <audio src={t.trackURL} controls></audio>
-                </td>
-                <td>{t.lyricLanguage}</td>
-              </tr>
-            ))}
-          </tbody>
         </table>
         {tracks.length === 0 ? (
           <div className=" h-56 flex items-center justify-center">
             <p className="text-xs text-gray-500">
-              you have no data to display.
+              You have no data to display.
             </p>
           </div>
         ) : null}

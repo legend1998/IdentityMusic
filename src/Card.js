@@ -22,7 +22,7 @@ function Card({ data }) {
         {data?.coverImage ? (
           <img src={data?.coverImage} alt="Avatar" />
         ) : (
-          <div className="text-7xl text-white bg-black rounded-full h-full flex items-center justify-center">
+          <div className="text-7xl text-white bg-black rounded- h-full flex items-center justify-center">
             {data?.name
               ? data?.name?.split(" ").map((e) => e[0])
               : data?.label?.split(" ").map((e) => e[0])}

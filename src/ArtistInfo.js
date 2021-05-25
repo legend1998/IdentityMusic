@@ -50,8 +50,10 @@ function ArtistInfo({ artist, setartist, disabled }) {
         <p className="text-lg my-3 font-semibold">Location</p>
         <input
           type="text"
-          onChange={(e) => setartist({ ...artist, locaiton: e.target.value })}
-          placeholder="Fans like to know! Can be country or city"
+          disabled={disabled}
+          defaultValue={artist?.location}
+          onChange={(e) => setartist({ ...artist, location: e.target.value })}
+          placeholder="Fans would like to know! May be city or country"
           className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
         />
       </div>
@@ -95,16 +97,38 @@ function ArtistInfo({ artist, setartist, disabled }) {
               placeholder="Fans like to know! Can be country or city"
               className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
             >
+              <option value="none">--select--</option>
               {lables.map((label, index) => (
                 <option value={label.label} key={index}>
                   {label.label}
                 </option>
               ))}
-              <option value="none">--select--</option>
             </select>
           )}
         </div>
       ) : null}
+      <div className="">
+        <p className="text-lg my-3 font-semibold">Payee ID (Optional)</p>
+        <input
+          type="text"
+          disabled={disabled}
+          defaultValue={artist?.payee}
+          onChange={(e) => setartist({ ...artist, payee: e.target.value })}
+          placeholder="PayPal / UPI ID"
+          className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
+        />
+      </div>
+      <div className="">
+        <p className="text-lg my-3 font-semibold">Royalty Sharing(Optional)</p>
+        <input
+          type="text"
+          disabled={disabled}
+          defaultValue={artist?.share}
+          onChange={(e) => setartist({ ...artist, share: e.target.value })}
+          placeholder="Royalty Sharing"
+          className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
+        />
+      </div>
     </div>
   );
 }

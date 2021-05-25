@@ -13,6 +13,7 @@ module.exports = {
         "white-cover": "#f6f6f6",
         sideblack: "#1d1d1d",
         sidetext: "#707070",
+        dropdwonc: "#2e3138",
       },
     },
   },

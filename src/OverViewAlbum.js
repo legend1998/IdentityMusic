@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { statusSwitch } from "./utis/Utils";
 
 function OverViewAlbum({ data }) {
   console.log(data);
@@ -16,10 +17,17 @@ function OverViewAlbum({ data }) {
         </div>
         <div className="bg-white flex-1 h-full  mx-5">
           <div className="pb-4 bg-gray-100  text-blue-600 border-b">
-            <p className="h-12 bg-white p-2">Message: {data?.message}</p>
+            <p className="h-auto bg-white py-3 pl-3  ">
+              {statusSwitch(data?.status)}
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <a className="text-lg">{data?.message}</a>
+              <br></br>
+              <a className="text-lg text-red-500">{data?.error}</a>
+            </p>
           </div>
-          <h1 className="text-xl font-semibold py-5 px-10 border-b ">
-            Album Info
+
+          <h1 className="text-xl font-Regular py-3 px-10 border-b ">
+            Release Info
           </h1>
           <div className="m-10">
             <p className="">

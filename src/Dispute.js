@@ -52,7 +52,7 @@ function Dispute() {
               <input
                 className="flex-grow h-7 outline-none text-gray-700"
                 type="text"
-                placeholder="Search by title, artist, label, UPC"
+                placeholder="Search by Date, Link"
               />
             </div>
             <div className="duration-200">
@@ -109,8 +109,8 @@ function Dispute() {
             </div>
           </div>
         </div>
-        <div className="h-16 py-2 text-xs text-gray-500 flex items-end">
-          Nothing to show
+        <div className="h-16 py-2 text-sm text-gray-500 flex items-end">
+          This table shows all the dispute created by User.
         </div>
         <div className="bg-white">
           <table className="table-fixed text-xs text-gray-700 w-full">
@@ -125,7 +125,7 @@ function Dispute() {
               {disputes.map((dispute, index) => (
                 <tr
                   key={index}
-                  className="text-center h-14"
+                  className="text-center h-14 hover:bg-gray-50"
                   onClick={() => showdetails(dispute)}
                 >
                   <td>{moment(dispute?.created_at).format("DD-MM-YYYY")}</td>
@@ -135,22 +135,13 @@ function Dispute() {
               ))}
             </tbody>
           </table>
-        </div>
-        <div className="bg-white my-5">
-          <table className="table-fixed text-xs text-gray-700 w-full h-60">
-            <thead>
-              <tr className="h-12 border">
-                <th className=" w-2/6">Date</th>
-                <th className=" w-1/6">Link</th>
-                <th className=" w-1/6">status</th>
-              </tr>
-            </thead>
-          </table>
-          <div className="w-full h-56 flex items-center justify-center">
-            <p className="text-xs text-gray-500">
-              You have no data to display.
-            </p>
-          </div>
+          {disputes.length === 0 ? (
+            <div className="w-full h-56 flex items-center justify-center">
+              <p className="text-xs text-gray-500">
+                You have no data to display.
+              </p>
+            </div>
+          ) : null}
         </div>
       </div>
     </div>

@@ -57,7 +57,7 @@ function ViewAlbumStats({ stats }) {
         </PieChart>
       ) : (
         <div className="flex items-center justify-center h-52">
-          <h2>NO updates yet</h2>
+          <h2>No Updates Yet</h2>
         </div>
       )}
       <div className="my-5">
@@ -70,8 +70,6 @@ function ViewAlbumStats({ stats }) {
         </div>
       </div>
       <div className="">
-        <h1 className="m-5">Views and Earnings</h1>
-
         <PlatFormViewsEarnings data={data} />
       </div>
     </div>

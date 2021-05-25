@@ -10,6 +10,7 @@ import { useStateValue } from "./StateProvider";
 function MainInfo({ nextab, albumid, setalbumid }) {
   //stats
   const [{ user }] = useStateValue();
+
   const [album, setalbum] = useState({
     email: user.email,
   });
@@ -95,6 +96,7 @@ function MainInfo({ nextab, albumid, setalbumid }) {
                     <i className="fas fa-plus"></i>
                   </div>
                 </label>
+
                 <input
                   type="file"
                   accept="image/*"

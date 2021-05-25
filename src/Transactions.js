@@ -35,7 +35,7 @@ function Transactions() {
           </h3>
         </div>
         <div className="">
-          <p className="text-sm">Balance</p>
+          <p className="text-sm">Total Earnings</p>
           <h3 className="text-3xl fa fa-inr font-bold">
             {user?.transactionStat?.total}
           </h3>

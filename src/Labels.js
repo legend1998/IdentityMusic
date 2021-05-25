@@ -82,7 +82,7 @@ function Labels() {
           </div>
         </div>
         <div className="h-16 py-2 text-xs text-gray-500 flex items-end">
-          nothing to show
+          Showing All Labels
         </div>
         <div className="">
           {lables.map((label, index) => (

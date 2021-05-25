@@ -36,7 +36,7 @@ function ReleaseInfo({ somefun, album }) {
     <div className="lg:p-10 p-2 bg-white my-10">
       <p className="px-5 text-xl border-b py-3 mb-5">Info</p>
 
-      <div className="grid grid-flow-col grid-cols-2 grid-rows-2 gap-5">
+      <div className="grid grid-flow-col grid-cols-2 grid-rows-2 gap-5 ">
         <div className="">
           <p className="px-5 text-md font-semibold">Genre 1</p>
           <select
@@ -44,10 +44,10 @@ function ReleaseInfo({ somefun, album }) {
             defaultValue={album?.genre1}
             disabled={album?.info ? true : false}
             onChange={(e) => somefun({ ...album, genre1: e.target.value })}
-            className="h-12 w-full text-center bg-gray-100"
+            className="h-12 w-full text-center bg-gray-100 focus:outline-none "
           >
             {genre1.map((genre, index) => (
-              <option className="capitalize" value={genre} key={index}>
+              <option className="capitalize " value={genre} key={index}>
                 {genre}
               </option>
             ))}
@@ -92,7 +92,13 @@ function ReleaseInfo({ somefun, album }) {
           />
         </div>
       </div>
-      <p className="px-5 text-md mt-5 font-semibold">Previously released?</p>
+      <p className="px-5 text-md mt-5 font-semibold">
+        Previously released? / Schedule Release
+      </p>
+      <p className="text-sm text-red-500   mx-5 mb-3">
+        Selecting "NO" will make release available on store as soon as it gets
+        approve. If your release is exclusive please select a release date date.
+      </p>
       <div className="grid grid-cols-2 gap-8">
         <div className="px-5">
           <label>

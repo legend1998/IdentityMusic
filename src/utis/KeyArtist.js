@@ -24,7 +24,7 @@ function KeyArtist({ close, keyartist, addArtist }) {
       <select
         name="artisttype"
         disabled={disable}
-        className="h-12 w-52 text-center border"
+        className="h-12 w-52 text-center border focus:outline-none"
         onChange={(e) => setArtists({ ...artists, type: e.target.value })}
       >
         <option value="default" defaultValue>
@@ -33,6 +33,7 @@ function KeyArtist({ close, keyartist, addArtist }) {
         <option value="composer">Composer</option>
         <option value="lyricist">Lyricist</option>
         <option value="producer">Producer</option>
+        <option value="producer">Secondary Artist</option>
       </select>
       <input
         type="text"

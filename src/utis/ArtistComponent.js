@@ -71,7 +71,7 @@ function ArtistComponent({ somefun, album }) {
           className="h-12 mx-5 px-5 mt-2 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
         >
           <option value="default" defaultChecked>
-            default
+            --Select--
           </option>
           {artist.map((art, index) => (
             <option value={art.name} key={index}>
@@ -93,7 +93,7 @@ function ArtistComponent({ somefun, album }) {
         onClick={() => (album?.artist ? null : setkeyartist(keyartist + 1))}
         className="text-purple-900 py-3 focus:outline-none mx-5"
       >
-        <i className="fas fa-plus"></i> add other key artist.
+        <i className="fas fa-plus"></i> Add other key artist.
       </button>
     </div>
   );

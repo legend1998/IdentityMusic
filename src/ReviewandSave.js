@@ -79,10 +79,10 @@ function ReviewandSave({ albumid, setid }) {
               by {album?.primaryArtist}
             </h4>
 
-            <p className="mt-5">Genre(S) {album?.genre1}</p>
-            <p className="">Label {album?.label}</p>
-            <p className="">(P) {album?.pCopyright} </p>
-            <p className="">(C) {album?.Ccopyright}</p>
+            <p className="mt-5">Genre(S): {album?.genre1}</p>
+            <p className="">Label: {album?.label}</p>
+            <p className="">(P): {album?.pCopyright} </p>
+            <p className="">(C): {album?.Ccopyright}</p>
           </div>
         </div>
       </div>
@@ -97,10 +97,10 @@ function ReviewandSave({ albumid, setid }) {
                 by {track?.primaryArtist}
               </h4>
 
-              <p className="mt-5">Genre(S) {track?.lyricLanguage}</p>
-              <p className="">Label {album?.label}</p>
-              <p className="">(P) {album?.pCopyright} </p>
-              <p className="">(C) {album?.Ccopyright}</p>
+              <p className="mt-5">Language {track?.lyricLanguage}</p>
+              <p className="">ISRC: {track?.isrc}</p>
+              <p className="">CRBT Time: {track?.crbt} </p>
+              <p className="">Lyrics: {track?.lyrics}</p>
             </div>
           </div>
         ))}

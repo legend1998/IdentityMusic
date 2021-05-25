@@ -20,33 +20,26 @@ function VIewTrackAlbum({ id }) {
   }, []);
   return (
     <div className="bg-white">
-      <table className="table-fixed text-xs text-gray-700 w-full h-60">
+      <table className="table-fixed text-gray-700 w-full h-full">
         <thead className="text-left">
           <tr className="h-12 border">
-            <th className=" w-1/12"></th>
-            <th className=" w-2/12">Track Name</th>
-            <th className="w-2/12">Artist</th>
-            <th className=" w-1/12">ISRC</th>
-            <th className="w-4/12">Audio</th>
-            <th className=" w-1/12">Language</th>
+            <th className=" w-2/12 pl-10 font-medium ">Track Name</th>
+            <th className="w-2/12 pl-5 font-medium ">Artist</th>
+            <th className=" w-2/12 font-medium ">ISRC</th>
+            <th className=" w-2/12 text-center font-medium ">CRBT Time</th>
+            <th className="w-4/12 text-center font-medium ">Audio</th>
           </tr>
         </thead>
         <tbody>
           {tracks.map((t) => (
-            <tr className="h-12 text-left text-lg font-semibold border-b hover:bg-gray-50">
-              <td>
-                <input
-                  type="checkbox"
-                  className="w-8 h-8 border focus:outline-none mx-4"
-                />
-              </td>
-              <td>{t.releaseTitle}</td>
-              <td>{t.primaryArtist}</td>
-              <td>{t.isrc}</td>
-              <td>
+            <tr className="h-20 text-lg font-regular hover:bg-gray-50 border-b">
+              <td className=" w-2/12 pl-10 ">{t.releaseTitle}</td>
+              <td className=" w-2/12 pl-5">{t.primaryArtist}</td>
+              <td className=" w-2/12">{t.isrc}</td>
+              <td className=" w-2/12 text-center">{t.crbt}</td>
+              <td className=" w-4/12 pl-20">
                 <audio src={t.trackURL} controls></audio>
               </td>
-              <td>{t.lyricLanguage}</td>
             </tr>
           ))}
         </tbody>

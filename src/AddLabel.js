@@ -53,10 +53,6 @@ function AddLabel() {
 
   function addLabelNow() {
     if (disabled) return;
-    if (label?.label === "" || label?.coverImage) {
-      new AWN().alert("name and logo requried");
-      return;
-    }
 
     firedb
       .collection("label")

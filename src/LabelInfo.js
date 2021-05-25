@@ -106,6 +106,28 @@ function LabelInfo({ label, setlabel, disabled }) {
           className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
         />
       </div>
+      <div className="">
+        <p className="text-lg my-3 font-semibold">Payee ID (Optional)</p>
+        <input
+          type="text"
+          disabled={disabled}
+          defaultValue={label?.payee}
+          onChange={(e) => setlabel({ ...label, payee: e.target.value })}
+          placeholder="PayPal / UPI ID"
+          className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
+        />
+      </div>
+      <div className="">
+        <p className="text-lg my-3 font-semibold">Royalty Sharing(Optional)</p>
+        <input
+          type="text"
+          disabled={disabled}
+          defaultValue={label?.share}
+          onChange={(e) => setlabel({ ...label, share: e.target.value })}
+          placeholder="Royalty Sharing"
+          className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
+        />
+      </div>
     </div>
   );
 }
