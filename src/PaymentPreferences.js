@@ -1,7 +1,30 @@
 import React, { useState } from "react";
+import { firedb } from "./firebaseconfig";
+import { useStateValue } from "./StateProvider";
+import AWN from "awesome-notifications";
 
 function PaymentPreferences() {
   const [Payment, setPayment] = useState(null);
+  const [id, setId] = useState(null);
+  const [{ user }] = useStateValue();
+
+  function saveId() {
+    firedb
+      .collection("user")
+      .doc(user.email)
+      .update({
+        paymentPreference: {
+          mode: Payment,
+          id: id,
+        },
+      })
+      .then(() => {
+        new AWN().success("success");
+      })
+      .catch((e) => {
+        new AWN().alert(e.message);
+      });
+  }
 
   return (
     <div className="p-5 bg-gray-100">
@@ -32,6 +55,7 @@ function PaymentPreferences() {
             <p className=" font-semibold mb-2">Payment Method</p>
             <select
               type="text"
+              defaultValue={user?.paymentPreference?.mode}
               className=" appearance-none focus:outline-none bg-gray-100 border h-12 px-2"
               onChange={(e) => setPayment(e.target.value)}
             >
@@ -48,6 +72,8 @@ function PaymentPreferences() {
                 PayPal Email / Upi ID
               </p>
               <input
+                onChange={(e) => setId(e.target.value)}
+                defaultValue={user?.paymentPreference?.id}
                 type="text"
                 placeholder="abc@xyz.com"
                 className=" appearance-none focus:outline-none bg-gray-100 border h-12 px-2 w-1/2"
@@ -60,7 +86,10 @@ function PaymentPreferences() {
         <button className="h-full w-52 focus:outline-none appearance-none">
           cancel
         </button>
-        <button className="h-full w-52 bg-indigo-600 text-white focus:outline-none appearance-none">
+        <button
+          onClick={() => saveId()}
+          className="h-full w-52 bg-indigo-600 text-white focus:outline-none appearance-none"
+        >
           Save
         </button>
       </div>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { firedb } from "../firebaseconfig";
 import raw from "../genre.txt";
 import raw2 from "../genre2.txt";
 
@@ -6,10 +7,18 @@ function ReleaseInfo({ somefun, album }) {
   const [ownupc, setownupc] = useState(0);
   const [preRel, setpreRel] = useState(false);
   const [genre1, setgenre1] = useState([]);
+  const [label, setlabel] = useState([]);
   const [genre2, setgenre2] = useState([]);
   const [recLabel, setrecLabel] = useState(false);
 
   useEffect(() => {
+    firedb.collection("label").onSnapshot((snapshot) => {
+      var a = [];
+      snapshot.forEach((snap) => {
+        a.push(snap.data());
+      });
+      setlabel(a);
+    });
     fetch(raw)
       .then((r) => r.text())
       .then((text) => {
@@ -168,6 +177,11 @@ function ReleaseInfo({ somefun, album }) {
             <option value="default" defaultValue>
               --select--
             </option>
+            {label.map((lab, i) => (
+              <option key={i} value={lab.label}>
+                {lab.label}
+              </option>
+            ))}
           </select>
         </div>
       </div>

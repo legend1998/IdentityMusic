@@ -34,7 +34,7 @@ function NewTracks({ nextab, albumid }) {
       setartist(a);
     });
   }, []);
-
+  console.log(tracks);
   const handletracks = () => {
     settracks(tracks + 1);
   };

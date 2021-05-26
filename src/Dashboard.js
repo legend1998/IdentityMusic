@@ -101,32 +101,20 @@ function Dashboard() {
           </div>
         </div>
         <div className="h-auto py-6  items-center justify-items-center bg-gray-100  flex flex-col md:flex-row  border-4 border-white ">
-          <div class=" h-72 w-96 bg-white ml-5 mr-3 mb-3">
-            <div class=" h-16 px-4 border-b flex items-center">
-              {vidoes.map((v, i) => (
-                <p class="text-2xl text-gray" key={i}>
-                  {v?.title}
-                </p>
-              ))}
+          {vidoes.map((v, i) => (
+            <div className="float-left m-5 bg-white">
+              <div className="px-4 p-3 font-medium ">{v.title} </div>
+              <iframe
+                width="560"
+                height="315"
+                src={v.src}
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
             </div>
-            <div class="h-52 ">
-              {vidoes.map((v, i) => (
-                <div className=" ">
-                  <div className="h-56 bg-gray-500">
-                    <iframe
-                      src={v?.src}
-                      width="100%"
-                      allowfullscreen
-                      height="100%"
-                      title="YouTube video player"
-                      frameborder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    ></iframe>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>

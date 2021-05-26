@@ -109,7 +109,7 @@ export function downloadxlsx(album) {
   document.body.removeChild(downloadLink);
 }
 
-export function calculateOutstanding(arraydata, total) {
+export function calculateOutstanding(arraydata = [], total = 0) {
   return arraydata.reduce(
     (total, a) => total - Number.parseInt(a.amount),
     total

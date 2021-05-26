@@ -47,6 +47,7 @@ function Signup() {
               fname: fname.current.value,
               lname: lname.current.value,
               email: email.current.value,
+              transactionStat: { total: 0 },
             };
             firedb
               .collection("user")

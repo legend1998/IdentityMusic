@@ -14,23 +14,22 @@ function Tracks() {
   }, []);
 
   async function getTracks() {
-    var a = [];
-    firedb.collection("album").onSnapshot((snapshot) => {
-      snapshot.forEach((snap) => {
-        if (snap.data().user === user.email) {
-          firedb
-            .collection("album")
-            .doc(snap.id)
-            .collection("tracks")
-            .onSnapshot((trackshot) => {
-              trackshot.forEach((snaptrack) => {
-                a.push(snaptrack.data());
-              });
-              setTracks(a);
-            });
-        }
-      });
-    });
+    var a = await firedb.collection("album").get();
+    var b = [];
+    for (const doc of a.docs) {
+      if (doc.data().email !== user.email) continue;
+      var tracks = await firedb
+        .collection("album")
+        .doc(doc.id)
+        .collection("tracks")
+        .get();
+
+      for (const track of tracks.docs) {
+        b.push(track.data());
+      }
+    }
+
+    setTracks(b);
   }
 
   return (
@@ -138,6 +137,19 @@ function Tracks() {
               <th className="w-4/12 text-center font-medium ">Audio</th>
             </tr>
           </thead>
+          <tbody>
+            {tracks.map((t) => (
+              <tr className="h-20 text-lg font-regular hover:bg-gray-50 border-b">
+                <td className=" w-2/12 pl-10 ">{t.releaseTitle}</td>
+                <td className=" w-2/12 pl-5">{t.primaryArtist}</td>
+                <td className=" w-2/12">{t.isrc}</td>
+                <td className=" w-2/12 text-center">{t.crbt}</td>
+                <td className=" w-4/12 pl-20">
+                  <audio src={t.trackURL} controls></audio>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
         {tracks.length === 0 ? (
           <div className=" h-56 flex items-center justify-center">

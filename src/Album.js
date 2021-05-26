@@ -18,8 +18,25 @@ function Album() {
           a.push({ ...snap.data(), id: snap.id });
       });
       setalbum(a);
+      updateTotal();
     });
   }, [user.email]);
+
+  function updateTotal() {
+    var total = 0;
+
+    album.forEach((alb) => {
+      alb?.stats?.forEach((st) => {
+        total += Number.parseInt(st.earnings);
+      });
+      console.log(alb);
+    });
+    console.log(total);
+    firedb
+      .collection("user")
+      .doc(user.email)
+      .update({ "transactionStat.total": total });
+  }
 
   function handleClick(id) {
     history.push("/panel/viewAlbum/" + id);

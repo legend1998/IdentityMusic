@@ -33,7 +33,8 @@ function KeyArtist({ close, keyartist, addArtist }) {
         <option value="composer">Composer</option>
         <option value="lyricist">Lyricist</option>
         <option value="producer">Producer</option>
-        <option value="producer">Secondary Artist</option>
+        <option value="secondaryArtist">Secondary Artist</option>
+        <option value="primaryArtist">Primary Artist</option>
       </select>
       <input
         type="text"
