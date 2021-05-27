@@ -267,7 +267,7 @@ function Stores({ nextab, albumid }) {
       <div className="pb-4 bg-gray-100  text-blue-600 border-b">
         <p className="h-14 bg-white pt-1 pl-6">
           * Note: Videos may claimed by any one of these Partners( Merlin
-          TrapBassHDtV, Merlin FUGA, Sony Music, RoutNote, Merlin Coin Digital).
+          TrapBassHDTV, Merlin FUGA, Sony Music, RoutNote, Merlin Coin Digital).
           We may use our Youtube deal or Mentioned Partnered depending upon use
           have choosed for Synchronisation Purpose.
         </p>

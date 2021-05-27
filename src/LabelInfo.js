@@ -58,6 +58,15 @@ function LabelInfo({ label, setlabel, disabled }) {
           ))}
         </div>
         <div className="">
+          {label?.genre ? (
+            <div className="p-2">
+              {label.genre.map((sel) => (
+                <span className="h-14 px-3 py-2 bg-indigo-500 m-2 text-white rounded">
+                  {sel}
+                </span>
+              ))}
+            </div>
+          ) : null}
           <select
             type="text"
             disabled={disabled}

@@ -18,24 +18,23 @@ function Album() {
           a.push({ ...snap.data(), id: snap.id });
       });
       setalbum(a);
-      updateTotal();
     });
   }, [user.email]);
+  updateTotal();
 
   function updateTotal() {
     var total = 0;
-
-    album.forEach((alb) => {
-      alb?.stats?.forEach((st) => {
-        total += Number.parseInt(st.earnings);
+    if (album.length !== 0) {
+      album.forEach((alb) => {
+        alb?.stats?.forEach((st) => {
+          total += Number.parseInt(st.earnings);
+        });
       });
-      console.log(alb);
-    });
-    console.log(total);
-    firedb
-      .collection("user")
-      .doc(user.email)
-      .update({ "transactionStat.total": total });
+      firedb
+        .collection("user")
+        .doc(user.email)
+        .update({ "transactionStat.total": total });
+    }
   }
 
   function handleClick(id) {
@@ -164,7 +163,7 @@ function Album() {
                   </div>
                 </td>
                 <td className=" w-1/6">{a.primaryArtist}</td>
-                <td className=" w-2/6">{a.label}</td>
+                <td className=" w-2/6">{a.recordLabel}</td>
                 <td className=" w-1/6">{a.upcEan}</td>
                 <td className=" w-1/6">{a.releaseDate}</td>
               </tr>

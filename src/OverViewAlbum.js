@@ -31,32 +31,36 @@ function OverViewAlbum({ data }) {
           </h1>
           <div className="m-10">
             <p className="">
-              <span className="font-semibold">Title:</span> {data?.title}
+              <span className="font-medium ">Title: </span> {data?.title}
             </p>
             <p className="">
-              <span className="font-semibold">Title Version:</span>
+              <span className="font-medium">Title Version: </span>
               {data?.titleVersion}
             </p>
             <p className="">
-              <span className="font-semibold">Label:</span> {data?.label}
+              <span className="font-medium">Label: </span> {data?.recordLabel}
             </p>
             <p className="">
-              <span className="font-semibold">UPC:</span> {data?.upcEan}
+              <span className="font-medium">UPC: </span> {data?.upcEan}
             </p>
-            <span className="font-semibold">(P):</span> {data?.pCopyright}
+            <span className="font-medium">(P) Copyright: </span>{" "}
+            {data?.pCopyright}
             <p>
-              <span className="font-semibold">(C): </span>
+              <span className="font-medium">(C) Copyright: </span>
               {data?.Ccopyright}
             </p>
             <p>
-              <span className="font-semibold">Release Date:</span>
+              <span className="font-medium">Release Date:</span>
               {data?.releaseDate}
             </p>
             <p className="">
-              <span className="font-semibold">Genre:</span> {data?.genre1}
+              <span className="font-medium">Genre1: </span> {data?.genre1}
+            </p>
+            <p className="">
+              <span className="font-medium">Genre2: </span> {data?.genre2}
             </p>
             <p>
-              <span className="font-semibold">Language:</span> {data?.language}
+              <span className="font-medium">Language:</span> {data?.language}
             </p>
           </div>
         </div>

@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { firedb } from "../firebaseconfig";
 import raw from "../genre.txt";
 import raw2 from "../genre2.txt";
+import { useStateValue } from "./../StateProvider";
 
 function ReleaseInfo({ somefun, album }) {
+  const [{ user }] = useStateValue();
   const [ownupc, setownupc] = useState(0);
   const [preRel, setpreRel] = useState(false);
   const [genre1, setgenre1] = useState([]);
@@ -12,13 +14,16 @@ function ReleaseInfo({ somefun, album }) {
   const [recLabel, setrecLabel] = useState(false);
 
   useEffect(() => {
-    firedb.collection("label").onSnapshot((snapshot) => {
-      var a = [];
-      snapshot.forEach((snap) => {
-        a.push(snap.data());
+    firedb
+      .collection("label")
+      .where("user", "==", user.email)
+      .onSnapshot((snapshot) => {
+        var a = [];
+        snapshot.forEach((snap) => {
+          a.push(snap.data());
+        });
+        setlabel(a);
       });
-      setlabel(a);
-    });
     fetch(raw)
       .then((r) => r.text())
       .then((text) => {
@@ -74,12 +79,12 @@ function ReleaseInfo({ somefun, album }) {
           />
         </div>
         <div className="">
-          <p className="px-5 text-md font-semibold">Genre 2</p>
+          <p className="px-5 text-md font-semibold ">Genre 2</p>
           <select
             name="gene2"
             defaultValue={album?.genre2}
             disabled={album?.info ? true : false}
-            className="h-12 w-full text-center bg-gray-100"
+            className="h-12 w-full text-center bg-gray-100 focus:outline-none"
             onChange={(e) => somefun({ ...album, genre2: e.target.value })}
           >
             {genre2.map((genre, index) => (
@@ -145,7 +150,7 @@ function ReleaseInfo({ somefun, album }) {
           />
         </div>
       </div>
-      <p className="px-5 text-md font-semibold mt-3">On a record Label</p>
+      <p className="px-5 text-md font-semibold mt-3">On a Record Label</p>
       <div className="grid grid-cols-2">
         <div className="px-5 py-2">
           <label>

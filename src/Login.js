@@ -134,7 +134,7 @@ function Login() {
             <div className="w-full flex items-center justify-end ">
               <button
                 type="submit"
-                className="focus:outline-none h-full bg-blue-600 text-white p-5 w-44"
+                className="focus:outline-none h-14 bg-blue-700 text-white p-3 w-48"
                 onClick={(e) => loginUser(e)}
               >
                 {loading ? (
@@ -147,7 +147,7 @@ function Login() {
               </button>
             </div>
           </form>
-          <Link to="/signup" className="py-3  text-gray-400">
+          <Link to="/signup" className="py-3 text-lg underline text-gray-400">
             Create New Account
           </Link>
         </div>

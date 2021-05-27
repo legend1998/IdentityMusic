@@ -31,11 +31,40 @@ export function statusSwitch(status) {
           Inspection Failed
         </button>
       );
-
+    case "injested":
+      return (
+        <button className="bg-indigo-500 text-white h-7 w-max text-center p-1 shadow-lg focus:outline-none">
+          Locked
+        </button>
+      );
+    case "moderation":
+      return (
+        <button className="bg-indigo-500 rounded text-white h-7 w-max text-center p-1 shadow-lg focus:outline-none">
+          Locked
+        </button>
+      );
+    case "approved":
+      return (
+        <button className="bg-green-500 rounded text-white h-7 w-max text-center p-1 shadow-lg focus:outline-none">
+          approved
+        </button>
+      );
+    case "live":
+      return (
+        <button className="bg-indigo-500 rounded text-white h-7 w-max text-center p-1 shadow-lg focus:outline-none">
+          Locked
+        </button>
+      );
+    case "consideration":
+      return (
+        <button className="bg-purple-500 rounded text-white h-7 w-max text-center p-1 shadow-lg focus:outline-none">
+          Processing
+        </button>
+      );
     default:
       return (
-        <button className="bg-blue-600 text-white h-7 w-max text-center p-1 shadow-lg focus:outline-none">
-          Locked
+        <button className="bg-yellow-500 rounded text-white h-7 w-max text-center p-1 shadow-lg focus:outline-none">
+          Pending
         </button>
       );
   }

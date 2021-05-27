@@ -12,7 +12,7 @@ function Language({ somefun, language }) {
         name="languge"
         id=""
         defaultValue={language}
-        className="w-full h-10 bg-gray-50"
+        className="w-full h-10 bg-gray-50 rounded cursor-pointer focus:outline-none"
         onChange={(e) => somefun(e.target.value)}
       >
         <option value="default" defaultValue>
