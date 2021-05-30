@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { firedb } from "./firebaseconfig";
 import { useStateValue } from "./StateProvider";
+import Language from "./utis/Language";
 
 function Tracks() {
   const [show, setshow] = useState(false);
@@ -133,18 +134,20 @@ function Tracks() {
               <th className=" w-2/12 pl-10 font-medium ">Track Name</th>
               <th className="w-2/12 pl-5 font-medium ">Artist</th>
               <th className=" w-2/12 font-medium ">ISRC</th>
-              <th className=" w-2/12 text-center font-medium ">CRBT Time</th>
-              <th className="w-4/12 text-center font-medium ">Audio</th>
+              <th className=" w-1/12 text-center font-medium ">CRBT Time</th>
+              <th className="w-2/12 text-center font-medium ">Language</th>
+              <th className="w-3/12 text-center font-medium ">Audio</th>
             </tr>
           </thead>
           <tbody>
             {tracks.map((t) => (
               <tr className="h-20 text-lg font-regular hover:bg-gray-50 border-b">
                 <td className=" w-2/12 pl-10 ">{t.releaseTitle}</td>
-                <td className=" w-2/12 pl-5">{t.primaryArtist}</td>
+                <td className=" w-2/12 pl-5">{t.mainArtist}</td>
                 <td className=" w-2/12">{t.isrc}</td>
-                <td className=" w-2/12 text-center">{t.crbt}</td>
-                <td className=" w-4/12 pl-20">
+                <td className=" w-1/12 text-center">{t.crbt}</td>
+                <td className=" w-2/12 text-center">{t.lyricLanguage}</td>
+                <td className=" w-3/12 ">
                   <audio src={t.trackURL} controls></audio>
                 </td>
               </tr>

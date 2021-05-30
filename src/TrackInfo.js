@@ -206,25 +206,21 @@ function TrackInfo({ track, close, index, albumid, data, artist }) {
       </div>
       <div className="grid grid-rows-2  mt-5">
         <p className="text-lg">Artist (Indicate only one in this field) *</p>
-        <div className="p-3">
-          {select.map((sel) => (
-            <span
-              className="h-14 px-3 py-2 bg-indigo-500 m-2 text-white rounded"
-              onClick={() => handleCutGenre(sel)}
-            >
-              {sel}
-            </span>
-          ))}
-        </div>
         <select
           type="text"
           placeholder="Artist Name"
-          defaultValue={newtrack?.singer}
-          onChange={(e) => handleartist(e.target.value)}
+          defaultValue={newtrack.mainArtist}
+          disabled={newtrack.info ? true : false}
+          onChange={(e) => {
+            setnewtrack({
+              ...newtrack,
+              mainArtist: e.target.value,
+            });
+          }}
           className="h-12 mx-5 px-5 mt-2 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
         >
           <option value="default" defaultChecked>
-            default
+            --Select--
           </option>
           {artist.map((art, index) => (
             <option value={art.name} key={index}>

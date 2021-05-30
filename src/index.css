@@ -5,4 +5,12 @@
   font-family: "Graphik";
   src: local("Graphik"), url(./fonts/Graphik-Regular.ttf) format("ttf");
 }
+@font-face {
+  font-family: "Graphik";
+  src: local("medium"), url(./fonts/Graphik-Medium.ttf) format("ttf");
+}
+@font-face {
+  font-family: "Graphik";
+  src: local("semibold"), url(./fonts/Graphik-Semibold.ttf) format("ttf");
+}
 @tailwind utilities;

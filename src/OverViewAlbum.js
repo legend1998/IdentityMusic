@@ -59,8 +59,9 @@ function OverViewAlbum({ data }) {
             <p className="">
               <span className="font-medium">Genre2: </span> {data?.genre2}
             </p>
-            <p>
-              <span className="font-medium">Language:</span> {data?.language}
+            <p className="capitalize">
+              <span className="font-medium capitalize">Language: </span>
+              {data?.language}
             </p>
           </div>
         </div>

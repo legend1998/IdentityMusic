@@ -63,16 +63,14 @@ function Dispute() {
                 Actions &#x2304;
               </button>
               {show ? (
-                <ul className="absolute bg-white w-64 rounded text-sm text-center border ">
-                  <li className="h-10 border-b p-2 hover:bg-gray-300">
+                <ul className="absolute bg-white w-64 rounded font-Light shadow-lg  border cursor-pointer">
+                  <li className="h-7 pt-1  pl-5 hover:bg-gray-100">
                     <Link to="/panel/create_new_dispute">
                       Create new Dispute
                     </Link>
                   </li>
-                  <li className="h-10 border-b p-2 hover:bg-gray-300">
-                    Export as csv
-                  </li>
-                  <li className="h-10 border-b p-2 hover:bg-gray-300">
+                  <li className="h-6 pl-5  hover:bg-gray-100">Export as csv</li>
+                  <li className="h-6 pl-5  hover:bg-gray-100">
                     Export as xlsx
                   </li>
                 </ul>

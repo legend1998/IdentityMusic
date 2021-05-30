@@ -156,7 +156,7 @@ function MainInfo({ nextab, albumid, setalbumid }) {
           </div>
         </div>
       </div>
-      <Language somefun={getLangugae} language={album.language} />
+      <Language somefun={getLangugae} language={album} />
       <Title somefun={setalbum} album={album} />
       <ArtistComponent somefun={setalbum} album={album} />
       <ReleaseInfo somefun={setalbum} album={album} />

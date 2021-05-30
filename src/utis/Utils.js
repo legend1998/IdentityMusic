@@ -61,6 +61,12 @@ export function statusSwitch(status) {
           Processing
         </button>
       );
+    case "takedown":
+      return (
+        <button className="bg-red-600 rounded text-white h-7 w-max text-center p-1 shadow-lg focus:outline-none">
+          Takendown
+        </button>
+      );
     default:
       return (
         <button className="bg-yellow-500 rounded text-white h-7 w-max text-center p-1 shadow-lg focus:outline-none">
