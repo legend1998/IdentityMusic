@@ -18,7 +18,7 @@ function Dashboard() {
     });
   }, []);
   return (
-    <div className="w-full bg-gray-100">
+    <div className="w-full h-max bg-gray-100">
       <div className="w-full bg-white h-24 flex items-center shadow-sm">
         <h1 className="text-3xl font-semibold ml-8 pl-10  capitalize">
           Hi, {user.fname}!

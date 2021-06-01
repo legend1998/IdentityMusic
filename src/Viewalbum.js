@@ -6,7 +6,7 @@ import ViewAlbumMore from "./ViewAlbumMore";
 import { useParams } from "react-router";
 import { firedb } from "./firebaseconfig";
 import AWN from "awesome-notifications";
-import { downloadcsv } from "./utis/Utils";
+import { downloadcsv, downloadxlsx } from "./utis/Utils";
 import { useHistory } from "react-router-dom";
 
 function Viewalbum() {
@@ -34,9 +34,9 @@ function Viewalbum() {
   }
 
   const passive =
-    "text-gray-500 bg-gray-200 w-1/4 text-center h-16 py-5 cursor-pointer";
+    "text-gray-500 bg-gray-200 w-1/4 text-center h-16 py-5 hover:font-semibold cursor-pointer";
   const active =
-    "border-b  border-indigo-500 bg-white w-1/4 text-center py-5 h-16 cursor-pointer";
+    "border-b-2   border-indigo-600 bg-white w-1/4 text-center font-medium py-5 h-16 cursor-pointer";
   return (
     <div>
       {/* header */}
@@ -70,21 +70,27 @@ function Viewalbum() {
               Actions &#x2304;
             </button>
             {show ? (
-              <ul className="absolute bg-white w-64 rounded font-Light shadow-lg  border cursor-pointer">
-                <li className="h-8 pl-5 pt-2   hover:bg-gray-100">
+              <ul className="absolute bg-white w-64 rounded focus:outline-none font-Light shadow-lg  border cursor-pointer">
+                <li className="h-8 pl-5 pt-2   hover:bg-gray-100 focus:border-none">
                   <a href={album?.coverImage} className="" target="blank">
                     Download Artwork
                   </a>
                 </li>
 
-                <li className="h-6 pl-5  hover:bg-gray-100">
-                  <button className="" onClick={() => downloadcsv(album)}>
-                    Download full catalog (CSV)
+                <li className="h-6 pl-5  hover:bg-gray-100 ">
+                  <button
+                    className="focus:outline-none"
+                    onClick={() => downloadcsv(album)}
+                  >
+                    Download Metadata (CSV)
                   </button>
                 </li>
-                <li className="h-6 pl-5  hover:bg-gray-100 focus:border-none">
-                  <button className="" onClick={() => downloadcsv(album)}>
-                    Download full catalog (XLSX)
+                <li className="h-6 pl-5  hover:bg-gray-100">
+                  <button
+                    className="focus:outline-none"
+                    onClick={() => downloadxlsx(album)}
+                  >
+                    Download Metadata (XLSX)
                   </button>
                 </li>
               </ul>

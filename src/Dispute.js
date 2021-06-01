@@ -4,7 +4,7 @@ import { useStateValue } from "./StateProvider";
 import { firedb } from "./firebaseconfig";
 import AWN from "awesome-notifications";
 import moment from "moment";
-import { statusSwitch } from "./utis/Utils";
+import { statusSwitch, downloadcsv, downloadxlsx } from "./utis/Utils";
 
 function Dispute() {
   const [show, setshow] = useState(false);
@@ -69,9 +69,21 @@ function Dispute() {
                       Create new Dispute
                     </Link>
                   </li>
-                  <li className="h-6 pl-5  hover:bg-gray-100">Export as csv</li>
                   <li className="h-6 pl-5  hover:bg-gray-100">
-                    Export as xlsx
+                    <button
+                      className="focus:outline-none"
+                      onClick={() => downloadcsv(disputes)}
+                    >
+                      Download full Metadata (CSV)
+                    </button>
+                  </li>
+                  <li className="h-6 pl-5  hover:bg-gray-100">
+                    <button
+                      className="focus:outline-none"
+                      onClick={() => downloadxlsx(disputes)}
+                    >
+                      Download full Metadata (XLSX)
+                    </button>
                   </li>
                 </ul>
               ) : null}
@@ -102,6 +114,9 @@ function Dispute() {
                   placeholder="Type"
                 >
                   <option value="all">All</option>
+                  <option value="pending">Pending</option>
+                  <option value="consideration">Processing</option>
+                  <option value="approved">Approved</option>
                 </select>
               </div>
             </div>

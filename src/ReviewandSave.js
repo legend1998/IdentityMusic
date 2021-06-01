@@ -4,7 +4,7 @@ import { firedb } from "./firebaseconfig";
 import { useHistory } from "react-router-dom";
 
 function ReviewandSave({ albumid, setid }) {
-  const [album, setalbum] = useState({});
+  const [album, setalbum] = useState({ createdAt: Date.now() });
   const [tracks, setracks] = useState([]);
 
   const history = useHistory();
@@ -39,6 +39,7 @@ function ReviewandSave({ albumid, setid }) {
         .collection("album")
         .doc(albumid)
         .update({ finalSubmit: true })
+
         .then(() => {
           setid(null);
           notifier.info("submitted successfully");

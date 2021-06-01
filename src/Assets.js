@@ -9,7 +9,7 @@ function Assets() {
   let passive = "bg-gray-50 text-gray-600 border";
 
   return (
-    <div className="bg-gray-100  h-screen">
+    <div className="bg-gray-100 min-h-screen">
       <div className="w-full bg-white h-24 flex items-center shadow-sm">
         <h1 className="text-3xl font-semibold ml-8 pl-10 font-graphik ">
           Music

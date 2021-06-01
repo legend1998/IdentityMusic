@@ -14,6 +14,7 @@ module.exports = {
         sideblack: "#1d1d1d",
         sidetext: "#707070",
         dropdwonc: "#2e3138",
+        box: "#f6f6f6",
       },
     },
   },

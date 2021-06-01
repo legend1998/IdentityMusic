@@ -105,8 +105,15 @@ function Sidebar() {
         >
           Dispute
         </Link>
+        <a
+          href="https://trapbasshdtv.tawk.help/"
+          target="_blank"
+          className="text-sidetext"
+        >
+          FAQ's
+        </a>
       </div>
-      <div className="sm self-start mx-6 text-gray-500 text-xs flex flex-col border-t border-gray-700">
+      <div className="sm self-start mx-6 text-gray-500 text-sm flex flex-col border-t border-gray-700">
         <Link
           to="/panel/account"
           className={
@@ -118,11 +125,16 @@ function Sidebar() {
           My Account
         </Link>
       </div>
-      <div className="my-8 pb-8 flex justify-between border-b border-gray-700 items-center text-sidetext  text-start w-4/5 text-xs">
+      <div className="my-8 pb-8 flex justify-between border-b border-gray-700 items-center text-sidetext  text-start w-4/5 text-sm">
         <div className="cursor-pointer">
           <p>{user.fname + " " + user.lname}</p>
-          <p>{user?.label}</p>
-          <button onClick={(e) => logoutnow(e)}>Sign out</button>
+          <p>{user?.labelName}</p>
+          <button
+            className="bg-white h-6 pl-3 pr-3 focus:outline-none "
+            onClick={(e) => logoutnow(e)}
+          >
+            Sign out
+          </button>
         </div>
         <div>
           <i className="fas fa-cog cursor-pointer"></i>

@@ -108,7 +108,7 @@ export function downloadcsv(album) {
   var blob = new Blob(["\ufeff", csvContent]);
   var url = URL.createObjectURL(blob);
   downloadLink.href = url;
-  downloadLink.download = "albuminfo.csv";
+  downloadLink.download = "info.csv";
 
   document.body.appendChild(downloadLink);
   downloadLink.click();
@@ -137,7 +137,7 @@ export function downloadxlsx(album) {
   var blob = new Blob(["\ufeff", csvContent]);
   var url = URL.createObjectURL(blob);
   downloadLink.href = url;
-  downloadLink.download = "albuminfo.xlsx";
+  downloadLink.download = "info.xlsx";
 
   document.body.appendChild(downloadLink);
   downloadLink.click();

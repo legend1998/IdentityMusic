@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { statusSwitch } from "./utis/Utils";
+import AWN from "awesome-notifications";
 
 function OverViewAlbum({ data }) {
+  function showdetails(status) {
+    if (status?.error) {
+      new AWN().modal(status?.error);
+    }
+  }
+
   console.log(data);
   if (!data) {
     return (
@@ -18,23 +25,25 @@ function OverViewAlbum({ data }) {
         <div className="bg-white flex-1 h-full  mx-5">
           <div className="pb-4 bg-gray-100  text-blue-600 border-b">
             <p className="h-auto bg-white py-3 pl-3  ">
-              {statusSwitch(data?.status)}
+              <button onClick={() => showdetails(data)}>
+                {statusSwitch(data?.status)}
+              </button>
               &nbsp;&nbsp;&nbsp;&nbsp;
               <a className="text-lg">{data?.message}</a>
               <br></br>
-              <a className="text-lg text-red-500">{data?.error}</a>
             </p>
           </div>
 
-          <h1 className="text-xl font-Regular py-3 px-10 border-b ">
+          <h1 className="text-xl font-Regular py-3 px-10  border-b ">
             Release Info
           </h1>
           <div className="m-10">
             <p className="">
-              <span className="font-medium ">Title: </span> {data?.title}
+              <span className="font-medium capitalize ">Title: </span>{" "}
+              {data?.title}
             </p>
             <p className="">
-              <span className="font-medium">Title Version: </span>
+              <span className="font-medium capitalize">Title Version: </span>
               {data?.titleVersion}
             </p>
             <p className="">
@@ -54,10 +63,9 @@ function OverViewAlbum({ data }) {
               {data?.releaseDate}
             </p>
             <p className="">
-              <span className="font-medium">Genre1: </span> {data?.genre1}
-            </p>
-            <p className="">
-              <span className="font-medium">Genre2: </span> {data?.genre2}
+              <span className="font-medium">Genre(s): </span> {data?.genre1}
+              {", "}
+              {data?.genre2}
             </p>
             <p className="capitalize">
               <span className="font-medium capitalize">Language: </span>
