@@ -38,7 +38,10 @@ function ReviewandSave({ albumid, setid }) {
       firedb
         .collection("album")
         .doc(albumid)
-        .update({ finalSubmit: true })
+        .update({
+          finalSubmit: true,
+          messgae: "your release is in processing.",
+        })
 
         .then(() => {
           setid(null);

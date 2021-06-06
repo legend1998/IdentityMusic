@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { firedb } from "./firebaseconfig";
 import { useStateValue } from "./StateProvider";
 import { useHistory } from "react-router";
+import { AWN } from "awesome-notifications";
 
 function Album() {
   const [show, setshow] = useState(false);
@@ -39,6 +40,30 @@ function Album() {
 
   function handleClick(id) {
     history.push("/panel/viewAlbum/" + id);
+  }
+
+  function handleRelease() {
+    if (user?.subType) {
+      history.push("/panel/create_new_release");
+    } else {
+      let notifier = new AWN();
+      let onOk = () => {
+        notifier.info("You pressed OK");
+      };
+      let onCancel = () => {
+        notifier.info("You pressed Cancel");
+      };
+      notifier.confirm(
+        "you have no any subscription get one to access.",
+        onOk,
+        onCancel,
+        {
+          labels: {
+            confirm: "No Subscription",
+          },
+        }
+      );
+    }
   }
 
   return (

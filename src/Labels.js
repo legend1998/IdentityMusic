@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
 import { firedb } from "./firebaseconfig";
+import { AWN } from "awesome-notifications";
 
 function Labels() {
   const [filter, setfilter] = useState(false);
   const [lables, setlabels] = useState([]);
-  const [{ user }] = useStateValue();
-
+  const [{ user, subLabel }] = useStateValue();
+  const history = useHistory();
   useEffect(() => {
     firedb.collection("label").onSnapshot((snapshot) => {
       var a = [];
@@ -19,6 +20,46 @@ function Labels() {
       setlabels(a);
     });
   }, []);
+
+  const gotolabel = () => {
+    if (user?.subType) {
+      if (subLabel[user.subType] >= lables.length) {
+        history.push("/panel/add_label");
+      } else {
+        let notifier = new AWN();
+        let onOk = () => {
+          notifier.info("You pressed OK");
+        };
+        let onCancel = () => {
+          notifier.info("You pressed Cancel");
+        };
+        notifier.confirm("you reached to a limit.", onOk, onCancel, {
+          labels: {
+            confirm: "Limit reached",
+          },
+        });
+      }
+    } else {
+      let notifier = new AWN();
+      let onOk = () => {
+        notifier.info("You pressed OK");
+      };
+      let onCancel = () => {
+        notifier.info("You pressed Cancel");
+      };
+      notifier.confirm(
+        "you have no any subscription get one to access.",
+        onOk,
+        onCancel,
+        {
+          labels: {
+            confirm: "No Subscription",
+          },
+        }
+      );
+    }
+  };
+
   return (
     <div className="bg-gray-100 pb-10 h-screen">
       <div className="w-full bg-white h-24 flex items-center shadow-sm">
@@ -44,10 +85,11 @@ function Labels() {
               />
             </div>
             <div className="duration-200">
-              <button className="bg-blue-700 hover:bg-blue-800 w-52 h-12 focus:outline-none text-white">
-                <Link to="/panel/add_label">
-                  <i className="fas fa-plus"></i> Add Label
-                </Link>
+              <button
+                onClick={() => gotolabel()}
+                className="bg-blue-700 hover:bg-blue-800 w-52 h-12 focus:outline-none text-white"
+              >
+                Add Label
               </button>
             </div>
           </div>

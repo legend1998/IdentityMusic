@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { firedb } from "./firebaseconfig";
 import { useStateValue } from "./StateProvider";
+import AWN from "awesome-notifications";
 
 function ArtistTab() {
   const [filter, setfilter] = useState(false);
   const [artists, setartists] = useState([]);
-  const [{ user }] = useStateValue();
+  const [{ user, subArtist }] = useStateValue();
+  const history = useHistory();
 
   useEffect(() => {
     firedb.collection("artist").onSnapshot((snapshot) => {
@@ -19,6 +21,45 @@ function ArtistTab() {
       setartists(a);
     });
   }, [user.email]);
+
+  const getartist = () => {
+    if (user?.subType) {
+      if (subArtist[user.subType] >= artists.length) {
+        history.push("/panel/add_new_artist");
+      } else {
+        let notifier = new AWN();
+        let onOk = () => {
+          notifier.info("You pressed OK");
+        };
+        let onCancel = () => {
+          notifier.info("You pressed Cancel");
+        };
+        notifier.confirm("you reached to a limit.", onOk, onCancel, {
+          labels: {
+            confirm: "Limit reached",
+          },
+        });
+      }
+    } else {
+      let notifier = new AWN();
+      let onOk = () => {
+        notifier.info("You pressed OK");
+      };
+      let onCancel = () => {
+        notifier.info("You pressed Cancel");
+      };
+      notifier.confirm(
+        "you have no any subscription get one to access.",
+        onOk,
+        onCancel,
+        {
+          labels: {
+            confirm: "No Subscription",
+          },
+        }
+      );
+    }
+  };
 
   return (
     <div className="bg-gray-100 pb-10 h-screen">
@@ -47,10 +88,11 @@ function ArtistTab() {
               />
             </div>
             <div className="duration-200">
-              <button className="bg-blue-700 hover:bg-blue-800 w-52 h-12 focus:outline-none text-white">
-                <Link to="/panel/add_new_artist">
-                  <i className="fas fa-plus"></i> Add Artist
-                </Link>
+              <button
+                onClick={() => getartist()}
+                className="bg-blue-700 hover:bg-blue-800 w-52 h-12 focus:outline-none text-white"
+              >
+                Add Artist
               </button>
             </div>
           </div>

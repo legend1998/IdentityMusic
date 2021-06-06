@@ -38,11 +38,29 @@ function ArtistComponent({ somefun, album }) {
       <p className="px-5 text-md">Is this a compilation of various artists?</p>
       <div className="px-5 py-3  flex items-center w-40 justify-between">
         <label>
-          <input type="radio" name="compilation" />
+          <input
+            onChange={(e) => {
+              somefun({
+                ...album,
+                compilation: "yes",
+              });
+            }}
+            type="radio"
+            name="compilation"
+          />
           Yes
         </label>
         <label>
-          <input type="radio" name="compilation" />
+          <input
+            onChange={(e) => {
+              somefun({
+                ...album,
+                compilation: "no",
+              });
+            }}
+            type="radio"
+            name="compilation"
+          />
           No
         </label>
       </div>
