@@ -4,10 +4,11 @@ import { firedb, storage } from "./firebaseconfig";
 import KeyArtist from "./utis/KeyArtist";
 import raw from "./languageList.txt";
 
-function TrackInfo({ track, close, index, albumid, data, artist }) {
+function TrackInfo({ track, close, index, albumid, data, artist, somefun }) {
   const [keyartist, setkeyartist] = useState(0);
   const [ownisrc, setownisrc] = useState(0);
   const [lyrics, setlyrics] = useState(false);
+  const [additional, setadditional] = useState(false);
   const [newtrack, setnewtrack] = useState({});
   const [progress, setprogress] = useState(0);
   const [language, setlanguage] = useState([]);
@@ -66,7 +67,7 @@ function TrackInfo({ track, close, index, albumid, data, artist }) {
 
   console.log(newtrack);
 
-  function getartist(secondaryartist) {
+  function getartist({ secondaryartist }) {
     if (data?.submitted) {
       return;
     }
@@ -121,31 +122,31 @@ function TrackInfo({ track, close, index, albumid, data, artist }) {
           <i className="fas fa-times text-red-500"></i>
         </span>
       </div>
-      <p className="text-lg mt-5">Audio File</p>
+      <p className="text-lg mt-5  font-medium">Audio File</p>
       {newtrack?.trackURL || data?.trackURL || progress > 0 ? (
-        <div className="h-10 w-full">
-          <div className="h-full bg-indigo-500 text-white text-center py-2">
-            {progress > 0
+        <div className="h-12 w-full">
+          <div className="h-full bg-indigo-500 text-white text-center py-3">
+            {progress <= 99
               ? Math.floor(progress) + "%"
-              : "Track has been uploaded Successfully"}
+              : "Audio has been uploaded Successfully"}
           </div>
         </div>
       ) : (
-        <div className="border h-12">
+        <div className=" h-14">
           <label
             htmlFor="audio-file"
-            className="w-full h-full bg-gray-100 flex items-center"
+            className="w-full h-full bg-box flex items-center"
           >
-            <p className="pl-5 text-gray-400">
-              Upload your files here (stereo mp3 files only sample rate :44.1
-              KHz)
+            <p className="pl-5 font-medium text-sidetext">
+              Upload your files here (stereo mp3 files only 320Kbps and sample
+              rate :44.1 KHz)
             </p>
             <input
               id="audio-file"
               type="file"
               disabled={data?.submitted}
               onChange={(e) => musciupload(e)}
-              accept="audio/"
+              accept="audio/mp3"
               className="hidden"
               placeholder=""
             />
@@ -153,7 +154,7 @@ function TrackInfo({ track, close, index, albumid, data, artist }) {
         </div>
       )}
       <div className="grid grid-rows-2  mt-5">
-        <p className="text-lg">
+        <p className="text-lg  font-medium">
           Language of Lyrics
           <span className="mx-5 text-xs text-gray-400">
             (Select "instrumental" if no lyrics present there.)
@@ -162,7 +163,7 @@ function TrackInfo({ track, close, index, albumid, data, artist }) {
         <select
           disabled={data?.submitted}
           defaultValue={data?.lyricLanguage}
-          className="appearance-none focus:outline-none w-full h-12 bg-gray-100 "
+          className="appearance-none focus:outline-none w-full h-12 px-4 font-normal bg-box "
           onChange={(e) =>
             setnewtrack({ ...newtrack, lyricLanguage: e.target.value })
           }
@@ -170,7 +171,7 @@ function TrackInfo({ track, close, index, albumid, data, artist }) {
           id=""
         >
           {language.map((lang, index) => (
-            <option className="capitalize" value={lang} key={index}>
+            <option className="capitalize  " value={lang} key={index}>
               {lang}
             </option>
           ))}
@@ -178,7 +179,7 @@ function TrackInfo({ track, close, index, albumid, data, artist }) {
       </div>
       <div className="grid grid-cols-2 gap-6 my-5">
         <div className="col">
-          <p className="text-lg">Release Title</p>
+          <p className="text-lg  font-medium pb-2 ">Release Title</p>
           <input
             type="text"
             defaultValue={data?.releaseTitle}
@@ -187,11 +188,11 @@ function TrackInfo({ track, close, index, albumid, data, artist }) {
               setnewtrack({ ...newtrack, releaseTitle: e.target.value })
             }
             placeholder="Eg: Song Name"
-            className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
+            className="h-14 px-5 w-full bg-box appearance-none outline-none  focus:border-purple-700"
           />
         </div>
         <div className="col">
-          <p className="text-lg">Title Version</p>
+          <p className="text-lg  font-medium pb-2 ">Title Version</p>
           <input
             type="text"
             defaultValue={data?.titleVersion}
@@ -200,12 +201,14 @@ function TrackInfo({ track, close, index, albumid, data, artist }) {
               setnewtrack({ ...newtrack, titleVersion: e.target.value })
             }
             placeholder="Eg: Live,Radio Edit"
-            className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
+            className="h-14 px-5 w-full bg-box appearance-none outline-none  focus:border-purple-700"
           />
         </div>
       </div>
       <div className="grid grid-rows-2  mt-5">
-        <p className="text-lg">Artist (Indicate only one in this field) *</p>
+        <p className="text-lg font-medium">
+          Artist (Indicate only one in this field) *
+        </p>
         <select
           type="text"
           placeholder="Artist Name"
@@ -217,7 +220,7 @@ function TrackInfo({ track, close, index, albumid, data, artist }) {
               mainArtist: e.target.value,
             });
           }}
-          className="h-12 mx-5 px-5 mt-2 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
+          className="h-12 mx-5 mr-5 px-5  w-full bg-box appearance-none outline-none  focus:border-purple-700"
         >
           <option value="default" defaultChecked>
             --Select--
@@ -240,21 +243,23 @@ function TrackInfo({ track, close, index, albumid, data, artist }) {
 
       <button
         onClick={() => (data?.submitted ? null : setkeyartist(keyartist + 1))}
-        className="text-purple-900 py-3 focus:outline-none"
+        className="text-purple-900 py-3 px-5 focus:outline-none"
       >
         <i className="fas fa-plus"></i> Add other Artist and Contributors.
       </button>
-      <div className="grid grid-flow-col grid-rows-1 grid-cols-2 my-5 gap-5">
+      <div className="grid grid-flow-col grid-rows-1 grid-cols-2 my-5 gap-1">
         <div>
-          <p className="text-md">Do you already have your own ISRC code?</p>
-          <div className="py-5    flex items-center justify-between">
+          <p className="text-lg font-medium">
+            Do you already have your own ISRC code?
+          </p>
+          <div className="py-2 flex items-center justify-between">
             <label>
               <input
                 type="radio"
                 name="ownupc"
                 onChange={() => setownisrc(1)}
               />
-              Yes(required if previously released = yes above)
+              Yes(required if previously released)
             </label>
             <label>
               <input
@@ -269,48 +274,104 @@ function TrackInfo({ track, close, index, albumid, data, artist }) {
             OK, We'll generate one for you when we send your Release.
           </p>
         </div>
+
         <div className={ownisrc ? "block" : "hidden"}>
-          <p className="text-xl">ISRC *</p>
+          <br></br>
+          <p className="text-xl font-medium mx-5">ISRC *</p>
           <input
             type="text "
             defaultValue={data?.isrc}
             onChange={(e) => setnewtrack({ ...newtrack, isrc: e.target.value })}
-            placeholder="isrc"
+            placeholder="Enter ISRC Code"
             required
-            className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border border-red-700"
+            className="h-12 px-5 w-full mx-5 bg-gray-50 appearance-none outline-none border border-red-500"
           />
         </div>
       </div>
-      <div>
-        <p className="text-lg">Explicit Lyrics? </p>
-        <div className="my-5">
+      <div className="pt-5">
+        <p className="text-lg font-medium  ">Explicit Lyrics? </p>
+        <div className="my-1">
           <label htmlFor="">
-            <input type="radio" name="el" defaultChecked />
+            <input
+              type="radio"
+              name="explicit"
+              value="no"
+              onChange={(e) =>
+                setnewtrack({ ...newtrack, explicit: e.target.value })
+              }
+            />
             No
           </label>
           <label className="ml-10">
-            <input type="radio" name="el" />
+            <input
+              type="radio"
+              name="explicit"
+              value="yes"
+              onChange={(e) =>
+                setnewtrack({ ...newtrack, explicit: e.target.value })
+              }
+            />
             Yes
           </label>
         </div>
       </div>
       <div className="mt-5">
-        <h1 className="cursor-pointer border-t py-4 text-lg ">
+        <h1 className="cursor-pointer border-t py-4 text-lg font-medium ">
           CRBT (Caller Ring Back Tunes)
         </h1>
+
         <input
-          type="time"
+          type="text"
           defaultValue={data?.crbt}
+          disabled={data?.submitted}
           onChange={(e) => setnewtrack({ ...newtrack, crbt: e.target.value })}
-          className="px-3 h-14 w-44 border bg-gray-100 text-gray-700 appearance-none focus:outline-none "
+          placeholder="Format: mm:ss    Example: 02:45"
+          className="h-14 px-5 w-4/6 bg-box appearance-none outline-none  focus:border-purple-700"
         />
       </div>
+
       <div className="mt-5">
         <h3
-          className="cursor-pointer border-t py-4 text-lg "
+          className="cursor-pointer border-t py-4 text-2xl font-normal "
+          onClick={() => setadditional(!additional)}
+        >
+          <i className="fas fa-caret-right mr-5"></i> Additional Info
+        </h3>
+        <div className={additional ? "" : "hidden"}>
+          <div className="grid grid-cols-2 gap-6 my-5" name="additional">
+            <div className="col" name="additional">
+              <p className="text-lg  font-medium pb-2 ">(C) Line</p>
+              <input
+                type="text"
+                defaultValue={data?.Ccopyright}
+                disabled={data?.submitted}
+                onChange={(e) =>
+                  setnewtrack({ ...newtrack, cline: e.target.value })
+                }
+                placeholder="Eg: 2021 Label Name"
+                className="h-14 px-5 w-full bg-box appearance-none outline-none  focus:border-purple-700"
+              />
+            </div>
+            <div className="col">
+              <p className="text-lg  font-medium pb-2 ">(P) Line</p>
+              <input
+                type="text"
+                defaultValue={data?.pCopyright}
+                disabled={data?.submitted}
+                onChange={(e) =>
+                  setnewtrack({ ...newtrack, pline: e.target.value })
+                }
+                placeholder="Eg: 2021 Label Name"
+                className="h-14 px-5 w-full bg-box appearance-none outline-none  focus:border-purple-700"
+              />
+            </div>
+          </div>
+        </div>
+        <h3
+          className="cursor-pointer border-t py-4 text-2xl font-normal"
           onClick={() => setlyrics(!lyrics)}
         >
-          <i className="fas fa-caret-right"></i> Lyrics (optional)
+          <i className="fas fa-caret-right mr-5"></i> Lyrics
         </h3>
         <textarea
           name="lyrics"
@@ -318,7 +379,7 @@ function TrackInfo({ track, close, index, albumid, data, artist }) {
           onChange={(e) => setnewtrack({ ...newtrack, lyrics: e.target.value })}
           className={
             lyrics
-              ? "border w-full h-64 focus:outline-none p-5 bg-gray-50 text-sm"
+              ? "border w-full h-64 focus:outline-none p-5 bg-box text-sm"
               : "hidden"
           }
         ></textarea>

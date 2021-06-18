@@ -48,17 +48,17 @@ function ReleaseInfo({ somefun, album }) {
 
   return (
     <div className="lg:p-10 p-2 bg-white my-10">
-      <p className="px-5 text-xl border-b py-3 mb-5">Info</p>
+      <p className="px-5 text-2xl border-b py-3 mb-5">Info</p>
 
       <div className="grid grid-flow-col grid-cols-2 grid-rows-2 gap-5 ">
-        <div className="">
-          <p className="px-5 text-md font-semibold">Genre 1</p>
+        <div className="mx-2">
+          <p className=" text-lg font-medium pb-2">Genre 1</p>
           <select
             name="genre1  "
             defaultValue={album?.genre1}
             disabled={album?.info ? true : false}
             onChange={(e) => somefun({ ...album, genre1: e.target.value })}
-            className="h-12 w-full text-center bg-gray-100 focus:outline-none "
+            className="h-12 px-3 w-full text-center bg-gray-100 focus:outline-none "
           >
             {genre1.map((genre, index) => (
               <option className="capitalize " value={genre} key={index}>
@@ -67,24 +67,24 @@ function ReleaseInfo({ somefun, album }) {
             ))}
           </select>
         </div>
-        <div className="">
-          <p className="px-5 text-md font-semibold"> (P) Copyright </p>
+        <div className="mx-2">
+          <p className=" pb-2 text-lg font-medium"> (P) Copyright </p>
           <input
             type="text"
             defaultValue={album?.pCopyright}
             disabled={album?.info ? true : false}
             onChange={(e) => somefun({ ...album, pCopyright: e.target.value })}
             placeholder="2021 Label Name"
-            className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
+            className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border border-red-500 focus:border-purple-700"
           />
         </div>
-        <div className="">
-          <p className="px-5 text-md font-semibold ">Genre 2</p>
+        <div className="mx-2">
+          <p className=" text-lg font-medium pb-2  ">Genre 2</p>
           <select
             name="gene2"
             defaultValue={album?.genre2}
             disabled={album?.info ? true : false}
-            className="h-12 w-full text-center bg-gray-100 focus:outline-none"
+            className="h-12 px-3  w-full text-center bg-gray-100 focus:outline-none"
             onChange={(e) => somefun({ ...album, genre2: e.target.value })}
           >
             {genre2.map((genre, index) => (
@@ -94,25 +94,23 @@ function ReleaseInfo({ somefun, album }) {
             ))}
           </select>
         </div>
-        <div className="">
-          <p className="px-5 text-md  font-semibold">(C) Copyright</p>
+        <div className="mx-2">
+          <p className=" pb-2 text-lg font-medium">(C) Copyright</p>
           <input
             type="text"
             placeholder="2021 Label Name"
             defaultValue={album?.Ccopyright}
             disabled={album?.info ? true : false}
             onChange={(e) => somefun({ ...album, Ccopyright: e.target.value })}
-            className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
+            className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border border-red-500 focus:border-purple-700"
           />
         </div>
       </div>
+
       <p className="px-5 text-md mt-5 font-semibold">
         Previously released? / Schedule Release
       </p>
-      <p className="text-sm text-red-500   mx-5 mb-3">
-        Selecting "NO" will make release available on store as soon as it gets
-        approve. If your release is exclusive please select a release date date.
-      </p>
+
       <div className="grid grid-cols-2 gap-8">
         <div className="px-5">
           <label>
@@ -150,6 +148,7 @@ function ReleaseInfo({ somefun, album }) {
           />
         </div>
       </div>
+
       <p className="px-5 text-md font-semibold mt-3">On a Record Label</p>
       <div className="grid grid-cols-2">
         <div className="px-5 py-2">
@@ -157,6 +156,7 @@ function ReleaseInfo({ somefun, album }) {
             <input
               type="radio"
               name="recordlabel"
+              className=""
               onChange={() => setrecLabel(true)}
             />
             Yes
@@ -177,10 +177,10 @@ function ReleaseInfo({ somefun, album }) {
             defaultValue={album?.recordLabel}
             disabled={album?.info ? true : false}
             onChange={(e) => somefun({ ...album, recordLabel: e.target.value })}
-            className="h-12 px-5 w-full my-2 bg-gray-50 appearance-none outline-none border focus:border-purple-700"
+            className="h-12 px-5 w-full my-2 bg-box appearance-none outline-none border focus:border-purple-700"
           >
             <option value="default" defaultValue>
-              --select--
+              -- Select --
             </option>
             {label.map((lab, i) => (
               <option key={i} value={lab.label}>
@@ -228,7 +228,7 @@ function ReleaseInfo({ somefun, album }) {
             disabled={album?.info ? true : false}
             required
             onChange={(e) => somefun({ ...album, upcEan: e.target.value })}
-            className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border border-red-700"
+            className="h-12 px-5 w-full bg-box appearance-none outline-none border border-red-500"
           />
         </div>
       </div>

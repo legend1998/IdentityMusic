@@ -15,7 +15,7 @@ function App() {
       <Helmet>
         <title>{TITLE}</title>
       </Helmet>
-      <div className="App font-graphik  ">
+      <div className="App font-normal  ">
         <Router>
           <Switch>
             <Route path="/signup">

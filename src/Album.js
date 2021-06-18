@@ -9,9 +9,22 @@ function Album() {
   const [show, setshow] = useState(false);
   const [filter, setfilter] = useState(false);
   const [{ user }] = useStateValue();
+  const [artist, setartist] = useState([]);
+  const [label, setlabel] = useState([]);
   const [album, setalbum] = useState([]);
   const history = useHistory();
   useEffect(() => {
+    firedb
+      .collection("label")
+      .where("user", "==", user.email)
+      .onSnapshot((snapshot) => {
+        var a = [];
+        snapshot.forEach((snap) => {
+          a.push(snap.data());
+        });
+        setlabel(a);
+      });
+
     firedb.collection("album").onSnapshot((snapshot) => {
       var a = [];
       snapshot.forEach((snap) => {
@@ -37,10 +50,20 @@ function Album() {
         .update({ "transactionStat.total": total });
     }
   }
-
   function handleClick(id) {
     history.push("/panel/viewAlbum/" + id);
   }
+  useEffect(() => {
+    firedb.collection("artist").onSnapshot((snapshot) => {
+      var a = [];
+      snapshot.forEach((snap) => {
+        if (snap.data().user === user.email) {
+          a.push(snap.data());
+        }
+      });
+      setartist(a);
+    });
+  }, [user.email]);
 
   function handleRelease() {
     if (user?.subType) {
@@ -54,7 +77,7 @@ function Album() {
         notifier.info("You pressed Cancel");
       };
       notifier.confirm(
-        "you have no any subscription get one to access.",
+        "You have no any subscription get one to access.",
         onOk,
         onCancel,
         {
@@ -73,13 +96,17 @@ function Album() {
           <button
             onClick={() => setfilter(!filter)}
             className={`px-7 hidden lg:block focus:outline-none ${
-              filter ? "bg-black text-white h-full" : null
+              filter ? "bg-filter text-white h-full" : null
             } `}
           >
-            Filters &#x2304;
+            Filters{" "}
+            <span className="px-5 text-blue-500 font-black text-lg ">
+              {" "}
+              &#x2304;
+            </span>
           </button>
           <div className="flex-grow flex items-center">
-            <i className="fas fa-search p-2"></i>
+            <i className="fas fa-search p-2 text-gray-700 mt-2"></i>
             <input
               className="flex-grow h-7 outline-none text-gray-700"
               type="text"
@@ -89,9 +116,10 @@ function Album() {
           <div className="duration-200">
             <button
               onClick={() => setshow(!show)}
-              className=" bg-blue-700 hover:bg-blue-800 w-64 h-14  focus:outline-none text-white"
+              className=" bg-tabborder hover:bg-indigo-700 w-64 h-14   focus:outline-none text-white"
             >
-              Actions &#x2304;
+              <span className="mx-16"> Actions</span>
+              <i class="fas fa-caret-down text-right  "></i>
             </button>
             {show ? (
               <ul className="absolute bg-white w-64 rounded font-Light shadow-lg  border cursor-pointer">
@@ -108,7 +136,7 @@ function Album() {
             ) : null}
           </div>
         </div>
-        <div className={filter ? "py-5 px-5 bg-black" : "hidden"}>
+        <div className={filter ? "py-5 px-5 bg-filter" : "hidden"}>
           <div className="grid grid-rows-2 grid-cols-3 gap-6">
             <div className="">
               <p className="text-white my-3">Release Date</p>
@@ -132,6 +160,12 @@ function Album() {
                 placeholder="Type"
               >
                 <option value="all">All</option>
+
+                {artist.map((art, index) => (
+                  <option value={art.name} key={index}>
+                    {art.name}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="">
@@ -142,28 +176,41 @@ function Album() {
                 placeholder="Type"
               >
                 <option value="all">All</option>
+                <option value="pending">Pending</option>
+                <option value="rejected">Rejected</option>
+                <option value="injested">Ingested</option>
+                <option value="moderation">Moderation</option>
+                <option value="approved">Approved</option>
+                <option value="live">Live</option>
               </select>
             </div>
             <div className="">
-              <p className="text-white my-3">Genre</p>
+              <p className="text-white my-3">Label</p>
               <select
                 className="flex-grow h-12 p-2 outline-none text-gray-700 w-full"
                 type="text"
                 placeholder="Type"
               >
-                <option value="all">All</option>
+                <option value="default" defaultValue>
+                  All
+                </option>
+                {label.map((lab, i) => (
+                  <option key={i} value={lab.label}>
+                    {lab.label}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
         </div>
       </div>
-      <div className=" h-16 py-2 text-xs text-gray-500 flex items-end">
+      <div className=" h-16 py-2 text-sm text-gray-500 flex items-end">
         {album.length === 0 ? "Nothing to show" : " Showing all Albums"}
       </div>
-      <div className="bg-white">
+      <div className="bg-white mt-2">
         <table className=" capitalize table-fixed text-sm text-gray-700 w-full text-left">
           <thead>
-            <tr className="h-14 border ">
+            <tr className="h-16 border-b font-medium text-base	 ">
               <th className=" w-24 "></th>
               <th className=" w-2/6 pl-2 ">Album Name</th>
               <th className=" w-1/6">Artist</th>
@@ -177,7 +224,7 @@ function Album() {
               <tr
                 key={index}
                 onClick={() => handleClick(a.id)}
-                className="h-20 text-lg font-Regular hover:bg-gray-50 border-b"
+                className="h-20 text-lg font-Regular hover:bg-hover border-b"
               >
                 <td className="text-center pl-6">
                   <img src={a.coverImage} width="50px" alt="" />

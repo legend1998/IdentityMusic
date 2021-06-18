@@ -1,16 +1,91 @@
 @tailwind base;
 @tailwind components;
+@tailwind utilities;
 
 @font-face {
-  font-family: "Graphik";
-  src: local("Graphik"), url(./fonts/Graphik-Regular.ttf) format("ttf");
+  font-family: "GraphikThin";
+  src: url(fonts/Graphik-Thin.eot);
+  src: url(fonts/Graphik-Thin.eot?#iefix) format("embedded-opentype"),
+    url(fonts/Graphik-Thin.woff) format("woff"),
+    url(fonts/Graphik-Thin.ttf) format("truetype");
+
+  font-style: normal;
+  font-weight: 100;
 }
+
 @font-face {
-  font-family: "Graphik";
-  src: local("medium"), url(./fonts/Graphik-Medium.ttf) format("ttf");
+  font-family: "GraphikExtraLight";
+  src: url(fonts/Graphik-Extralight.eot);
+  src: url(fonts/Graphik-Extralight.eot?#iefix) format("embedded-opentype"),
+    url(fonts/Graphik-Extralight.woff) format("woff"),
+    url(fonts/Graphik-Extralight.ttf) format("truetype");
+
+  font-style: normal;
+  font-weight: 200;
 }
+
 @font-face {
-  font-family: "Graphik";
-  src: local("semibold"), url(./fonts/Graphik-Semibold.ttf) format("ttf");
+  font-family: "GraphikLight";
+  src: url(fonts/Graphik-Light.eot);
+  src: url(fonts/Graphik-Light.eot?#iefix) format("embedded-opentype"),
+    url(fonts/Graphik-Light.woff) format("woff"),
+    url(fonts/Graphik-Light.ttf) format("truetype");
+
+  font-style: normal;
+  font-weight: 300;
 }
-@tailwind utilities;
+
+@font-face {
+  font-family: "GraphikNormal";
+  src: url(fonts/Graphik-Regular.eot);
+  src: url(fonts/Graphik-Regular.eot?#iefix) format("embedded-opentype"),
+    url(fonts/Graphik-Regular.woff) format("woff"),
+    url(fonts/Graphik-Regular.ttf) format("truetype");
+
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "GraphikMedium";
+  src: url(fonts/Graphik-Medium.eot);
+  src: url(fonts/Graphik-Medium.eot?#iefix) format("embedded-opentype"),
+    url(fonts/Graphik-Medium.woff) format("woff"),
+    url(fonts/Graphik-Medium.ttf) format("truetype");
+
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "GraphikSemibold";
+  src: url(fonts/Graphik-Semibold.eot);
+  src: url(fonts/Graphik-Semibold.eot?#iefix) format("embedded-opentype"),
+    url(fonts/Graphik-Semibold.woff) format("woff"),
+    url(fonts/Graphik-Semibold.ttf) format("truetype");
+
+  font-style: normal;
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "GraphikBold";
+  src: url(fonts/Graphik-Bold.eot);
+  src: url(fonts/Graphik-Bold.eot?#iefix) format("embedded-opentype"),
+    url(fonts/Graphik-Bold.woff) format("woff"),
+    url(fonts/Graphik-Bold.ttf) format("truetype");
+
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "GraphikBlack";
+  src: url(fonts/Graphik-Black.eot);
+  src: url(fonts/Graphik-Black.eot?#iefix) format("embedded-opentype"),
+    url(fonts/Graphik-Black.woff) format("woff"),
+    url(fonts/Graphik-Black.ttf) format("truetype");
+
+  font-style: normal;
+  font-weight: 900;
+}

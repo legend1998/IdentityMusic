@@ -31,18 +31,20 @@ function Dispute() {
   }
 
   return (
-    <div className="w-full bg-gray-100 h-full">
+    <div className="w-full bg-background h-full">
       <div className="w-full bg-white h-24 flex items-center shadow-sm">
-        <h1 className="text-3xl font-semibold ml-8     font-sans ">Dispute</h1>
+        <h1 className="text-3xl font-semibold ml-8     font-Graphik ">
+          Dispute
+        </h1>
       </div>
 
       <div className="lg:px-12 md:px-1  py-5">
         <div className="bg-white">
-          <div className="flex h-12 items-center flex-wrap">
+          <div className="flex h-14 items-center flex-wrap">
             <button
               onClick={() => setfilter(!filter)}
               className={`px-7 hidden lg:block focus:outline-none ${
-                filter ? "bg-black text-white h-full" : null
+                filter ? "bg-filter text-white h-full" : null
               } `}
             >
               Filters &#x2304;
@@ -58,7 +60,7 @@ function Dispute() {
             <div className="duration-200">
               <button
                 onClick={() => setshow(!show)}
-                className="bg-blue-700 hover:bg-blue-800 w-64 h-12 focus:outline-none text-white"
+                className="bg-blue-700 hover:bg-blue-800 w-64 h-14 focus:outline-none text-white"
               >
                 Actions &#x2304;
               </button>
@@ -89,7 +91,7 @@ function Dispute() {
               ) : null}
             </div>
           </div>
-          <div className={filter ? "py-5 px-5 bg-black" : "hidden"}>
+          <div className={filter ? "py-5 px-5 bg-filter" : "hidden"}>
             <div className="grid grid-rows-1 grid-cols-2 gap-6">
               <div className="">
                 <p className="text-white my-3">Date</p>
@@ -129,8 +131,8 @@ function Dispute() {
           <table className="table-fixed text-xs text-gray-700 w-full">
             <thead>
               <tr className="h-12 border">
-                <th className=" w-2/6">Date</th>
-                <th className=" w-3/6">Link</th>
+                <th className=" w-2/6 text-left px-20">Date</th>
+                <th className=" w-3/6 text-left">Link</th>
                 <th className=" w-1/6">Status</th>
               </tr>
             </thead>
@@ -141,8 +143,10 @@ function Dispute() {
                   className="text-center h-14 hover:bg-gray-50"
                   onClick={() => showdetails(dispute)}
                 >
-                  <td>{moment(dispute?.created_at).format("DD-MM-YYYY")}</td>
-                  <td>{dispute.youtubeLink}</td>
+                  <td className="text-left px-20">
+                    {moment(dispute?.created_at).format("DD-MM-YYYY")}
+                  </td>
+                  <td className="text-left">{dispute.youtubeLink}</td>
                   <td>{statusSwitch(dispute?.status)}</td>
                 </tr>
               ))}

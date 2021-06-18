@@ -5,15 +5,13 @@ import Tracks from "./Tracks";
 function Assets() {
   const [tab, settab] = useState(1);
 
-  let active = "border-b-2 border-purple-700 bg-white";
-  let passive = "bg-gray-50 text-gray-600 border";
+  let active = "border-b-2 border-tabborder bg-white  font-medium";
+  let passive = "bg-tab text-gray-600 border ";
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="bg-background min-h-screen font-Graphik">
       <div className="w-full bg-white h-24 flex items-center shadow-sm">
-        <h1 className="text-3xl font-semibold ml-8 pl-10 font-graphik ">
-          Music
-        </h1>
+        <h1 className="text-3xl font-semibold ml-8 pl-10  ">Music</h1>
       </div>
       <div className="flex border flex-wrap items-center h-16 ">
         <div
@@ -22,7 +20,7 @@ function Assets() {
             tab === 1 ? active : passive
           }`}
         >
-          <i className="fas fa-record-vinyl mx-5"></i>Albums
+          <i className="fas fa-compact-disc mx-5 "></i>Albums
         </div>
         <div
           onClick={() => settab(2)}
@@ -30,7 +28,7 @@ function Assets() {
             tab === 2 ? active : passive
           }`}
         >
-          <i className="fas fa-music mx-5"></i> Tracks
+          <i className="fas fa-music mx-5 "></i> Tracks
         </div>
         <div
           onClick={() => settab(3)}
@@ -38,7 +36,7 @@ function Assets() {
             tab === 3 ? active : passive
           }`}
         >
-          <i className="fas fa-music mx-5"></i> Video
+          <i className="fas fa-video mx-5"></i> Video
         </div>
       </div>
       {tab === 1 ? <Album /> : null}

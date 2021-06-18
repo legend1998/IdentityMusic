@@ -39,7 +39,7 @@ function NewTracks({ nextab, albumid }) {
     settracks(tracks + 1);
   };
   return (
-    <div className=" lg:p-10 p-2 bg-gray-100 min-h-screen border border-red-800">
+    <div className=" lg:p-10 p-2 bg-background min-h-screen border border-red-800">
       <div className="my-4 min-h-0">
         {Array.from(Array(tracks)).map((data, index) => (
           <TrackInfo
@@ -55,7 +55,7 @@ function NewTracks({ nextab, albumid }) {
 
         <button
           onClick={handletracks}
-          className="w-full text-white h-14 rounded hover:bg-indigo-800 bg-indigo-700 focus:outline-none"
+          className="w-full text-white h-14  hover:bg-indigo-800 bg-indigo-700 focus:outline-none"
         >
           <i className="fas fa-plus"></i> Upload new track
         </button>

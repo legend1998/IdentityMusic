@@ -97,14 +97,14 @@ function Login() {
   // }
 
   return (
-    <div className="min-h-screen w-full border-8 border-white login">
+    <div className="min-h-screen w-full border-8 border-white login font-Graphik">
       <div className=" h-32 p-10 ">
         <img src={logo} alt="logo" className="  h-20" />
       </div>
       <div className="flex items-end  w-full md:w-2/3 h-full   justify-center">
         <div className="text-white w-full lg:w-1/2 mt-10  p-5">
           <h1 className="text-7xl">Hello There.</h1>
-          <p className="text-2xl my-5 text-gray-500">
+          <p className="text-2xl my-5 text-sidetext">
             TrakLab | Client Login Portal
           </p>
           <form
@@ -147,7 +147,7 @@ function Login() {
               </button>
             </div>
           </form>
-          <Link to="/signup" className="py-3 text-lg underline text-gray-400">
+          <Link to="/signup" className="py-3 text-lg underline text-sidetext">
             Create New Account
           </Link>
         </div>

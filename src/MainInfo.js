@@ -83,17 +83,23 @@ function MainInfo({ nextab, albumid, setalbumid }) {
   }
 
   return (
-    <div className="lg:p-10 p-2 bg-gray-100">
+    <div className="lg:p-10 p-2 bg-background">
       <div className="bg-white ">
-        <p className="px-5 text-xl border-b py-3 ">Cover Image</p>
+        <p className="px-5 text-2xl border-b  py-5 mx-8 font-normal text-black">
+          Cover Art
+        </p>
 
         <div className="grid grid-cols-3">
           <div className=" col lg:p-10 flex justify-center ">
             {!album.coverImage ? (
-              <div className=" w-64 h-64">
+              <div className=" w-5/6 h-5/6">
                 <label htmlFor="file-for">
-                  <div className="border rounded text-center w-64 h-64 flex justify-center items-center bg-gray-50">
-                    <i className="fas fa-plus"></i>
+                  <div className="border rounded text-center w-64 h-64  justify-center items-center cursor-pointer bg-gray-50">
+                    <i className="fas fa-plus mt-24 fa-blue  text-lg"></i>
+
+                    <p className="text-sm text-center text-gray-800 py-24">
+                      Upload your image file here
+                    </p>
                   </div>
                 </label>
 
@@ -104,9 +110,6 @@ function MainInfo({ nextab, albumid, setalbumid }) {
                   className="hidden"
                   onChange={(e) => imageupload(e)}
                 />
-                <p className="text-xs text-center text-gray-400">
-                  Upload your image file here
-                </p>
               </div>
             ) : (
               <div className=" w-64 h-64 overflow-hidden">
@@ -115,11 +118,11 @@ function MainInfo({ nextab, albumid, setalbumid }) {
             )}
           </div>
           <div className=" col-span-2  flex flex-col justify-start">
-            <h5 className="text-sm text-gray-800 font-semibold lg:p-3">
+            <h5 className="text-sm text-black font-semibold lg:p-3">
               Please follow these rules so your release isn't rejected by the
               stores & services.
             </h5>
-            <ul className="pl-10 list-disc text-sm pr-5">
+            <ul className="pl-10 list-disc text-base pb-10 pr-5">
               <li>File format: JPG or JPEG</li>
               <li>Color space: RGB</li>
               <li>

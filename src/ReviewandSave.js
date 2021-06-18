@@ -40,12 +40,12 @@ function ReviewandSave({ albumid, setid }) {
         .doc(albumid)
         .update({
           finalSubmit: true,
-          messgae: "your release is in processing.",
+          message: "Your release is in processing.",
         })
 
         .then(() => {
           setid(null);
-          notifier.info("submitted successfully");
+          notifier.info("Submitted Successfully");
           history.replace("/panel/assets");
         })
         .catch((e) => {
@@ -56,7 +56,7 @@ function ReviewandSave({ albumid, setid }) {
       notifier.info("You pressed Cancel");
     };
     notifier.confirm(
-      "You are going to approve this album finally. Is the Given Information correct?",
+      "  You are going to approve this album finally. Is the Given Information correct?",
       onOk,
       onCancel,
       {
@@ -87,8 +87,8 @@ function ReviewandSave({ albumid, setid }) {
               Genre(S): {album?.genre1}, {album?.genre2}
             </p>
             <p className="">Label: {album?.recordLabel}</p>
-            <p className="">(P): {album?.pCopyright} </p>
-            <p className="">(C): {album?.Ccopyright}</p>
+            <p className="">(P) Copyright: {album?.pCopyright} </p>
+            <p className="">(C) Copyright: {album?.Ccopyright}</p>
           </div>
         </div>
       </div>

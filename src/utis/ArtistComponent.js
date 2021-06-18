@@ -34,9 +34,11 @@ function ArtistComponent({ somefun, album }) {
 
   return (
     <div className="lg:p-10 p-2 bg-white my-10">
-      <p className="px-5 text-xl border-b py-3 mb-5">Artist</p>
-      <p className="px-5 text-md">Is this a compilation of various artists?</p>
-      <div className="px-5 py-3  flex items-center w-40 justify-between">
+      <p className="px-5 text-2xl border-b py-3 mb-5">Artist</p>
+      <p className="px-5 font-medium text-lg">
+        Is this a compilation of various artists ?
+      </p>
+      <div className="px-5 py-1  flex items-center w-40 justify-between">
         <label>
           <input
             onChange={(e) => {
@@ -64,7 +66,7 @@ function ArtistComponent({ somefun, album }) {
           No
         </label>
       </div>
-      <p className="px-5 text-sm font-bold">
+      <p className="px-5 pt-5 text-lg font-medium">
         Artist(s) – indicate ONLY ONE per field
       </p>
       {artist.length === 0 ? (
@@ -86,7 +88,7 @@ function ArtistComponent({ somefun, album }) {
               primaryArtist: e.target.value,
             });
           }}
-          className="h-12 mx-5 px-5 mt-2 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
+          className="h-14 mx-5 px-5 mt-2 pr-10 w-full text-lg bg-box appearance-none outline-none  focus:border-purple-700"
         >
           <option value="default" defaultChecked>
             --Select--
@@ -109,9 +111,9 @@ function ArtistComponent({ somefun, album }) {
 
       <button
         onClick={() => (album?.artist ? null : setkeyartist(keyartist + 1))}
-        className="text-purple-900 py-3 focus:outline-none mx-5"
+        className="text-indigo-500 py-3 focus:outline-none mx-5"
       >
-        <i className="fas fa-plus"></i> Add other key artist.
+        <i className="fas fa-plus mr-3"></i> Add other key artist.
       </button>
     </div>
   );

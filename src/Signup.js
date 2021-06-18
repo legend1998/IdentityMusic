@@ -93,7 +93,7 @@ function Signup() {
       <div className="flex items-center w-full lg:w-2/3  h-full  justify-center">
         <div className="text-white w-full lg:w-1/2 mt-10 p-5">
           <h1 className="text-7xl">Sign Up.</h1>
-          <p className="text-2xl my-5 text-gray-500">
+          <p className="text-2xl my-5 text-sidetext">
             TrakLab | Client Sign Up Portal
           </p>
           <form className="text-black ">
@@ -136,21 +136,21 @@ function Signup() {
 
             <div className="w-full flex items-center justify-end my-2 h-14">
               <button
-                className="focus:outline-none h-full w-44 bg-blue-600 text-white p-5"
+                className="focus:outline-none h-full w-44 bg-blue-600 text-white"
                 onClick={(e) => createUser(e)}
               >
                 {Loading ? (
-                  <span className>
+                  <span>
                     <i className="fas fa-spinner animate-spin text-white"></i>
                   </span>
                 ) : (
-                  <p>
+                  <p className=" items-center justify-items-center ">
                     Sign up <i className="fas fa-arrow-right mx-3"></i>
                   </p>
                 )}
               </button>
             </div>
-            <Link to="/" className="p-3  text-gray-400">
+            <Link to="/" className=" text-lg text-sidetext">
               Already have an Account | Login
             </Link>
           </form>

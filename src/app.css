@@ -7,3 +7,7 @@
     rgb(47, 0, 255)
   );
 }
+
+.fa-blue {
+  color: blue !important;
+}

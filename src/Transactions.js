@@ -23,7 +23,7 @@ function Transactions() {
   }, [user]);
 
   return (
-    <div className="w-full bg-gray-100 h-full">
+    <div className="w-full bg-background h-full">
       <div className="w-full bg-white h-24 font-Graphik flex items-center shadow-sm">
         <h1 className="text-3xl font-Graphikmedium ml-8  ">Balance</h1>
       </div>
