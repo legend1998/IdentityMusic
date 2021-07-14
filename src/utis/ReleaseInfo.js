@@ -49,16 +49,17 @@ function ReleaseInfo({ somefun, album }) {
   return (
     <div className="lg:p-10 p-2 bg-white my-10">
       <p className="px-5 text-2xl border-b py-3 mb-5">Info</p>
-
       <div className="grid grid-flow-col grid-cols-2 grid-rows-2 gap-5 ">
         <div className="mx-2">
-          <p className=" text-lg font-medium pb-2">Genre 1</p>
+          <p className=" text-lg font-medium pb-2">
+            Genre <span className="text-red-500">*</span>
+          </p>
           <select
             name="genre1  "
             defaultValue={album?.genre1}
             disabled={album?.info ? true : false}
             onChange={(e) => somefun({ ...album, genre1: e.target.value })}
-            className="h-12 px-3 w-full text-center bg-gray-100 focus:outline-none "
+            className="h-12 px-3 w-full text-center bg-box focus:outline-none "
           >
             {genre1.map((genre, index) => (
               <option className="capitalize " value={genre} key={index}>
@@ -68,23 +69,28 @@ function ReleaseInfo({ somefun, album }) {
           </select>
         </div>
         <div className="mx-2">
-          <p className=" pb-2 text-lg font-medium"> (P) Copyright </p>
+          <p className=" pb-2 text-lg font-medium">
+            {" "}
+            (P) Copyright <span className="text-red-500">*</span>
+          </p>
           <input
             type="text"
             defaultValue={album?.pCopyright}
             disabled={album?.info ? true : false}
             onChange={(e) => somefun({ ...album, pCopyright: e.target.value })}
             placeholder="2021 Label Name"
-            className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border border-red-500 focus:border-purple-700"
+            className="h-12 px-5 w-full bg-box appearance-none outline-none border border-box focus:border-purple-700"
           />
         </div>
         <div className="mx-2">
-          <p className=" text-lg font-medium pb-2  ">Genre 2</p>
+          <p className=" text-lg font-medium pb-2  ">
+            Sub Genre <span className="text-red-500">*</span>{" "}
+          </p>
           <select
             name="gene2"
             defaultValue={album?.genre2}
             disabled={album?.info ? true : false}
-            className="h-12 px-3  w-full text-center bg-gray-100 focus:outline-none"
+            className="h-12 px-3  w-full text-center bg-box focus:outline-none"
             onChange={(e) => somefun({ ...album, genre2: e.target.value })}
           >
             {genre2.map((genre, index) => (
@@ -95,24 +101,25 @@ function ReleaseInfo({ somefun, album }) {
           </select>
         </div>
         <div className="mx-2">
-          <p className=" pb-2 text-lg font-medium">(C) Copyright</p>
+          <p className=" pb-2 text-lg font-medium">
+            (C) Copyright <span className="text-red-500">*</span>
+          </p>
           <input
             type="text"
             placeholder="2021 Label Name"
             defaultValue={album?.Ccopyright}
             disabled={album?.info ? true : false}
             onChange={(e) => somefun({ ...album, Ccopyright: e.target.value })}
-            className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border border-red-500 focus:border-purple-700"
+            className="h-12 px-5 w-full bg-box appearance-none outline-none border border-box focus:border-purple-700"
           />
         </div>
       </div>
-
-      <p className="px-5 text-md mt-5 font-semibold">
-        Previously released? / Schedule Release
+      <p className="px-2 text-lg mt-5 font-semibold">
+        Schedule Release / Previously Released{" "}
+        <span className="text-red-500">*</span>
       </p>
-
       <div className="grid grid-cols-2 gap-8">
-        <div className="px-5">
+        <div className="px-2 pt-2 pb-4">
           <label>
             <input
               type="radio"
@@ -144,14 +151,16 @@ function ReleaseInfo({ somefun, album }) {
             disabled={album?.info ? true : false}
             onChange={(e) => somefun({ ...album, releaseDate: e.target.value })}
             placeholder="Previously release date"
-            className="h-12 px-5 w-full bg-gray-50 appearance-none outline-none border focus:border-purple-700"
+            className="h-12 px-5 w-full bg-box appearance-none outline-none border focus:border-purple-700"
           />
         </div>
       </div>
+      <p className="px-2 text-lg font-semibold mt-3">
+        On a Record Label <span className="text-red-500">*</span>
+      </p>
 
-      <p className="px-5 text-md font-semibold mt-3">On a Record Label</p>
       <div className="grid grid-cols-2">
-        <div className="px-5 py-2">
+        <div className="px-2 pt-2 pb-4">
           <label>
             <input
               type="radio"
@@ -177,7 +186,7 @@ function ReleaseInfo({ somefun, album }) {
             defaultValue={album?.recordLabel}
             disabled={album?.info ? true : false}
             onChange={(e) => somefun({ ...album, recordLabel: e.target.value })}
-            className="h-12 px-5 w-full my-2 bg-box appearance-none outline-none border focus:border-purple-700"
+            className="h-12 px-5 w-full my-2 bg-box appearance-none outline-none border border-box focus:border-purple-700"
           >
             <option value="default" defaultValue>
               -- Select --
@@ -192,10 +201,10 @@ function ReleaseInfo({ somefun, album }) {
       </div>
       <div className="grid grid-flow-col grid-rows-1 grid-cols-2">
         <div>
-          <p className="px-5 text-md font-semibold">
+          <p className="px-2 text-lg font-semibold">
             Do you already have a UPC/EAN?
           </p>
-          <div className="px-5 py-3">
+          <div className="px-2 pt-2 pb-4">
             <label>
               <input
                 type="radio"
@@ -216,8 +225,8 @@ function ReleaseInfo({ somefun, album }) {
               No
             </label>
           </div>
-          <p className={ownupc ? "hidden" : "text-sm text-gray-600 mx-5"}>
-            OK, we'll generate one for you when we send your release.
+          <p className={ownupc ? "hidden" : "text-sm text-gray-600 mx-2"}>
+            "OK, we'll generate one for you when we send your release."
           </p>
         </div>
         <div className={ownupc ? "block" : "hidden"}>

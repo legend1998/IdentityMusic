@@ -7,6 +7,7 @@ function Dashboard() {
   const [{ user }] = useStateValue();
   const history = useHistory();
   const [vidoes, setvidoes] = useState([]);
+  const [release, setrelease] = useState([]);
 
   useEffect(() => {
     firedb.collection("video").onSnapshot((snapshot) => {
@@ -17,8 +18,17 @@ function Dashboard() {
       setvidoes(a);
     });
   }, []);
+  useEffect(() => {
+    firedb.collection("release").onSnapshot((snapshot) => {
+      var a = [];
+      snapshot.forEach((snap) => {
+        a.push(snap.data());
+      });
+      setrelease(a);
+    });
+  }, []);
   return (
-    <div className="w-full h-max bg-gray-100">
+    <div className="bg-background min-h-screen">
       <div className="w-full bg-white h-24 flex items-center shadow-sm">
         <h1 className="text-3xl font-semibold ml-8 pl-10  capitalize">
           Hi, {user.fname}!
@@ -29,9 +39,7 @@ function Dashboard() {
           <h3 className="font-regular text-2xl text-black ">
             Please do the following
           </h3>
-          <div>
-            <i className="far fa-times-circle cursor-pointer"></i>
-          </div>
+          <div></div>
         </div>
         <div className=" min-h-56 pl-40 flex items-center justify-center ">
           <div className="">
@@ -96,17 +104,15 @@ function Dashboard() {
           <h3 className="font-regular text-2xl text-black ">
             Account Setup Tutorials
           </h3>
-          <div>
-            <i className="far fa-times-circle cursor-pointer"></i>
-          </div>
+          <div></div>
         </div>
-        <div className="h-auto py-6  items-center justify-items-center bg-gray-100  flex flex-col md:flex-row  border-4 border-white ">
+        <div className="h-auto py-6  overflow-scroll items-center justify-items-center bg-background  flex flex-col md:flex-row  border-4 border-white ">
           {vidoes.map((v, i) => (
-            <div className="float-left m-5 bg-white">
-              <div className="px-4 p-3 font-medium ">{v.title} </div>
+            <div className="float-left m-5  bg-white ">
+              <div className="px-4 p-3  font-medium ">{v.title}</div>
               <iframe
-                width="560"
-                height="315"
+                height="190"
+                width="340"
                 src={v.src}
                 title="YouTube video player"
                 frameborder="0"
@@ -117,6 +123,29 @@ function Dashboard() {
           ))}
         </div>
       </div>
+      <div className="m-16 bg-white ">
+        <div className=" m-5  py-3  border-b flex items-center justify-between text-gray-500">
+          <h3 className="font-regular text-2xl text-black ">Latest Releases</h3>
+          <div></div>
+        </div>
+        <div className="h-auto py-6  overflow-scroll items-center justify-items-center bg-background  flex flex-col md:flex-row  border-4 border-white ">
+          {release.map((r, i) => (
+            <div className="float-left m-5  bg-white ">
+              <div className="px-4 p-3  font-base ">{r.title}</div>
+              <iframe
+                height="190"
+                width="340"
+                src={r.src}
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="h-2"></div>
     </div>
   );
 }

@@ -40,7 +40,7 @@ function ReviewandSave({ albumid, setid }) {
         .doc(albumid)
         .update({
           finalSubmit: true,
-          message: "Your release is in processing.",
+          message: "Your release is in Review.",
         })
 
         .then(() => {
@@ -93,7 +93,7 @@ function ReviewandSave({ albumid, setid }) {
         </div>
       </div>
       <div className="my-8 p-2 lg:p-8 bg-white">
-        <p className="text-xl font border-b py-5">Tracks</p>
+        <p className="text-2xl font border-b py-5">Tracks</p>
         {tracks.map((track, index) => (
           <div key={index} className="flex border-b my-3">
             <div className="my-4 mr-7 text-lg font-semibold">{index + 1}.</div>
@@ -104,7 +104,7 @@ function ReviewandSave({ albumid, setid }) {
               </h4>
 
               <p className="mt-5">Language: {track?.lyricLanguage}</p>
-              <p className="">ISRC: {track?.isrc}</p>
+              <p className=" capitalize">Explicit: {track?.explicit}</p>
               <p className="">CRBT Time: {track?.crbt} </p>
               <p className="">Lyrics: {track?.lyrics}</p>
             </div>

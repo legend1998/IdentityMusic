@@ -7,9 +7,21 @@ import AWN from "awesome-notifications";
 
 function ArtistTab() {
   const [filter, setfilter] = useState(false);
+  const [label, setlabel] = useState([]);
   const [artists, setartists] = useState([]);
   const [{ user, subArtist }] = useStateValue();
   const history = useHistory();
+
+  firedb
+    .collection("label")
+    .where("user", "==", user.email)
+    .onSnapshot((snapshot) => {
+      var a = [];
+      snapshot.forEach((snap) => {
+        a.push(snap.data());
+      });
+      setlabel(a);
+    });
 
   useEffect(() => {
     firedb.collection("artist").onSnapshot((snapshot) => {
@@ -49,7 +61,7 @@ function ArtistTab() {
         notifier.info("You pressed Cancel");
       };
       notifier.confirm(
-        "you have no any subscription get one to access.",
+        "You have no any subscription get one to access.",
         onOk,
         onCancel,
         {
@@ -62,22 +74,20 @@ function ArtistTab() {
   };
 
   return (
-    <div className="bg-gray-100 pb-10 h-screen">
+    <div className="bg-background pb-10 min-h-full ">
       <div className="w-full bg-white h-24 flex items-center shadow-sm">
-        <h1 className="text-3xl font-semibold ml-8 pl-10 font-sans ">
-          Artists
-        </h1>
+        <h1 className="text-4xl font-medium ml-8 pl-10 ">Artists</h1>
       </div>
-      <div className="lg:px-12 md:px-1  py-5">
-        <div className=" bg-white">
-          <div className="flex h-12 items-center">
+      <div className="lg:px-12 md:px-1  py-5 ">
+        <div className=" bg-white ml-10 mr-10 mt-10">
+          <div className="flex h-14 items-center">
             <button
               onClick={() => setfilter(!filter)}
               className={`px-7 md:hidden lg:block focus:outline-none ${
                 filter ? "bg-black text-white h-full" : null
               } `}
             >
-              Filters &#x2304;
+              Filters <i class="fas fa-chevron-down ml-6"></i>
             </button>
             <div className="flex-grow flex items-center">
               <i className="fas fa-search p-2"></i>
@@ -90,8 +100,9 @@ function ArtistTab() {
             <div className="duration-200">
               <button
                 onClick={() => getartist()}
-                className="bg-blue-700 hover:bg-blue-800 w-52 h-12 focus:outline-none text-white"
+                className="bg-blue-700 hover:bg-blue-800 w-52 h-14 focus:outline-none text-white"
               >
+                <i class="fas fa-plus text-xs mr-2 scale-50 "></i>
                 Add Artist
               </button>
             </div>
@@ -119,7 +130,14 @@ function ArtistTab() {
                   type="text"
                   placeholder="Type"
                 >
-                  <option value="all">All</option>
+                  <option value="default" defaultValue>
+                    All
+                  </option>
+                  {label.map((lab, i) => (
+                    <option key={i} value={lab.label}>
+                      {lab.label}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div className="">
@@ -135,10 +153,11 @@ function ArtistTab() {
             </div>
           </div>
         </div>
-        <div className="h-16 py-2 text-xs text-gray-500 flex items-end">
+        <h1 className="h-16 py-2  ml-10 mr-10 font-normal text-sm text-gray-500 flex items-end">
           Showing All Artists
-        </div>
-        <div className="">
+        </h1>
+
+        <div className="relative m-5 min-h-screen">
           {artists.map((data, index) => (
             <Card key={index} data={data} />
           ))}

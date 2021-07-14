@@ -27,50 +27,50 @@ export function statusSwitch(status) {
   switch (status) {
     case "rejected":
       return (
-        <button className="bg-red-400 text-white h-7 w-max text-center p-1 shadow-lg focus:outline-none">
+        <button className="bg-red-400 text-white h-10 w-max pl-5 pr-5 rounded-full text-center p-1 shadow-lg focus:outline-none">
           Inspection Failed
         </button>
       );
     case "injested":
       return (
-        <button className="bg-indigo-500 text-white h-7 w-max text-center p-1 shadow-lg focus:outline-none">
+        <button className="bg-indigo-500 text-white h-10 w-max pl-5 pr-5 rounded-full text-center p-1 shadow-lg focus:outline-none">
           Locked
         </button>
       );
     case "moderation":
       return (
-        <button className="bg-indigo-500 rounded text-white h-7 w-max text-center p-1 shadow-lg focus:outline-none">
-          Locked
+        <button className="bg-indigo-500  text-white h-10 w-max pl-5 pr-5 rounded-full text-center p-1 shadow-lg focus:outline-none">
+          Moderation
         </button>
       );
     case "approved":
       return (
-        <button className="bg-green-500 rounded text-white h-7 w-max text-center p-1 shadow-lg focus:outline-none">
-          approved
+        <button className="bg-green-500  text-white h-10 w-max pl-5 pr-5 rounded-full text-center p-1 shadow-lg focus:outline-none">
+          Approved
         </button>
       );
     case "live":
       return (
-        <button className="bg-indigo-500 rounded text-white h-7 w-max text-center p-1 shadow-lg focus:outline-none">
-          Locked
+        <button className="bg-indigo-500  text-white h-10 w-max pl-5 pr-5 rounded-full text-center p-1 shadow-lg focus:outline-none">
+          Live
         </button>
       );
     case "consideration":
       return (
-        <button className="bg-purple-500 rounded text-white h-7 w-max text-center p-1 shadow-lg focus:outline-none">
+        <button className="bg-purple-500  text-white h-10 w-max pl-5 pr-5 rounded-full text-center p-1 shadow-lg focus:outline-none">
           Processing
         </button>
       );
     case "takedown":
       return (
-        <button className="bg-red-600 rounded text-white h-7 w-max text-center p-1 shadow-lg focus:outline-none">
+        <button className="bg-red-600  text-white h-10 w-max pl-5 pr-5 rounded-full text-center p-1 shadow-lg focus:outline-none">
           Takendown
         </button>
       );
     default:
       return (
-        <button className="bg-yellow-500 rounded text-white h-7 w-max text-center p-1 shadow-lg focus:outline-none">
-          Pending
+        <button className="bg-yellow-500  text-white h-10 w-max pl-5 pr-5 rounded-full text-center p-1 shadow-lg focus:outline-none">
+          In Review
         </button>
       );
   }

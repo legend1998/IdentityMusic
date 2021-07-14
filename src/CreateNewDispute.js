@@ -28,21 +28,20 @@ function CreateNewDispute() {
   }
 
   return (
-    <div className="h-screen overflow-y-auto bg-gray-100">
+    <div className="h-screen overflow-y-auto bg-background">
       <div className="w-full bg-white h-24  flex items-center justify-between shadow-sm">
-        <h1 className="text-3xl font-semibold ml-8 font-sans ">Dispute</h1>
-        <p className="text-sm font-light mr-8 ">Dispute</p>
+        <h1 className="text-4xl  ml-12 font-medium ">Dispute</h1>
       </div>
       <div className="p-5 lg:m-10 m-5">
         <div className=" my-8 p-5 bg-white">
-          <p className=" font-normal">Youtube Link</p>
+          <p className=" font-normal">Youtube Video Link</p>
           <input
             type="link"
             onChange={(e) =>
               setdispute({ ...dispute, youtubeLink: e.target.value })
             }
-            placeholder="paste youtube link here"
-            className=" appearance-none focus:outline-none bg-gray-100 border h-12 my-5 w-full px-5"
+            placeholder="Youtube Video Link"
+            className=" appearance-none focus:outline-none bg-box border border-box h-14 my-5 w-full px-5"
           />
           <br />
           <p className=" font-normal">Comments</p>
@@ -51,14 +50,14 @@ function CreateNewDispute() {
             onChange={(e) =>
               setdispute({ ...dispute, comments: e.target.value })
             }
-            placeholder="any comments"
+            placeholder="For example: ISRC: UKU932110000 Please remove claim from this video"
             className={
-              "border w-full h-64 focus:outline-none p-5 bg-gray-50 text-sm"
+              " w-full h-64 focus:outline-none p-5 bg-box border border-box mt-2  text-sm"
             }
           ></textarea>
           <button
             onClick={() => createDispute()}
-            className=" appearance-none focus:outline-none h-12 w-52 bg-indigo-600 text-white"
+            className=" appearance-none focus:outline-none h-12 w-52 mt-6 bg-indigo-600 text-white"
           >
             Create Dispute
           </button>

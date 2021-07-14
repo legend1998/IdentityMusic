@@ -45,7 +45,7 @@ function MainInfo({ nextab, albumid, setalbumid }) {
     }
     var storageRef = storage.ref();
     storageRef
-      .child(`thumbnail/${image.name + Date.now()}`)
+      .child(`thumbnail/${Date.now() + user.labelName + " - " + image.name}`)
       .put(image)
       .then((snapshot) => {
         snapshot.ref
@@ -65,7 +65,7 @@ function MainInfo({ nextab, albumid, setalbumid }) {
       nextab(2, 2);
       return;
     }
-    if (Object.keys(album).length < 9) {
+    if (Object.keys(album).length < 4) {
       new AWN().alert("fill all details ", { position: "bottom-right" });
       return;
     }
@@ -92,13 +92,13 @@ function MainInfo({ nextab, albumid, setalbumid }) {
         <div className="grid grid-cols-3">
           <div className=" col lg:p-10 flex justify-center ">
             {!album.coverImage ? (
-              <div className=" w-5/6 h-5/6">
+              <div className=" ">
                 <label htmlFor="file-for">
-                  <div className="border rounded text-center w-64 h-64  justify-center items-center cursor-pointer bg-gray-50">
-                    <i className="fas fa-plus mt-24 fa-blue  text-lg"></i>
+                  <div className=" text-center w-80 h-80  justify-center items-center cursor-pointer bg-box">
+                    <i className="fas fa-plus mt-32 fa-blue  text-lg"></i>
 
-                    <p className="text-sm text-center text-gray-800 py-24">
-                      Upload your image file here
+                    <p className="text-sm text-center font-normal text-sidetext pt-32">
+                      Click here to Upload Album Artwork
                     </p>
                   </div>
                 </label>
@@ -112,8 +112,8 @@ function MainInfo({ nextab, albumid, setalbumid }) {
                 />
               </div>
             ) : (
-              <div className=" w-64 h-64 overflow-hidden">
-                <img src={album.coverImage} alt="" className="h-64" />
+              <div className=" w-72 h-72 overflow-hidden">
+                <img src={album.coverImage} alt="" className="h-72" />
               </div>
             )}
           </div>

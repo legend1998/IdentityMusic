@@ -24,33 +24,55 @@ function Transactions() {
 
   return (
     <div className="w-full bg-background h-full">
-      <div className="w-full bg-white h-24 font-Graphik flex items-center shadow-sm">
-        <h1 className="text-3xl font-Graphikmedium ml-8  ">Balance</h1>
+      <div className="w-full bg-white h-24  flex items-center shadow-sm">
+        <h1 className="text-4xl font-medium ml-12 ">Balance</h1>
       </div>
-      <div className="flex justify-between items-end mx-10 my-5">
+
+      <div className="flex justify-between items-end mx-12 my-5">
         <div className="">
-          <p className="">OutStanding Earnings</p>
-          <h3 className="text-3xl fa fa-inr font-bold">
-            {calculateOutstanding(trans, user?.transactionStat?.total)}
-          </h3>
+          <p className="text-3xl font-medium">Total Earnings</p>
         </div>
         <div className="">
-          <p className="text-sm">Total Earnings</p>
-          <h3 className="text-3xl fa fa-inr font-bold">
-            {user?.transactionStat?.total}
-          </h3>
+          <p className="text-md font-medium text-sidetext text-right ">
+            Balance
+          </p>
+          <p className="text-3xl font-medium">
+            ₹ {user?.transactionStat?.total}.00
+          </p>
+        </div>
+      </div>
+
+      <div className="flex justify-between items-end mx-12 ">
+        <div className="">
+          <p className="text-3xl font-medium">Outstanding Earnings</p>
+        </div>
+        <div className="">
+          <p className="text-md font-medium text-sidetext text-right">
+            Balance
+          </p>
+          <p className="text-3xl font-medium">
+            ₹ {calculateOutstanding(trans, user?.transactionStat?.total)}.00
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <div className="h-14 ml-12 mr-12 mb-6 mt-12 bg-white ">
+          <i className="fas fa-search px-4 text-sidetext pt-5"></i>
+          <input
+            className="flex-grow h-7 w-5/6 outline-none text-gray-700"
+            type="text"
+            placeholder="Search by text"
+          />
         </div>
       </div>
       <div className="lg:px-12 md:px-1  py-5">
-        <div className="h-16 py-2 text-xs text-gray-500 flex items-end">
-          {trans.length === 0 ? "Nothing to show" : "showing all transactions"}
-        </div>
         <div className="bg-white">
-          <table className="table-fixed text-xs text-gray-700 w-full">
+          <table className="table-fixed text-xs text-black w-full">
             <thead>
-              <tr className="h-12 border">
+              <tr className="h-14 border-b text-sm tracking-wider">
                 <th className=" w-1/6">Date</th>
-                <th className=" w-2/6">Transaction Mode</th>
+                <th className=" w-2/6">Transaction mode</th>
                 <th className=" w-1/6">Amount</th>
                 <th className=" w-1/6">Status</th>
               </tr>
@@ -68,7 +90,7 @@ function Transactions() {
           </table>
           {trans.length === 0 ? (
             <div className="w-full h-56 flex items-center justify-center">
-              <p className="text-xs text-gray-500">
+              <p className="text-md text-gray-500">
                 You have no data to display.
               </p>
             </div>

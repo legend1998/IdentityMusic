@@ -29,7 +29,7 @@ function Sidebar() {
           to="/panel/dashboard"
           className={
             matchurl.pathname.includes("dashboard")
-              ? "my-1 text-gray-100"
+              ? "my-1 text-sidetext"
               : "my-1 text-sidetext hover:text-gray-100"
           }
         >
@@ -55,12 +55,12 @@ function Sidebar() {
               : "my-1 text-sidetext hover:text-gray-100 cursor-pointer"
           }
         >
-          RightHolders &#x2304;
+          Rights holders
         </span>
         {showright ? (
           <div
             id="rightholders"
-            className="transform duration-500 overflow-hidden "
+            className="transform duration-500 overflow-hidden text-base pl-3"
           >
             <Link
               to="/panel/artist"
@@ -70,7 +70,7 @@ function Sidebar() {
                   : "ml-5 text-sidetext hover:text-gray-100"
               }
             >
-              Artist
+              Artists
             </Link>
             <br />
             <Link

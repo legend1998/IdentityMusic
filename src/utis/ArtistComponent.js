@@ -93,6 +93,9 @@ function ArtistComponent({ somefun, album }) {
           <option value="default" defaultChecked>
             --Select--
           </option>
+          <option value="Various Artists" defaultChecked>
+            Various Artists
+          </option>
           {artist.map((art, index) => (
             <option value={art.name} key={index}>
               {art.name}

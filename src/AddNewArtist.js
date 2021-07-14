@@ -80,10 +80,13 @@ function AddNewArtist() {
   return (
     <div className="bg-gray-100 pb-10">
       <div className="w-full bg-white h-24 lg:pl-12 pl-5 flex items-center justify-start shadow-sm">
-        <button onClick={()=>history.goBack()} className="focus:outline-none appearance-none">
-          <i  className="fas fa-arrow-left"></i>
+        <button
+          onClick={() => history.goBack()}
+          className="focus:outline-none appearance-none"
+        >
+          <i className="fas fa-arrow-left"></i>
         </button>
-        <h1 className="text-3xl font-semibold pl-2 font-sans "> 
+        <h1 className="text-3xl font-semibold pl-2 font-sans ">
           {disabled ? "Artist" : "Create New Artist"}
         </h1>
       </div>

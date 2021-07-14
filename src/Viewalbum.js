@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import OverViewAlbum from "./OverViewAlbum";
 import VIewTrackAlbum from "./VIewTrackAlbum";
 import ViewAlbumStats from "./ViewAlbumStats";
+import { statusSwitch } from "./utis/Utils";
 import ViewAlbumMore from "./ViewAlbumMore";
 import { useParams } from "react-router";
 import { firedb } from "./firebaseconfig";
@@ -15,6 +16,8 @@ function Viewalbum() {
   const [tab, setab] = useState(1);
   const [album, setalbum] = useState(null);
   const history = useHistory();
+  const [showModal, setShowModal] = React.useState(false);
+  const [showbutton, setShowButton] = React.useState(false);
 
   useEffect(() => {
     firedb
@@ -55,10 +58,62 @@ function Viewalbum() {
                 <h2 className=" flex-1 text-3xl font-medium py-5 border-b">
                   {album.title}
                 </h2>
+                {showbutton ? (
+                  <>
+                    <button onClick={() => setShowModal(true)}>
+                      {statusSwitch(album?.status)}
+                    </button>
+                  </>
+                ) : null}
+
+                {showModal ? (
+                  <>
+                    <div className=" duration-200 justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                      <div className="relative w-auto my-6 mx-auto max-w-5xl">
+                        {/*content*/}
+                        <div className="border-b   shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                          {/*header*/}
+                          <div className="flex items-start justify-between p-3 pl-8 border-b border-solid border-blueGray-200 rounded-t">
+                            <h3 className="text-2xl font-semibold">
+                              Please Note
+                            </h3>
+
+                            <button
+                              className="p-1 ml-auto bg-transparent border-0 text-albums  float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                              onClick={() => setShowModal(false)}
+                            >
+                              <span className=" text-red  h-6 w-6 text-2xl block outline-none focus:outline-none">
+                                ×
+                              </span>
+                            </button>
+                          </div>
+                          {/*body*/}
+                          <div className="relative p-6 pl-6 flex-auto">
+                            <p className="m-4 mb-16 text-filter text-lg leading-relaxed">
+                              Please fix the issues indicated below and then
+                              don't forget to re-submit your release for
+                              distribution.
+                            </p>
+                            <p>
+                              <a className="text-lg m-4">{album?.error}</a>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="opacity-70 fixed inset-0 z-40 bg-black"></div>
+                  </>
+                ) : null}
               </div>
-              <p className="">by {album.primaryArtist}</p>
-              <p className="">Released Date: {album.releaseDate}</p>
-              <p className="">UPC: {album.upcEan}</p>
+              <p className="text-albums text-md font-normal">
+                by {album.primaryArtist}
+              </p>
+              <p className="text-albums text-md font-normal">
+                Released Date: {album.releaseDate}
+              </p>
+              <p className="text-albums text-md font-normal">
+                UPC: {album.upcEan}
+              </p>
             </div>
           </div>
           {/* action */}
@@ -67,17 +122,17 @@ function Viewalbum() {
               onClick={() => setshow(!show)}
               className="bg-blue-700 hover:bg-blue-800 w-64 h-12 focus:outline-none text-white"
             >
-              Actions &#x2304;
+              Actions <i class="fas fa-chevron-down ml-6"></i>
             </button>
             {show ? (
               <ul className="absolute bg-white w-64 rounded focus:outline-none font-Light shadow-lg  border cursor-pointer">
-                <li className="h-8 pl-5 pt-2   hover:bg-gray-100 focus:border-none">
+                <li className="h-8 pl-5 pt-2   hover:bg-tab focus:border-none">
                   <a href={album?.coverImage} className="" target="blank">
                     Download Artwork
                   </a>
                 </li>
 
-                <li className="h-6 pl-5  hover:bg-gray-100 ">
+                <li className="h-6 pl-5  hover:bg-tab ">
                   <button
                     className="focus:outline-none"
                     onClick={() => downloadcsv(album)}
@@ -85,7 +140,7 @@ function Viewalbum() {
                     Download Metadata (CSV)
                   </button>
                 </li>
-                <li className="h-6 pl-5  hover:bg-gray-100">
+                <li className="h-6 pl-5  hover:bg-tab">
                   <button
                     className="focus:outline-none"
                     onClick={() => downloadxlsx(album)}

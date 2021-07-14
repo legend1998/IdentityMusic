@@ -27,7 +27,7 @@ function PaymentPreferences() {
   }
 
   return (
-    <div className="p-5 bg-gray-100">
+    <div className="p-5 bg-background">
       <div className="bg-white m-5">
         <h1 className="text-xl font-semibold py-8 border-b pl-5">
           Payment Prefrences
@@ -39,7 +39,7 @@ function PaymentPreferences() {
               type="text"
               value="5000 INR"
               readOnly
-              className=" appearance-none focus:outline-none bg-gray-100 border h-12 px-2"
+              className=" appearance-none focus:outline-none bg-box  h-14 px-5"
             />
           </div>
           <div className="flex flex-col justify-start px-5 m-2">
@@ -48,7 +48,7 @@ function PaymentPreferences() {
               type="text"
               value="INR"
               readOnly
-              className=" appearance-none focus:outline-none bg-gray-100 border h-12 px-2"
+              className=" appearance-none focus:outline-none bg-box  h-14 px-5"
             />
           </div>
           <div className="flex flex-col justify-start px-5 m-2">
@@ -56,7 +56,7 @@ function PaymentPreferences() {
             <select
               type="text"
               defaultValue={user?.paymentPreference?.mode}
-              className=" appearance-none focus:outline-none bg-gray-100 border h-12 px-2"
+              className=" appearance-none focus:outline-none bg-box  h-14 px-5"
               onChange={(e) => setPayment(e.target.value)}
             >
               <option value="paypal">PayPal</option>
@@ -69,14 +69,14 @@ function PaymentPreferences() {
           <div className="">
             <div className="">
               <p className="text-md  font-semibold my-4">
-                PayPal Email / Upi ID
+                PayPal Email / UPI ID
               </p>
               <input
                 onChange={(e) => setId(e.target.value)}
                 defaultValue={user?.paymentPreference?.id}
                 type="text"
                 placeholder="abc@xyz.com"
-                className=" appearance-none focus:outline-none bg-gray-100 border h-12 px-2 w-1/2"
+                className=" appearance-none focus:outline-none bg-box  h-14 px-2 w-1/2"
               />
             </div>
           </div>
@@ -84,7 +84,7 @@ function PaymentPreferences() {
       </div>
       <div className="flex justify-end h-12 mx-5">
         <button className="h-full w-52 focus:outline-none appearance-none">
-          cancel
+          Cancel
         </button>
         <button
           onClick={() => saveId()}

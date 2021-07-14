@@ -8,6 +8,7 @@ import { AWN } from "awesome-notifications";
 function Labels() {
   const [filter, setfilter] = useState(false);
   const [lables, setlabels] = useState([]);
+  const [artists, setartists] = useState([]);
   const [{ user, subLabel }] = useStateValue();
   const history = useHistory();
   useEffect(() => {
@@ -61,34 +62,35 @@ function Labels() {
   };
 
   return (
-    <div className="bg-gray-100 pb-10 h-screen">
+    <div className="bg-background pb-10 min-h-full">
       <div className="w-full bg-white h-24 flex items-center shadow-sm">
         <h1 className="text-3xl font-semibold ml-8 pl-10 font-sans ">Labels</h1>
       </div>
       <div className="lg:px-12 md:px-1  py-5">
-        <div className="bg-white">
-          <div className="flex h-12 items-center">
+        <div className="bg-white ml-10 mr-10 mt-10">
+          <div className="flex h-14  items-center">
             <button
               onClick={() => setfilter(!filter)}
               className={`px-7 md:hidden lg:block focus:outline-none ${
                 filter ? "bg-black text-white h-full" : null
               } `}
             >
-              Filters &#x2304;
+              Filters <i class="fas fa-chevron-down ml-6"></i>
             </button>
             <div className="flex-grow flex items-center">
               <i className="fas fa-search p-2"></i>
               <input
                 className="flex-grow h-7 outline-none text-gray-700"
                 type="text"
-                placeholder="Search by title, artist, label, UPC"
+                placeholder="Search by Label"
               />
             </div>
             <div className="duration-200">
               <button
                 onClick={() => gotolabel()}
-                className="bg-blue-700 hover:bg-blue-800 w-52 h-12 focus:outline-none text-white"
+                className="bg-blue-700 hover:bg-blue-800 w-52 h-14 focus:outline-none text-white"
               >
+                <i class="fas fa-plus text-xs mr-2 scale-50 "></i>
                 Add Label
               </button>
             </div>
@@ -123,10 +125,10 @@ function Labels() {
             </div>
           </div>
         </div>
-        <div className="h-16 py-2 text-xs text-gray-500 flex items-end">
+        <h1 className="h-16 py-2  ml-10 mr-10 font-normal text-sm text-gray-500 flex items-end">
           Showing All Labels
-        </div>
-        <div className="">
+        </h1>
+        <div className="relative m-5 min-h-screen">
           {lables.map((label, index) => (
             <Card data={label} key={index} />
           ))}

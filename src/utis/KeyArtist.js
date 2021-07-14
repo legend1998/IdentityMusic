@@ -24,7 +24,7 @@ function KeyArtist({ close, keyartist, addArtist }) {
       <select
         name="artisttype"
         disabled={disable}
-        className="h-14 w-52 text-center bg-gray-50 border  focus:outline-none"
+        className="h-14 w-52 text-center bg-box pl-5 font-medium focus:outline-none"
         onChange={(e) => setArtists({ ...artists, type: e.target.value })}
       >
         <option value="default" defaultValue>
@@ -41,7 +41,7 @@ function KeyArtist({ close, keyartist, addArtist }) {
         placeholder="Name"
         onChange={(e) => setArtists({ ...artists, artistname: e.target.value })}
         disabled={disable}
-        className="h-14 w-full pl-5 bg-box appearance-none outline-none  focus:border-purple-700"
+        className="h-14 w-full pl-5 ml-5 bg-box appearance-none outline-none  focus:border-purple-700"
       />
       <span
         className="mx-3 text-green-400 cursor-pointer"

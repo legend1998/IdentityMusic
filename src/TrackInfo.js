@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { firedb, storage } from "./firebaseconfig";
 import KeyArtist from "./utis/KeyArtist";
 import raw from "./languageList.txt";
+import { useStateValue } from "./StateProvider";
 
 function TrackInfo({ track, close, index, albumid, data, artist, somefun }) {
   const [keyartist, setkeyartist] = useState(0);
@@ -14,6 +15,7 @@ function TrackInfo({ track, close, index, albumid, data, artist, somefun }) {
   const [language, setlanguage] = useState([]);
   const [select, setselect] = useState([]);
   const [sideartist, setsideartist] = useState([]);
+  const [{ user }] = useStateValue();
 
   useEffect(() => {
     fetch(raw)
@@ -43,7 +45,7 @@ function TrackInfo({ track, close, index, albumid, data, artist, somefun }) {
 
     var storageRef = storage.ref();
     var uploadtask = storageRef
-      .child(`music/${image.name + Date.now()}`)
+      .child(`music/${Date.now() + user.labelName + " - " + image.name}`)
       .put(image);
 
     uploadtask.on(
@@ -113,8 +115,8 @@ function TrackInfo({ track, close, index, albumid, data, artist, somefun }) {
   return (
     <div className="lg:p-10 p-2 bg-white my-10">
       <div className="flex items-center justify-between border-b">
-        <p className="text-xl py-3 mb-1">Track ({index + 1}) </p>
-        <p className="text-sm">Singer</p>
+        <p className="text-2xl py-3 mb-1">Track ({index + 1}) </p>
+        <p className="text-sm"></p>
         <span
           onClick={() => handleclose()}
           className="h-10 w-10 rounded-full border flex items-center justify-center"
@@ -122,7 +124,7 @@ function TrackInfo({ track, close, index, albumid, data, artist, somefun }) {
           <i className="fas fa-times text-red-500"></i>
         </span>
       </div>
-      <p className="text-lg mt-5  font-medium">Audio File</p>
+      <p className="text-lg mt-5 mb-2 font-medium">Audio File</p>
       {newtrack?.trackURL || data?.trackURL || progress > 0 ? (
         <div className="h-12 w-full">
           <div className="h-full bg-indigo-500 text-white text-center py-3">
@@ -138,8 +140,9 @@ function TrackInfo({ track, close, index, albumid, data, artist, somefun }) {
             className="w-full h-full bg-box flex items-center"
           >
             <p className="pl-5 font-medium text-sidetext">
-              Upload your files here (stereo mp3 files only 320Kbps and sample
-              rate :44.1 KHz)
+              <i className="fas fa-plus mr-6 fa-green  text-md"></i>
+              Click here to upload your audio file (mp3 format file only.
+              Recommended min bitrate: 320kbps; sample rate: 44.1 kHz)
             </p>
             <input
               id="audio-file"
@@ -155,9 +158,9 @@ function TrackInfo({ track, close, index, albumid, data, artist, somefun }) {
       )}
       <div className="grid grid-rows-2  mt-5">
         <p className="text-lg  font-medium">
-          Language of Lyrics
-          <span className="mx-5 text-xs text-gray-400">
-            (Select "instrumental" if no lyrics present there.)
+          Language of Lyrics <span className="text-red-500">*</span>
+          <span className="mx-5 text-sm font-normal text-sidetext">
+            Select Instrumental if track has no lyrics
           </span>
         </p>
         <select

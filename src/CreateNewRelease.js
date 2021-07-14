@@ -12,8 +12,8 @@ function CreateNewRelease() {
 
   let history = useHistory();
 
-  let active = "border-b-2 border-purple-700 bg-white";
-  let passive = "bg-gray-50 text-gray-600 border";
+  let active = "border-b-2 border-indigo-500 font-medium bg-white";
+  let passive = "bg-tab text-gray-600 border";
 
   function handletab(tab, next) {
     if (next) {
@@ -32,8 +32,8 @@ function CreateNewRelease() {
   return (
     <div className="h-screen">
       <div className="w-full bg-white h-24 flex items-center shadow-sm">
-        <h1 className="text-3xl font-semibold ml-8 pl-10 font-sans ">
-          Add New Release
+        <h1 className="text-4xl font-semibold ml-8 pl-10 font-sans ">
+          Add new release
         </h1>
       </div>
       <div className="flex border flex-wrap items-center h-14 ">

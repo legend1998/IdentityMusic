@@ -4,6 +4,7 @@ import { firedb } from "./firebaseconfig";
 import { useStateValue } from "./StateProvider";
 import { useHistory } from "react-router";
 import { AWN } from "awesome-notifications";
+import moment from "moment";
 
 function Album() {
   const [show, setshow] = useState(false);
@@ -92,25 +93,21 @@ function Album() {
   return (
     <div className="lg:px-12 md:px-1 py-5 ">
       <div className="bg-white">
-        <div className="flex h-14 items-center flex-wrap">
+        <div className="flex h-14 mt-8 items-center flex-wrap">
           <button
             onClick={() => setfilter(!filter)}
             className={`px-7 hidden lg:block focus:outline-none ${
               filter ? "bg-filter text-white h-full" : null
             } `}
           >
-            Filters{" "}
-            <span className="px-5 text-blue-500 font-black text-lg ">
-              {" "}
-              &#x2304;
-            </span>
+            Filters <i class="fas fa-chevron-down ml-6"></i>
           </button>
           <div className="flex-grow flex items-center">
             <i className="fas fa-search p-2 text-gray-700 mt-2"></i>
             <input
               className="flex-grow h-7 outline-none text-gray-700"
               type="text"
-              placeholder="Search by title, artist, label, UPC"
+              placeholder="Search by Title, Artist, Label, UPC"
             />
           </div>
           <div className="duration-200">
@@ -119,17 +116,17 @@ function Album() {
               className=" bg-tabborder hover:bg-indigo-700 w-64 h-14   focus:outline-none text-white"
             >
               <span className="mx-16"> Actions</span>
-              <i class="fas fa-caret-down text-right  "></i>
+              <i class="fas fa-chevron-down ml-6"></i>
             </button>
             {show ? (
-              <ul className="absolute bg-white w-64 rounded font-Light shadow-lg  border cursor-pointer">
-                <li className="h-7 pt-1  pl-5 hover:bg-gray-100">
+              <ul className="absolute bg-white w-64  font-Light shadow-md  border cursor-pointer">
+                <li className="h-10 pt-3  pl-5 hover:bg-tab">
                   <Link to="/panel/create_new_release">Create new release</Link>
                 </li>
-                <li className="h-6 pl-5  hover:bg-gray-100">
+                <li className="h-7 pl-5  hover:bg-tab">
                   Download full catalog (CSV)
                 </li>
-                <li className="h-6 pl-5 hover:bg-gray-100">
+                <li className="h-8 pl-5  hover:bg-tab">
                   Download full catalog (XLSX)
                 </li>
               </ul>
@@ -204,27 +201,37 @@ function Album() {
           </div>
         </div>
       </div>
-      <div className=" h-16 py-2 text-sm text-gray-500 flex items-end">
+      <div className=" h-16 mt-2 text-sm text-gray-500 flex items-end">
         {album.length === 0 ? "Nothing to show" : " Showing all Albums"}
       </div>
-      <div className="bg-white mt-2">
-        <table className=" capitalize table-fixed text-sm text-gray-700 w-full text-left">
-          <thead>
-            <tr className="h-16 border-b font-medium text-base	 ">
-              <th className=" w-24 "></th>
-              <th className=" w-2/6 pl-2 ">Album Name</th>
-              <th className=" w-1/6">Artist</th>
-              <th className=" w-1/6">Label</th>
-              <th className=" w-1/6">UPC</th>
-              <th className=" w-1/6">Release Date</th>
+      <div className="bg-white mt-2 ">
+        <table className="  capitalize table-fixed text-sm text-black w-full text-left">
+          <thead className="">
+            <tr className="h-16 border-b 	 ">
+              <th className=" w-24 font-medium tracking-wide text-base"></th>
+              <th className=" w-2/6 pl-2 font-medium tracking-wide text-base">
+                Album Name
+              </th>
+              <th className=" w-1/6 font-medium tracking-wide text-base">
+                Artist
+              </th>
+              <th className=" w-1/6 font-medium tracking-wide text-base">
+                Label
+              </th>
+              <th className=" w-1/6 font-medium tracking-wide text-base">
+                UPC
+              </th>
+              <th className=" w-1/6 font-medium tracking-wide text-base">
+                Release Date
+              </th>
             </tr>
           </thead>
-          <tbody className="cursor-pointer">
+          <tbody className="cursor-pointer ">
             {album.map((a, index) => (
               <tr
                 key={index}
                 onClick={() => handleClick(a.id)}
-                className="h-20 text-lg font-Regular hover:bg-hover border-b"
+                className="h-20 text-lg font-Regular text-filter hover:bg-hover border-b"
               >
                 <td className="text-center pl-6">
                   <img src={a.coverImage} width="50px" alt="" />
@@ -244,7 +251,7 @@ function Album() {
         </table>
         {album.length === 0 ? (
           <div className="w-full h-56 flex items-center justify-center">
-            <p className="text-xs text-gray-500">
+            <p className="text-sm text-sidetext">
               You have no data to display.
             </p>
           </div>
