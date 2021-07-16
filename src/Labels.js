@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
 import { firedb } from "./firebaseconfig";
 import { AWN } from "awesome-notifications";
@@ -21,45 +22,6 @@ function Labels() {
       setlabels(a);
     });
   }, []);
-
-  const gotolabel = () => {
-    if (user?.subType) {
-      if (subLabel[user.subType] >= lables.length) {
-        history.push("/panel/add_label");
-      } else {
-        let notifier = new AWN();
-        let onOk = () => {
-          notifier.info("You pressed OK");
-        };
-        let onCancel = () => {
-          notifier.info("You pressed Cancel");
-        };
-        notifier.confirm("you reached to a limit.", onOk, onCancel, {
-          labels: {
-            confirm: "Limit reached",
-          },
-        });
-      }
-    } else {
-      let notifier = new AWN();
-      let onOk = () => {
-        notifier.info("You pressed OK");
-      };
-      let onCancel = () => {
-        notifier.info("You pressed Cancel");
-      };
-      notifier.confirm(
-        "you have no any subscription get one to access.",
-        onOk,
-        onCancel,
-        {
-          labels: {
-            confirm: "No Subscription",
-          },
-        }
-      );
-    }
-  };
 
   return (
     <div className="bg-background pb-10 min-h-full">
@@ -86,12 +48,10 @@ function Labels() {
               />
             </div>
             <div className="duration-200">
-              <button
-                onClick={() => gotolabel()}
-                className="bg-blue-700 hover:bg-blue-800 w-52 h-14 focus:outline-none text-white"
-              >
-                <i class="fas fa-plus text-xs mr-2 scale-50 "></i>
-                Add Label
+              <button className="bg-blue-700 hover:bg-blue-800 w-52 h-14 focus:outline-none text-white">
+                <Link to="/panel/add_label">
+                  <i class="fas fa-plus text-xs mr-2 scale-50 "></i>Add Label
+                </Link>
               </button>
             </div>
           </div>

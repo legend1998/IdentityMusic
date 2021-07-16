@@ -89,7 +89,7 @@ function AccountInfo() {
             onClick={() => handleLabelSave()}
             className=" appearance-none focus:outline-none h-12 w-52 bg-indigo-600 text-white"
           >
-            save
+            Save
           </button>
         )}
       </div>

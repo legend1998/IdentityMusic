@@ -34,45 +34,6 @@ function ArtistTab() {
     });
   }, [user.email]);
 
-  const getartist = () => {
-    if (user?.subType) {
-      if (subArtist[user.subType] >= artists.length) {
-        history.push("/panel/add_new_artist");
-      } else {
-        let notifier = new AWN();
-        let onOk = () => {
-          notifier.info("You pressed OK");
-        };
-        let onCancel = () => {
-          notifier.info("You pressed Cancel");
-        };
-        notifier.confirm("you reached to a limit.", onOk, onCancel, {
-          labels: {
-            confirm: "Limit reached",
-          },
-        });
-      }
-    } else {
-      let notifier = new AWN();
-      let onOk = () => {
-        notifier.info("You pressed OK");
-      };
-      let onCancel = () => {
-        notifier.info("You pressed Cancel");
-      };
-      notifier.confirm(
-        "You have no any subscription get one to access.",
-        onOk,
-        onCancel,
-        {
-          labels: {
-            confirm: "No Subscription",
-          },
-        }
-      );
-    }
-  };
-
   return (
     <div className="bg-background pb-10 min-h-full ">
       <div className="w-full bg-white h-24 flex items-center shadow-sm">
@@ -98,12 +59,10 @@ function ArtistTab() {
               />
             </div>
             <div className="duration-200">
-              <button
-                onClick={() => getartist()}
-                className="bg-blue-700 hover:bg-blue-800 w-52 h-14 focus:outline-none text-white"
-              >
-                <i class="fas fa-plus text-xs mr-2 scale-50 "></i>
-                Add Artist
+              <button className="bg-blue-700 hover:bg-blue-800 w-52 h-14 focus:outline-none text-white">
+                <Link to="/panel/add_new_artist">
+                  <i class="fas fa-plus text-xs mr-2 scale-50 "></i>Add Artist
+                </Link>
               </button>
             </div>
           </div>

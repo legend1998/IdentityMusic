@@ -66,30 +66,6 @@ function Album() {
     });
   }, [user.email]);
 
-  function handleRelease() {
-    if (user?.subType) {
-      history.push("/panel/create_new_release");
-    } else {
-      let notifier = new AWN();
-      let onOk = () => {
-        notifier.info("You pressed OK");
-      };
-      let onCancel = () => {
-        notifier.info("You pressed Cancel");
-      };
-      notifier.confirm(
-        "You have no any subscription get one to access.",
-        onOk,
-        onCancel,
-        {
-          labels: {
-            confirm: "No Subscription",
-          },
-        }
-      );
-    }
-  }
-
   return (
     <div className="lg:px-12 md:px-1 py-5 ">
       <div className="bg-white">
